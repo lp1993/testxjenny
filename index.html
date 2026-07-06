@@ -13,8 +13,8 @@
 
         .grid-bg {
             background-image: 
-                linear-gradient(rgba(139,92,246,0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(139,92,246,0.015) 1px, transparent 1px);
+                linear-gradient(rgba(59,130,246,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59,130,246,0.015) 1px, transparent 1px);
             background-size: 60px 60px;
         }
 
@@ -22,7 +22,7 @@
             position: absolute;
             width: 500px;
             height: 400px;
-            background: rgba(139,92,246,0.06);
+            background: rgba(59,130,246,0.06);
             filter: blur(140px);
             border-radius: 9999px;
             pointer-events: none;
@@ -42,7 +42,7 @@
             position: absolute;
             width: 350px;
             height: 280px;
-            background: rgba(139,92,246,0.035);
+            background: rgba(59,130,246,0.035);
             filter: blur(100px);
             border-radius: 9999px;
             pointer-events: none;
@@ -71,7 +71,7 @@
         .opera .shade {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(9,9,11,0.8) 0%, rgba(139,92,246,0.05) 40%, transparent 70%);
+            background: linear-gradient(to top, rgba(9,9,11,0.8) 0%, rgba(59,130,246,0.05) 40%, transparent 70%);
             opacity: 0;
             transition: opacity 0.5s ease;
         }
@@ -154,7 +154,7 @@
             height: 44px;
             border-radius: 50%;
             background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(139,92,246,0.15);
+            border: 1px solid rgba(59,130,246,0.15);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -162,8 +162,8 @@
             transition: all 0.3s ease;
         }
         .lb-btn:hover {
-            background: rgba(139,92,246,0.15);
-            border-color: rgba(139,92,246,0.35);
+            background: rgba(59,130,246,0.15);
+            border-color: rgba(59,130,246,0.35);
         }
         .lb-btn.prev { left: 20px; }
         .lb-btn.next { right: 20px; }
@@ -178,7 +178,7 @@
             height: 40px;
             border-radius: 50%;
             background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(139,92,246,0.15);
+            border: 1px solid rgba(59,130,246,0.15);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -189,7 +189,7 @@
 
         .line {
             height: 1px;
-            background: linear-gradient(to right, transparent, rgba(139,92,246,0.12), transparent);
+            background: linear-gradient(to right, transparent, rgba(59,130,246,0.12), transparent);
         }
 
         .reveal {
@@ -204,7 +204,7 @@
             font-weight: 300;
             letter-spacing: -0.04em;
             line-height: 0.9;
-            background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 50%, #a78bfa 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #3b82f6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -219,7 +219,7 @@
             inset: 0;
             border-radius: 20px;
             padding: 1px;
-            background: linear-gradient(160deg, rgba(139,92,246,0.25), transparent 40%, transparent 60%, rgba(180,83,9,0.12));
+            background: linear-gradient(160deg, rgba(59,130,246,0.3), transparent 40%, transparent 60%, rgba(180,83,9,0.12));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
@@ -233,22 +233,22 @@
             gap: 8px;
             padding: 12px 28px;
             border-radius: 100px;
-            border: 1px solid rgba(139,92,246,0.25);
-            color: #a78bfa;
+            border: 1px solid rgba(59,130,246,0.25);
+            color: #60a5fa;
             font-size: 14px;
             font-weight: 500;
             transition: all 0.4s ease;
             text-decoration: none;
         }
         .ig-link:hover {
-            background: rgba(139,92,246,0.08);
-            border-color: rgba(139,92,246,0.4);
+            background: rgba(59,130,246,0.08);
+            border-color: rgba(59,130,246,0.4);
         }
 
         .quote-mark {
             font-size: 80px;
             line-height: 1;
-            color: rgba(139,92,246,0.12);
+            color: rgba(59,130,246,0.12);
             font-family: Georgia, serif;
         }
 
@@ -263,8 +263,8 @@
         }
         .marquee-track:hover { animation-play-state: paused; }
 
-        .btn-violet {
-            background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+        .btn-blue {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
             color: #fff;
             padding: 12px 28px;
             border-radius: 100px;
@@ -274,9 +274,9 @@
             text-decoration: none;
             display: inline-block;
         }
-        .btn-violet:hover {
-            background: linear-gradient(135deg, #6d28d9, #7c3aed);
-            box-shadow: 0 0 30px rgba(139,92,246,0.2);
+        .btn-blue:hover {
+            background: linear-gradient(135deg, #1d4ed8, #2563eb);
+            box-shadow: 0 0 30px rgba(59,130,246,0.2);
         }
 
         body::before {
@@ -287,35 +287,81 @@
             pointer-events: none;
             z-index: 0;
         }
+
+        .hero-img-glow {
+            position: absolute;
+            inset: -30px;
+            background: rgba(59,130,246,0.07);
+            filter: blur(60px);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Contenitore immagine hero: mostra l'intera foto senza tagli */
+        .hero-img-wrap {
+            background: #0c0c10;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            min-height: 420px;
+        }
+        .hero-img-wrap img {
+            max-height: 540px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        @media (min-width: 768px) {
+            .hero-img-wrap { min-height: 520px; }
+            .hero-img-wrap img { max-height: 600px; }
+        }
     </style>
 </head>
 <body class="grid-bg">
 
     <!-- HERO -->
     <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div class="glow" style="top: 10%; left: 35%;"></div>
+        <div class="glow" style="top: 10%; left: 25%;"></div>
         <div class="glow-warm" style="bottom: 5%; right: 5%;"></div>
 
         <div class="max-w-7xl mx-auto px-6 w-full relative z-10">
-            <div class="reveal">
-                <p class="text-violet-400/60 text-xs font-medium uppercase tracking-[0.25em] mb-8">Artista Visiva</p>
-                <h1 class="hero-name mb-8">Jennina</h1>
-                <p class="text-zinc-500 text-base md:text-lg font-light max-w-md leading-relaxed mb-12">
-                    L'autunno è espansione e rigenerazione.<br>
-                    Dipingo il ciclo eterno delle cose.
-                </p>
-                <div class="flex flex-wrap items-center gap-4">
-                    <a href="#opere" class="btn-violet">Vedi le opere</a>
-                    <a href="https://www.instagram.com/iamjennina/" target="_blank" class="ig-link">
-                        <i data-lucide="instagram" class="w-4 h-4"></i>
-                        @iamjennina
-                    </a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+                
+                <!-- Sinistra: testo -->
+                <div class="reveal">
+                    <p class="text-blue-400/60 text-xs font-medium uppercase tracking-[0.25em] mb-8">Artista Visiva</p>
+                    <h1 class="hero-name mb-8">Jennina</h1>
+                    <p class="text-zinc-500 text-base md:text-lg font-light max-w-md leading-relaxed mb-12">
+                        L'autunno è espansione e rigenerazione.<br>
+                        Dipingo il ciclo eterno delle cose.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="#opere" class="btn-blue">Vedi le opere</a>
+                        <a href="https://www.instagram.com/iamjennina/" target="_blank" class="ig-link">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                            @iamjennina
+                        </a>
+                    </div>
                 </div>
+
+                <!-- Destra: immagine intera -->
+                <div class="reveal relative">
+                    <div class="hero-img-glow"></div>
+                    <div class="frame rounded-[20px] overflow-hidden relative" style="background: rgba(24,24,27,0.5); padding: 6px;">
+                        <div class="hero-img-wrap">
+                            <img src="https://z-cdn-media.chatglm.cn/files/b9e3fe81-efc4-4f7c-b9ca-f3f70675c5c3.jpg?auth_key=1883319429-6fbe31f6470640959a9707b0f8253b3a-0-3dcd605a681a917f8a5f5de03f089063" alt="Oltre... risiede immensa bellezza">
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
-            <div class="w-px h-8 bg-gradient-to-b from-transparent to-violet-500/50"></div>
+            <div class="w-px h-8 bg-gradient-to-b from-transparent to-blue-500/50"></div>
         </div>
     </section>
 
@@ -324,33 +370,33 @@
     <div class="overflow-hidden py-5">
         <div class="marquee-track flex items-center gap-8 whitespace-nowrap" style="width: max-content;">
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Pittura</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Tecnica mista</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Autunno</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Rigenerazione</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Materia</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Ciclo</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Paesaggio interiore</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Pittura</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Tecnica mista</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Autunno</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Rigenerazione</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Materia</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Ciclo</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Paesaggio interiore</span>
-            <span class="text-violet-500/25">✦</span>
+            <span class="text-blue-500/25">✦</span>
         </div>
     </div>
     <div class="line"></div>
@@ -362,7 +408,7 @@
 
         <div class="max-w-7xl mx-auto px-6">
             <div class="reveal mb-14">
-                <p class="text-violet-400/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">Selezione</p>
+                <p class="text-blue-400/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">Selezione</p>
                 <h2 class="text-3xl md:text-4xl font-light tracking-tight">Opere recenti</h2>
             </div>
 
@@ -472,7 +518,7 @@
                 L'autunno non è fine. È espansione e rigenerazione. 
                 Ogni foglia che cade è una promessa che torna.
             </p>
-            <p class="text-violet-500/50 text-sm">— Jennina</p>
+            <p class="text-blue-500/50 text-sm">— Jennina</p>
         </div>
     </section>
     <div class="line max-w-4xl mx-auto"></div>
@@ -492,7 +538,7 @@
                 </div>
 
                 <div class="md:col-span-3 reveal">
-                    <p class="text-violet-400/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">About</p>
+                    <p class="text-blue-400/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">About</p>
                     <h2 class="text-3xl md:text-4xl font-light tracking-tight mb-8">Chi sono</h2>
                     
                     <div class="space-y-4 text-zinc-400 font-light leading-relaxed text-[15px]">
@@ -503,7 +549,7 @@
                         </p>
                         <p>
                             Lavoro con olio, acrilico, pigmenti naturali e materiali di recupero. 
-                            Le mie opere attraversano il viola, il blu, il marrone della terra: 
+                            Le mie opere attraversano il blu, l'indaco, il marrone della terra: 
                             i colori di chi si lascia trasformare.
                         </p>
                         <p>
@@ -524,13 +570,13 @@
         <div class="glow" style="bottom: -100px; left: 50%; transform: translateX(-50%);"></div>
 
         <div class="max-w-2xl mx-auto px-6 relative z-10 reveal">
-            <p class="text-violet-400/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">Seguimi</p>
+            <p class="text-blue-400/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">Seguimi</p>
             <h2 class="text-3xl md:text-4xl font-light tracking-tight mb-5">Il processo creativo<br>su Instagram</h2>
             <p class="text-zinc-500 font-light text-[15px] leading-relaxed mb-10 max-w-md mx-auto">
                 Dietro le quinte, opere in progress, pensieri sparsi. 
                 È lì che condivido il lato vivo del mio lavoro.
             </p>
-            <a href="https://www.instagram.com/iamjennina/" target="_blank" class="btn-violet text-base px-10 py-4 inline-flex items-center gap-3">
+            <a href="https://www.instagram.com/iamjennina/" target="_blank" class="btn-blue text-base px-10 py-4 inline-flex items-center gap-3">
                 <i data-lucide="instagram" class="w-5 h-5"></i>
                 @iamjennina
             </a>
@@ -538,14 +584,14 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="border-t border-violet-500/[0.04] py-8">
+    <footer class="border-t border-blue-500/[0.04] py-8">
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-zinc-700 text-xs">© 2024 Jennina · I'm not human, I'm art</p>
             <div class="flex items-center gap-6">
-                <a href="https://www.instagram.com/iamjennina/" target="_blank" class="text-zinc-700 hover:text-violet-400 transition-colors">
+                <a href="https://www.instagram.com/iamjennina/" target="_blank" class="text-zinc-700 hover:text-blue-400 transition-colors">
                     <i data-lucide="instagram" class="w-4 h-4"></i>
                 </a>
-                <a href="mailto:hello@jennina.art" class="text-zinc-700 hover:text-violet-400 transition-colors">
+                <a href="mailto:hello@jennina.art" class="text-zinc-700 hover:text-blue-400 transition-colors">
                     <i data-lucide="mail" class="w-4 h-4"></i>
                 </a>
             </div>
@@ -567,7 +613,7 @@
         <div class="lb-info">
             <p class="text-white text-sm font-medium" id="lb-title"></p>
             <p class="text-zinc-500 text-xs mt-1" id="lb-detail"></p>
-            <p class="text-violet-500/30 text-[11px] mt-2" id="lb-count"></p>
+            <p class="text-blue-500/30 text-[11px] mt-2" id="lb-count"></p>
         </div>
     </div>
 
