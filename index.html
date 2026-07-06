@@ -13,8 +13,8 @@
 
         .grid-bg {
             background-image: 
-                linear-gradient(rgba(59,130,246,0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59,130,246,0.015) 1px, transparent 1px);
+                linear-gradient(rgba(124,127,205,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124,127,205,0.015) 1px, transparent 1px);
             background-size: 60px 60px;
         }
 
@@ -22,7 +22,7 @@
             position: absolute;
             width: 500px;
             height: 400px;
-            background: rgba(59,130,246,0.06);
+            background: rgba(124,127,205,0.05);
             filter: blur(140px);
             border-radius: 9999px;
             pointer-events: none;
@@ -42,7 +42,7 @@
             position: absolute;
             width: 350px;
             height: 280px;
-            background: rgba(59,130,246,0.035);
+            background: rgba(124,127,205,0.03);
             filter: blur(100px);
             border-radius: 9999px;
             pointer-events: none;
@@ -71,7 +71,7 @@
         .opera .shade {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(9,9,11,0.8) 0%, rgba(59,130,246,0.05) 40%, transparent 70%);
+            background: linear-gradient(to top, rgba(9,9,11,0.8) 0%, rgba(124,127,205,0.05) 40%, transparent 70%);
             opacity: 0;
             transition: opacity 0.5s ease;
         }
@@ -154,7 +154,7 @@
             height: 44px;
             border-radius: 50%;
             background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(59,130,246,0.15);
+            border: 1px solid rgba(124,127,205,0.15);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -162,8 +162,8 @@
             transition: all 0.3s ease;
         }
         .lb-btn:hover {
-            background: rgba(59,130,246,0.15);
-            border-color: rgba(59,130,246,0.35);
+            background: rgba(124,127,205,0.15);
+            border-color: rgba(124,127,205,0.35);
         }
         .lb-btn.prev { left: 20px; }
         .lb-btn.next { right: 20px; }
@@ -178,7 +178,7 @@
             height: 40px;
             border-radius: 50%;
             background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(59,130,246,0.15);
+            border: 1px solid rgba(124,127,205,0.15);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -189,7 +189,7 @@
 
         .line {
             height: 1px;
-            background: linear-gradient(to right, transparent, rgba(59,130,246,0.12), transparent);
+            background: linear-gradient(to right, transparent, rgba(124,127,205,0.1), transparent);
         }
 
         .reveal {
@@ -204,7 +204,7 @@
             font-weight: 300;
             letter-spacing: -0.04em;
             line-height: 0.9;
-            background: linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #3b82f6 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #b8bad8 50%, #7c7fcd 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -219,7 +219,7 @@
             inset: 0;
             border-radius: 20px;
             padding: 1px;
-            background: linear-gradient(160deg, rgba(59,130,246,0.3), transparent 40%, transparent 60%, rgba(180,83,9,0.12));
+            background: linear-gradient(160deg, rgba(124,127,205,0.25), transparent 40%, transparent 60%, rgba(180,83,9,0.1));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
@@ -233,22 +233,22 @@
             gap: 8px;
             padding: 12px 28px;
             border-radius: 100px;
-            border: 1px solid rgba(59,130,246,0.25);
-            color: #60a5fa;
+            border: 1px solid rgba(124,127,205,0.2);
+            color: #9496cc;
             font-size: 14px;
             font-weight: 500;
             transition: all 0.4s ease;
             text-decoration: none;
         }
         .ig-link:hover {
-            background: rgba(59,130,246,0.08);
-            border-color: rgba(59,130,246,0.4);
+            background: rgba(124,127,205,0.07);
+            border-color: rgba(124,127,205,0.35);
         }
 
         .quote-mark {
             font-size: 80px;
             line-height: 1;
-            color: rgba(59,130,246,0.12);
+            color: rgba(124,127,205,0.1);
             font-family: Georgia, serif;
         }
 
@@ -263,8 +263,8 @@
         }
         .marquee-track:hover { animation-play-state: paused; }
 
-        .btn-blue {
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
+        .btn-main {
+            background: linear-gradient(135deg, #6b6eb8, #7c7fcd);
             color: #fff;
             padding: 12px 28px;
             border-radius: 100px;
@@ -274,9 +274,9 @@
             text-decoration: none;
             display: inline-block;
         }
-        .btn-blue:hover {
-            background: linear-gradient(135deg, #1d4ed8, #2563eb);
-            box-shadow: 0 0 30px rgba(59,130,246,0.2);
+        .btn-main:hover {
+            background: linear-gradient(135deg, #5c5fb3, #6b6eb8);
+            box-shadow: 0 0 30px rgba(124,127,205,0.15);
         }
 
         body::before {
@@ -291,13 +291,12 @@
         .hero-img-glow {
             position: absolute;
             inset: -30px;
-            background: rgba(59,130,246,0.07);
+            background: rgba(124,127,205,0.06);
             filter: blur(60px);
             border-radius: 50%;
             pointer-events: none;
         }
 
-        /* Contenitore immagine hero: mostra l'intera foto senza tagli */
         .hero-img-wrap {
             background: #0c0c10;
             border-radius: 16px;
@@ -318,6 +317,146 @@
             .hero-img-wrap { min-height: 520px; }
             .hero-img-wrap img { max-height: 600px; }
         }
+
+        /* ===== STORYTELLING ===== */
+        .story-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            max-height: 75vh;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #0c0c10;
+        }
+        @media (max-width: 768px) {
+            .story-container { aspect-ratio: 4/5; max-height: 85vh; }
+        }
+        .story-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+        .story-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        .story-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .story-slide .story-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(9,9,11,0.7) 0%, transparent 50%);
+        }
+        .story-slide .story-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 32px;
+            z-index: 3;
+        }
+
+        /* Progress bar */
+        .story-progress {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            display: flex;
+            gap: 4px;
+            z-index: 10;
+        }
+        .story-bar {
+            flex: 1;
+            height: 2px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+        .story-bar-fill {
+            height: 100%;
+            background: rgba(255,255,255,0.6);
+            border-radius: 100px;
+            width: 0%;
+            transition: width 5s linear;
+        }
+        .story-bar.done .story-bar-fill {
+            width: 100%;
+            transition: none;
+        }
+        .story-bar.active .story-bar-fill {
+            width: 100%;
+        }
+
+        /* Pause indicator */
+        .story-pause {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 15;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .story-container.paused .story-pause {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Nav arrows storytelling */
+        .story-nav {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 35%;
+            z-index: 12;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .story-nav.left { left: 0; justify-content: flex-start; padding-left: 16px; }
+        .story-nav.right { right: 0; justify-content: flex-end; padding-right: 16px; }
+        .story-nav-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .story-nav:hover .story-nav-icon {
+            opacity: 1;
+            background: rgba(255,255,255,0.12);
+        }
+
+        /* Counter */
+        .story-counter {
+            position: absolute;
+            bottom: 16px;
+            right: 20px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.3);
+            z-index: 10;
+            font-variant-numeric: tabular-nums;
+        }
     </style>
 </head>
 <body class="grid-bg">
@@ -330,16 +469,15 @@
         <div class="max-w-7xl mx-auto px-6 w-full relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
                 
-                <!-- Sinistra: testo -->
                 <div class="reveal">
-                    <p class="text-blue-400/60 text-xs font-medium uppercase tracking-[0.25em] mb-8">Artista Visiva</p>
+                    <p class="text-[#9496cc]/60 text-xs font-medium uppercase tracking-[0.25em] mb-8">Artista Visiva</p>
                     <h1 class="hero-name mb-8">Jennina</h1>
                     <p class="text-zinc-500 text-base md:text-lg font-light max-w-md leading-relaxed mb-12">
                         L'autunno è espansione e rigenerazione.<br>
                         Dipingo il ciclo eterno delle cose.
                     </p>
                     <div class="flex flex-wrap items-center gap-4">
-                        <a href="#opere" class="btn-blue">Vedi le opere</a>
+                        <a href="#opere" class="btn-main">Vedi le opere</a>
                         <a href="https://www.instagram.com/iamjennina/" target="_blank" class="ig-link">
                             <i data-lucide="instagram" class="w-4 h-4"></i>
                             @iamjennina
@@ -347,7 +485,6 @@
                     </div>
                 </div>
 
-                <!-- Destra: immagine intera -->
                 <div class="reveal relative">
                     <div class="hero-img-glow"></div>
                     <div class="frame rounded-[20px] overflow-hidden relative" style="background: rgba(24,24,27,0.5); padding: 6px;">
@@ -361,7 +498,7 @@
         </div>
 
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
-            <div class="w-px h-8 bg-gradient-to-b from-transparent to-blue-500/50"></div>
+            <div class="w-px h-8 bg-gradient-to-b from-transparent to-[#7c7fcd]/50"></div>
         </div>
     </section>
 
@@ -370,33 +507,33 @@
     <div class="overflow-hidden py-5">
         <div class="marquee-track flex items-center gap-8 whitespace-nowrap" style="width: max-content;">
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Pittura</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Tecnica mista</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Autunno</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Rigenerazione</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Materia</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Ciclo</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Paesaggio interiore</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Pittura</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Tecnica mista</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Autunno</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Rigenerazione</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Materia</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Ciclo</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
             <span class="text-zinc-700 text-sm uppercase tracking-[0.2em] font-light">Paesaggio interiore</span>
-            <span class="text-blue-500/25">✦</span>
+            <span class="text-[#7c7fcd]/20">✦</span>
         </div>
     </div>
     <div class="line"></div>
@@ -408,7 +545,7 @@
 
         <div class="max-w-7xl mx-auto px-6">
             <div class="reveal mb-14">
-                <p class="text-blue-400/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">Selezione</p>
+                <p class="text-[#9496cc]/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">Selezione</p>
                 <h2 class="text-3xl md:text-4xl font-light tracking-tight">Opere recenti</h2>
             </div>
 
@@ -508,6 +645,110 @@
         </div>
     </section>
 
+    <!-- STORYTELLING -->
+    <div class="line max-w-4xl mx-auto"></div>
+    <section id="storytelling" class="py-24 md:py-32 relative">
+        <div class="glow" style="top: 40%; left: 50%; transform: translateX(-50%);"></div>
+
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="reveal mb-14 text-center">
+                <p class="text-[#9496cc]/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">Storytelling</p>
+                <h2 class="text-3xl md:text-4xl font-light tracking-tight">Un racconto visivo</h2>
+                <p class="text-zinc-600 text-sm mt-4 font-light">Si ferma al passaggio del mouse — clicca le frecce per navigare</p>
+            </div>
+
+            <div class="reveal">
+                <div class="story-container" id="storyContainer"
+                     onmouseenter="pauseStory()" onmouseleave="resumeStory()">
+
+                    <!-- Progress bars -->
+                    <div class="story-progress" id="storyProgress"></div>
+
+                    <!-- Pause icon -->
+                    <div class="story-pause">
+                        <i data-lucide="pause" class="w-5 h-5 text-white"></i>
+                    </div>
+
+                    <!-- Slides -->
+                    <div class="story-slide active" data-index="0">
+                        <img src="https://picsum.photos/seed/story-begin/1400/800.jpg" alt="">
+                        <div class="story-overlay"></div>
+                        <div class="story-text">
+                            <p class="text-white/50 text-xs uppercase tracking-[0.2em] mb-2">01</p>
+                            <h3 class="text-white text-xl md:text-2xl font-light">Tutto inizia dal silenzio</h3>
+                            <p class="text-zinc-400 text-sm font-light mt-2 max-w-md">La tela è vuota. La mano si avvicina senza fretta.</p>
+                        </div>
+                    </div>
+
+                    <div class="story-slide" data-index="1">
+                        <img src="https://picsum.photos/seed/story-matter/1400/800.jpg" alt="">
+                        <div class="story-overlay"></div>
+                        <div class="story-text">
+                            <p class="text-white/50 text-xs uppercase tracking-[0.2em] mb-2">02</p>
+                            <h3 class="text-white text-xl md:text-2xl font-light">La materia si risveglia</h3>
+                            <p class="text-zinc-400 text-sm font-light mt-2 max-w-md">Pigmenti, terra, polvere. Il colore esiste già nella materia.</p>
+                        </div>
+                    </div>
+
+                    <div class="story-slide" data-index="2">
+                        <img src="https://picsum.photos/seed/story-layer/1400/800.jpg" alt="">
+                        <div class="story-overlay"></div>
+                        <div class="story-text">
+                            <p class="text-white/50 text-xs uppercase tracking-[0.2em] mb-2">03</p>
+                            <h3 class="text-white text-xl md:text-2xl font-light">Strato su strato</h3>
+                            <p class="text-zinc-400 text-sm font-light mt-2 max-w-md">Coprire per svelare. Ogni cancellazione è una decisione.</p>
+                        </div>
+                    </div>
+
+                    <div class="story-slide" data-index="3">
+                        <img src="https://picsum.photos/seed/story-light/1400/800.jpg" alt="">
+                        <div class="story-overlay"></div>
+                        <div class="story-text">
+                            <p class="text-white/50 text-xs uppercase tracking-[0.2em] mb-2">04</p>
+                            <h3 class="text-white text-xl md:text-2xl font-light">La luce entra</h3>
+                            <p class="text-zinc-400 text-sm font-light mt-2 max-w-md">Non è la mano che crea — è l'opera che si fa vedere.</p>
+                        </div>
+                    </div>
+
+                    <div class="story-slide" data-index="4">
+                        <img src="https://picsum.photos/seed/story-fall/1400/800.jpg" alt="">
+                        <div class="story-overlay"></div>
+                        <div class="story-text">
+                            <p class="text-white/50 text-xs uppercase tracking-[0.2em] mb-2">05</p>
+                            <h3 class="text-white text-xl md:text-2xl font-light">Come una foglia</h3>
+                            <p class="text-zinc-400 text-sm font-light mt-2 max-w-md">L'opera si stacca e comincia a vivere da sola.</p>
+                        </div>
+                    </div>
+
+                    <div class="story-slide" data-index="5">
+                        <img src="https://picsum.photos/seed/story-end/1400/800.jpg" alt="">
+                        <div class="story-overlay"></div>
+                        <div class="story-text">
+                            <p class="text-white/50 text-xs uppercase tracking-[0.2em] mb-2">06</p>
+                            <h3 class="text-white text-xl md:text-2xl font-light">Oltre... risiede immensa bellezza</h3>
+                            <p class="text-zinc-400 text-sm font-light mt-2 max-w-md">Il ciclo ricomincia.</p>
+                        </div>
+                    </div>
+
+                    <!-- Nav -->
+                    <div class="story-nav left" onclick="prevStory(event)">
+                        <div class="story-nav-icon">
+                            <i data-lucide="chevron-left" class="w-4 h-4 text-white"></i>
+                        </div>
+                    </div>
+                    <div class="story-nav right" onclick="nextStory(event)">
+                        <div class="story-nav-icon">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-white"></i>
+                        </div>
+                    </div>
+
+                    <!-- Counter -->
+                    <div class="story-counter" id="storyCounter">01 / 06</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- QUOTE -->
     <div class="line max-w-4xl mx-auto"></div>
     <section class="py-24 md:py-32 relative">
@@ -518,7 +759,7 @@
                 L'autunno non è fine. È espansione e rigenerazione. 
                 Ogni foglia che cade è una promessa che torna.
             </p>
-            <p class="text-blue-500/50 text-sm">— Jennina</p>
+            <p class="text-[#9496cc]/50 text-sm">— Jennina</p>
         </div>
     </section>
     <div class="line max-w-4xl mx-auto"></div>
@@ -538,7 +779,7 @@
                 </div>
 
                 <div class="md:col-span-3 reveal">
-                    <p class="text-blue-400/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">About</p>
+                    <p class="text-[#9496cc]/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">About</p>
                     <h2 class="text-3xl md:text-4xl font-light tracking-tight mb-8">Chi sono</h2>
                     
                     <div class="space-y-4 text-zinc-400 font-light leading-relaxed text-[15px]">
@@ -549,7 +790,7 @@
                         </p>
                         <p>
                             Lavoro con olio, acrilico, pigmenti naturali e materiali di recupero. 
-                            Le mie opere attraversano il blu, l'indaco, il marrone della terra: 
+                            Le mie opere attraversano il blu, il viola, il marrone della terra: 
                             i colori di chi si lascia trasformare.
                         </p>
                         <p>
@@ -570,13 +811,13 @@
         <div class="glow" style="bottom: -100px; left: 50%; transform: translateX(-50%);"></div>
 
         <div class="max-w-2xl mx-auto px-6 relative z-10 reveal">
-            <p class="text-blue-400/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">Seguimi</p>
+            <p class="text-[#9496cc]/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">Seguimi</p>
             <h2 class="text-3xl md:text-4xl font-light tracking-tight mb-5">Il processo creativo<br>su Instagram</h2>
             <p class="text-zinc-500 font-light text-[15px] leading-relaxed mb-10 max-w-md mx-auto">
                 Dietro le quinte, opere in progress, pensieri sparsi. 
                 È lì che condivido il lato vivo del mio lavoro.
             </p>
-            <a href="https://www.instagram.com/iamjennina/" target="_blank" class="btn-blue text-base px-10 py-4 inline-flex items-center gap-3">
+            <a href="https://www.instagram.com/iamjennina/" target="_blank" class="btn-main text-base px-10 py-4 inline-flex items-center gap-3">
                 <i data-lucide="instagram" class="w-5 h-5"></i>
                 @iamjennina
             </a>
@@ -584,14 +825,14 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="border-t border-blue-500/[0.04] py-8">
+    <footer class="border-t border-[#7c7fcd]/[0.04] py-8">
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-zinc-700 text-xs">© 2024 Jennina · I'm not human, I'm art</p>
             <div class="flex items-center gap-6">
-                <a href="https://www.instagram.com/iamjennina/" target="_blank" class="text-zinc-700 hover:text-blue-400 transition-colors">
+                <a href="https://www.instagram.com/iamjennina/" target="_blank" class="text-zinc-700 hover:text-[#9496cc] transition-colors">
                     <i data-lucide="instagram" class="w-4 h-4"></i>
                 </a>
-                <a href="mailto:hello@jennina.art" class="text-zinc-700 hover:text-blue-400 transition-colors">
+                <a href="mailto:hello@jennina.art" class="text-zinc-700 hover:text-[#9496cc] transition-colors">
                     <i data-lucide="mail" class="w-4 h-4"></i>
                 </a>
             </div>
@@ -613,13 +854,14 @@
         <div class="lb-info">
             <p class="text-white text-sm font-medium" id="lb-title"></p>
             <p class="text-zinc-500 text-xs mt-1" id="lb-detail"></p>
-            <p class="text-blue-500/30 text-[11px] mt-2" id="lb-count"></p>
+            <p class="text-[#7c7fcd]/30 text-[11px] mt-2" id="lb-count"></p>
         </div>
     </div>
 
     <script>
         lucide.createIcons();
 
+        // ===== GALLERY LIGHTBOX =====
         const works = [
             { img: 'https://picsum.photos/seed/jn-autumn1/1400/2000.jpg', title: 'Espansione', detail: 'Olio su tela · 70×100 cm · 2024' },
             { img: 'https://picsum.photos/seed/jn-leaf2/1400/1400.jpg', title: 'Caduta dolce', detail: 'Acrilico e sabbia · 50×50 cm · 2024' },
@@ -669,6 +911,140 @@
             if (e.key === 'ArrowRight') navLB(1, e);
         });
 
+        // ===== STORYTELLING =====
+        const slides = document.querySelectorAll('.story-slide');
+        const totalSlides = slides.length;
+        let storyIndex = 0;
+        let storyTimer = null;
+        let storyPaused = false;
+
+        // Crea le barre di progresso
+        const progressContainer = document.getElementById('storyProgress');
+        for (let i = 0; i < totalSlides; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'story-bar';
+            bar.innerHTML = '<div class="story-bar-fill"></div>';
+            progressContainer.appendChild(bar);
+        }
+        const bars = document.querySelectorAll('.story-bar');
+
+        function goToStory(index) {
+            // Rimuovi active dalla slide corrente
+            slides[storyIndex].classList.remove('active');
+            
+            // Segna la barra corrente come "done"
+            bars[storyIndex].classList.remove('active');
+            bars[storyIndex].classList.add('done');
+
+            storyIndex = (index + totalSlides) % totalSlides;
+
+            // Attiva nuova slide
+            slides[storyIndex].classList.add('active');
+
+            // Reset e attiva barra nuova
+            bars[storyIndex].classList.remove('done');
+            bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'none';
+            bars[storyIndex].querySelector('.story-bar-fill').style.width = '0%';
+            
+            // Forza reflow
+            void bars[storyIndex].offsetWidth;
+            
+            bars[storyIndex].classList.add('active');
+            bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'width 5s linear';
+            bars[storyIndex].querySelector('.story-bar-fill').style.width = '100%';
+
+            // Aggiorna contatore
+            document.getElementById('storyCounter').textContent = 
+                String(storyIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
+
+            // Reset timer
+            clearTimeout(storyTimer);
+            if (!storyPaused) {
+                storyTimer = setTimeout(() => goToStory(storyIndex + 1), 5000);
+            }
+        }
+
+        function nextStory(e) {
+            if (e) e.stopPropagation();
+            goToStory(storyIndex + 1);
+        }
+
+        function prevStory(e) {
+            if (e) e.stopPropagation();
+            // Torna indietro: resetta anche le barre precedenti
+            bars[storyIndex].classList.remove('active', 'done');
+            bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'none';
+            bars[storyIndex].querySelector('.story-bar-fill').style.width = '0%';
+            
+            slides[storyIndex].classList.remove('active');
+            storyIndex = (storyIndex - 1 + totalSlides) % totalSlides;
+            
+            slides[storyIndex].classList.add('active');
+            bars[storyIndex].classList.remove('done');
+            bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'none';
+            bars[storyIndex].querySelector('.story-bar-fill').style.width = '0%';
+            void bars[storyIndex].offsetWidth;
+            bars[storyIndex].classList.add('active');
+            bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'width 5s linear';
+            bars[storyIndex].querySelector('.story-bar-fill').style.width = '100%';
+
+            document.getElementById('storyCounter').textContent = 
+                String(storyIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
+
+            clearTimeout(storyTimer);
+            if (!storyPaused) {
+                storyTimer = setTimeout(() => goToStory(storyIndex + 1), 5000);
+            }
+        }
+
+        function pauseStory() {
+            storyPaused = true;
+            clearTimeout(storyTimer);
+            document.getElementById('storyContainer').classList.add('paused');
+            // Ferma animazione barra corrente
+            const fill = bars[storyIndex].querySelector('.story-bar-fill');
+            const computed = getComputedStyle(fill).width;
+            fill.style.transition = 'none';
+            fill.style.width = computed;
+        }
+
+        function resumeStory() {
+            storyPaused = false;
+            document.getElementById('storyContainer').classList.remove('paused');
+            // Riprendi barra dal punto attuale
+            const fill = bars[storyIndex].querySelector('.story-bar-fill');
+            const current = parseFloat(fill.style.width) || 0;
+            const parent = fill.parentElement;
+            const percent = (parseFloat(getComputedStyle(fill).width) / parent.offsetWidth) * 100;
+            
+            fill.style.transition = 'none';
+            fill.style.width = percent + '%';
+            void fill.offsetWidth;
+            
+            const remaining = 5000 * (1 - percent / 100);
+            fill.style.transition = 'width ' + remaining + 'ms linear';
+            fill.style.width = '100%';
+
+            storyTimer = setTimeout(() => goToStory(storyIndex + 1), remaining);
+        }
+
+        // Avvia lo storytelling quando diventa visibile
+        let storyStarted = false;
+        const storyObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !storyStarted) {
+                    storyStarted = true;
+                    // Avvia prima slide
+                    bars[0].classList.add('active');
+                    bars[0].querySelector('.story-bar-fill').style.transition = 'width 5s linear';
+                    bars[0].querySelector('.story-bar-fill').style.width = '100%';
+                    storyTimer = setTimeout(() => goToStory(1), 5000);
+                }
+            });
+        }, { threshold: 0.3 });
+        storyObs.observe(document.getElementById('storyContainer'));
+
+        // ===== SCROLL REVEAL =====
         const obs = new IntersectionObserver((entries) => {
             entries.forEach((entry, i) => {
                 if (entry.isIntersecting) {
