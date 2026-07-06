@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio — Artista</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #09090b; color: #ffffff; }
+
+        /* Sfondo sottile a griglia */
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Glow arancione */
+        .glow-orange {
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            background: rgba(249,115,22,0.06);
+            filter: blur(120px);
+            border-radius: 9999px;
+            pointer-events: none;
+        }
+
+        /* Card opera */
+        .opera-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(24,24,27,0.4);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .opera-card:hover {
+            border-color: rgba(249,115,22,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+        .opera-card img {
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.85;
+        }
+        .opera-card:hover img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+        .opera-card .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .opera-card:hover .overlay {
+            opacity: 1;
+        }
+        .opera-card .info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: all 0.4s ease 0.1s;
+        }
+        .opera-card:hover .info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .lightbox img {
+            max-width: 85vw;
+            max-height: 85vh;
+            border-radius: 16px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+            transform: scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+        }
+
+        /* Fade in allo scroll */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Bordo gradiente hero */
+        .hero-border {
+            position: relative;
+        }
+        .hero-border::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(249,115,22,0.3), transparent 50%, rgba(249,115,22,0.1));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* Nav blur */
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(9,9,11,0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Cursor default per le card */
+        .opera-card { cursor: pointer; }
+
+        /* Frecce lightbox */
+        .lb-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .lb-arrow:hover {
+            background: rgba(249,115,22,0.2);
+            border-color: rgba(249,115,22,0.4);
+        }
+        .lb-arrow.left { left: 24px; }
+        .lb-arrow.right { right: 24px; }
+
+        /* Contatore lightbox */
+        .lb-counter {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            color: #a1a1aa;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        /* Smooth scroll */
+        html { scroll-behavior: smooth; }
+
+        /* Instagram CTA pulse */
+        @keyframes subtle-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.3); }
+            50% { box-shadow: 0 0 0 8px rgba(249,115,22,0); }
+        }
+        .ig-pulse { animation: subtle-pulse 3s ease-in-out infinite; }
+    </style>
+</head>
+<body class="grid-bg">
+
+    <!-- NAVBAR -->
+    <nav class="nav-blur fixed top-0 left-0 right-0 z-50 h-16 flex items-center">
+        <div class="max-w-7xl mx-auto w-full px-6 flex items-center justify-between">
+            <a href="#" class="text-white font-medium text-lg tracking-tight">Il Tuo Nome</a>
+            <div class="flex items-center gap-8">
+                <a href="#opere" class="text-zinc-400 hover:text-white transition-colors text-sm font-medium">Opere</a>
+                <a href="#chi-sono" class="text-zinc-400 hover:text-white transition-colors text-sm font-medium">Chi sono</a>
+                <a href="#contatti" class="text-zinc-400 hover:text-white transition-colors text-sm font-medium">Contatti</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="min-h-screen flex items-center justify-center relative pt-16">
+        <div class="glow-orange" style="top: 20%; left: 50%; transform: translateX(-50%);"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <div class="fade-up">
+                <p class="text-orange-400 text-sm font-medium uppercase tracking-widest mb-6">Artista Visivo</p>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tighter leading-[0.95] mb-8">
+                    L'arte come<br>
+                    <span class="text-zinc-500">conversazione</span>
+                </h1>
+                <p class="text-zinc-400 text-lg md:text-xl font-light leading-relaxed max-w-xl mx-auto mb-10">
+                    Opere che esplorano il confine tra materia ed emozione. 
+                    Ogni pezzo racconta una storia silenziosa.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#opere" class="bg-white text-zinc-950 px-8 py-3.5 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
+                        Scopri le opere
+                    </a>
+                    <a href="https://instagram.com/tuo.username" target="_blank" class="ig-pulse flex items-center gap-2 border border-orange-500/30 text-orange-400 px-8 py-3.5 rounded-full text-sm font-medium hover:bg-orange-500/10 transition-colors">
+                        <i data-lucide="instagram" class="w-4 h-4"></i>
+                        Seguimi su Instagram
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+                <span class="text-xs uppercase tracking-widest text-zinc-500">Scroll</span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-zinc-500 animate-bounce"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <div class="divider max-w-4xl mx-auto"></div>
+
+    <!-- OPERE -->
+    <section id="opere" class="py-24 md:py-32 relative">
+        <div class="glow-orange" style="top: 30%; right: -200px;"></div>
+        
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="fade-up text-center mb-16">
+                <p class="text-orange-400 text-sm font-medium uppercase tracking-widest mb-4">Portfolio</p>
+                <h2 class="text-3xl md:text-5xl font-medium tracking-tighter">Opere selezionate</h2>
+            </div>
+
+            <!-- Griglia opere -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="gallery">
+                
+                <!-- Opera 1 - grande -->
+                <div class="opera-card md:col-span-2 fade-up" onclick="openLightbox(0)">
+                    <div class="overflow-hidden" style="height: 500px;">
+                        <img src="https://picsum.photos/seed/art-abstract1/1200/600.jpg" alt="Opera 1" class="w-full h-full object-cover">
+                    </div>
+                    <div class="overlay"></div>
+                    <div class="info">
+                        <h3 class="text-lg font-medium mb-1">Frammenti di Silenzio</h3>
+                        <p class="text-zinc-400 text-sm">Olio su tela — 80×120 cm — 2024</p>
+                    </div>
+                </div>
+
+                <!-- Opera 2 -->
+                <div class="opera-card fade-up" onclick="openLightbox(1)">
+                    <div class="overflow-hidden" style="height: 400px;">
+                        <img src="https://picsum.photos/seed/art-texture2/600/500.jpg" alt="Opera 2" class="w-full h-full object-cover">
+                    </div>
+                    <div class="overlay"></div>
+                    <div class="info">
+                        <h3 class="text-lg font-medium mb-1">Territorio Interiore</h3>
+                        <p class="text-zinc-400 text-sm">Acrilico su tavola — 60×60 cm — 2024</p>
+                    </div>
+                </div>
+
+                <!-- Opera 3 -->
+                <div class="opera-card fade-up" onclick="openLightbox(2)">
+                    <div class="overflow-hidden" style="height: 400px;">
+                        <img src="https://picsum.photos/seed/art-colors3/600/500.jpg" alt="Opera 3" class="w-full h-full object-cover">
+                    </div>
+                    <div class="overlay"></div>
+                    <div class="info">
+                        <h3 class="text-lg font-medium mb-1">Cromia Emotiva</h3>
+                        <p class="text-zinc-400 text-sm">Mista su carta — 50×70 cm — 2023</p>
+                    </div>
+                </div>
+
+                <!-- Opera 4 -->
+                <div class="opera-card fade-up" onclick="openLightbox(3)">
+                    <div class="overflow-hidden" style="height: 400px;">
+                        <img src="https://picsum.photos/seed/art-dark4/600/500.jpg" alt="Opera 4" class="w-full h-full object-cover">
+                    </div>
+                    <div class="overlay"></div>
+                    <div class="info">
+                        <h3 class="text-lg font-medium mb-1">Ombre Portatili</h3>
+                        <p class="text-zinc-400 text-sm">Carbone su tela — 70×100 cm — 2023</p>
+                    </div>
+                </div>
+
+                <!-- Opera 5 -->
+                <div class="opera-card fade-up" onclick="openLightbox(4)">
+                    <div class="overflow-hidden" style="height: 400px;">
+                        <img src="https://picsum.photos/seed/art-light5/600/500.jpg" alt="Opera 5" class="w-full h-full object-cover">
+                    </div>
+                    <div class="overlay"></div>
+                    <div class="info">
+                        <h3 class="text-lg font-medium mb-1">Luce Diffusa</h3>
+                        <p class="text-zinc-400 text-sm">Olio su lino — 90×90 cm — 2023</p>
+                    </div>
+                </div>
+
+                <!-- Opera 6 - grande -->
+                <div class="opera-card md:col-span-2 fade-up" onclick="openLightbox(5)">
+                    <div class="overflow-hidden" style="height: 500px;">
+                        <img src="https://picsum.photos/seed/art-landscape6/1200/600.jpg" alt="Opera 6" class="w-full h-full object-cover">
+                    </div>
+                    <div class="overlay"></div>
+                    <div class="info">
+                        <h3 class="text-lg font-medium mb-1">Paesaggio Interiore #3</h3>
+                        <p class="text-zinc-400 text-sm">Tecnica mista su tela — 100×150 cm — 2022</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <div class="divider max-w-4xl mx-auto"></div>
+
+    <!-- CHI SONO -->
+    <section id="chi-sono" class="py-24 md:py-32 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                
+                <!-- Foto -->
+                <div class="fade-up">
+                    <div class="hero-border rounded-3xl overflow-hidden">
+                        <div class="bg-zinc-900/50 rounded-3xl overflow-hidden" style="padding: 8px;">
+                            <img src="https://picsum.photos/seed/artist-portrait/600/700.jpg" alt="Ritratto dell'artista" class="w-full h-[480px] object-cover rounded-2xl">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testo -->
+                <div class="fade-up">
+                    <p class="text-orange-400 text-sm font-medium uppercase tracking-widest mb-4">Chi sono</p>
+                    <h2 class="text-3xl md:text-4xl font-medium tracking-tighter mb-6">La mia ricerca<br>visiva</h2>
+                    <div class="space-y-4 text-zinc-400 font-light leading-relaxed">
+                        <p>
+                            Lavoro tra Milano e la campagna circostante, e il mio lavoro esplora 
+                            il rapporto tra lo spazio interiore e il paesaggio esteriore.
+                        </p>
+                        <p>
+                            Utilizzo tecniche miste — olio, acrilico, carbone, materia — per 
+                            creare superfici che respirano e cambiano con la luce. Ogni opera 
+                            è il risultato di un dialogo lento tra intenzione e caso.
+                        </p>
+                        <p>
+                            Le mie opere sono state esposte in gallerie private e spazi 
+                            indipendenti in Italia e all'estero.
+                        </p>
+                    </div>
+
+                    <!-- Statistiche -->
+                    <div class="grid grid-cols-3 gap-6 mt-10 pt-10 border-t border-white/5">
+                        <div>
+                            <p class="text-2xl md:text-3xl font-medium text-white">50+</p>
+                            <p class="text-zinc-500 text-sm mt-1">Opere create</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl md:text-3xl font-medium text-white">12</p>
+                            <p class="text-zinc-500 text-sm mt-1">Mostre</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl md:text-3xl font-medium text-white">6</p>
+                            <p class="text-zinc-500 text-sm mt-1">Anni di attività</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <div class="divider max-w-4xl mx-auto"></div>
+
+    <!-- CONTATTI / CTA -->
+    <section id="contatti" class="py-24 md:py-32 relative">
+        <div class="glow-orange" style="bottom: 0; left: 50%; transform: translateX(-50%);"></div>
+        
+        <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+            <div class="fade-up">
+                <p class="text-orange-400 text-sm font-medium uppercase tracking-widest mb-4">Restiamo in contatto</p>
+                <h2 class="text-3xl md:text-5xl font-medium tracking-tighter mb-6">
+                    Segui il mio percorso<br>su Instagram
+                </h2>
+                <p class="text-zinc-400 font-light leading-relaxed mb-10 max-w-lg mx-auto">
+                    Dietro le quinte del mio lavoro, processi creativi, 
+                    opere in progress e pensieri sparsi. È lì che sono più presente.
+                </p>
+                
+                <a href="https://instagram.com/tuo.username" target="_blank" 
+                   class="ig-pulse inline-flex items-center gap-3 bg-white text-zinc-950 px-10 py-4 rounded-full text-sm font-medium hover:bg-zinc-200 transition-colors">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                    @tuo.username
+                </a>
+
+                <div class="flex items-center justify-center gap-8 mt-12">
+                    <a href="mailto:email@esempio.it" class="flex items-center gap-2 text-zinc-500 hover:text-orange-400 transition-colors text-sm">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                        email@esempio.it
+                    </a>
+                    <a href="#" class="flex items-center gap-2 text-zinc-500 hover:text-orange-400 transition-colors text-sm">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        Telegram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 py-8">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-zinc-600 text-sm">© 2024 Il Tuo Nome. Tutti i diritti riservati.</p>
+            <p class="text-zinc-700 text-xs">Realizzato con cura</p>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lb-arrow left" onclick="navigateLightbox(-1, event)">
+            <i data-lucide="chevron-left" class="w-5 h-5 text-white"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lb-arrow right" onclick="navigateLightbox(1, event)">
+            <i data-lucide="chevron-right" class="w-5 h-5 text-white"></i>
+        </button>
+        <div class="lb-counter" id="lb-counter"></div>
+        <button class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 border border-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" onclick="closeLightbox(event)">
+            <i data-lucide="x" class="w-5 h-5 text-white"></i>
+        </button>
+    </div>
+
+    <script>
+        // Inizializza icone Lucide
+        lucide.createIcons();
+
+        // Dati opere per il lightbox
+        const opere = [
+            { img: 'https://picsum.photos/seed/art-abstract1/1400/900.jpg', titolo: 'Frammenti di Silenzio', info: 'Olio su tela — 80×120 cm — 2024' },
+            { img: 'https://picsum.photos/seed/art-texture2/1400/900.jpg', titolo: 'Territorio Interiore', info: 'Acrilico su tavola — 60×60 cm — 2024' },
+            { img: 'https://picsum.photos/seed/art-colors3/1400/900.jpg', titolo: 'Cromia Emotiva', info: 'Mista su carta — 50×70 cm — 2023' },
+            { img: 'https://picsum.photos/seed/art-dark4/1400/900.jpg', titolo: 'Ombre Portatili', info: 'Carbone su tela — 70×100 cm — 2023' },
+            { img: 'https://picsum.photos/seed/art-light5/1400/900.jpg', titolo: 'Luce Diffusa', info: 'Olio su lino — 90×90 cm — 2023' },
+            { img: 'https://picsum.photos/seed/art-landscape6/1400/900.jpg', titolo: 'Paesaggio Interiore #3', info: 'Tecnica mista su tela — 100×150 cm — 2022' },
+        ];
+
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightbox();
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target === document.getElementById('lightbox') || e.currentTarget.tagName === 'BUTTON') {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(dir, e) {
+            e.stopPropagation();
+            currentIndex = (currentIndex + dir + opere.length) % opere.length;
+            updateLightbox();
+        }
+
+        function updateLightbox() {
+            const lb = document.getElementById('lightbox');
+            document.getElementById('lightbox-img').src = opere[currentIndex].img;
+            document.getElementById('lightbox-img').alt = opere[currentIndex].titolo;
+            document.getElementById('lb-counter').textContent = 
+                `${opere[currentIndex].titolo} — ${currentIndex + 1} / ${opere.length}`;
+        }
+
+        // Navigazione tastiera
+        document.addEventListener('keydown', (e) => {
+            const lb = document.getElementById('lightbox');
+            if (!lb.classList.contains('active')) return;
+            if (e.key === 'Escape') { lb.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowLeft') navigateLightbox(-1, e);
+            if (e.key === 'ArrowRight') navigateLightbox(1, e);
+        });
+
+        // Fade in allo scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
