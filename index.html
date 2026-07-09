@@ -15,10 +15,57 @@
         body {
             background: #09090b;
             color: #ffffff;
+            cursor: none;
+        }
+
+        /* ===== CURSORE PERSONALIZZATO ===== */
+        .cursor-moon {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .cursor-moon.visible {
+            opacity: 1;
+        }
+
+        .cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 6px;
+            background: #7c7fcd;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, opacity 0.3s ease;
+            opacity: 0;
+            mix-blend-mode: screen;
+        }
+
+        .cursor-dot.visible {
+            opacity:1;
+        }
+
+        /* Mostra cursore normale sugli elementi interattivi */
+        a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close {
+            cursor: pointer;
+        }
+
+        /* Nascondi cursore predefinito su tutto il resto */
+        *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause) {
+            cursor: none;
         }
 
         .grid-bg {
-            background-image: 
+            background-image:
                 linear-gradient(rgba(124,127,205,0.015) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(124,127,205,0.015) 1px, transparent 1px);
             background-size: 60px 60px;
@@ -554,6 +601,7 @@
             display: inline-block;
             padding: 5px 14px;
             border-radius: 100px;
+            border: 1px border-radius: 100px;
             border: 1px solid rgba(124,127,205,0.15);
             color: #9496cc;
             font-size: 12px;
@@ -588,6 +636,39 @@
     </style>
 </head>
 <body class="grid-bg">
+
+    <!-- CURSORE PERSONALIZZATO: Mezzaluna + Puntino -->
+    <div class="cursor-moon" id="cursorMoon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="moonGlow" cx="50%" cy="40%" r="60%" fx="50%" fy="40%">
+                    <stop offset="0%" stop-color="#7c7fcd" stop-opacity="0.3"/>
+                    <stop offset="100%" stop-color="#7c7fcd" stop-opacity="0"/>
+                </radialGradient>
+                <mask id="moonMask">
+                    <circle cx="16" cy="13" r="12" fill="white"/>
+                    <circle cx="22" cy="8" r="7" fill="black"/>
+                    <circle cx="10" cy="7" r="6" fill="black"/>
+                    <circle cx="16" cy="21" r="8" fill="black"/>
+                </mask>
+            </defs>
+            <!-- Sfumatura morbida della luna -->
+            <circle cx="16" cy="14" r="11" fill="url(#moonGlow)" mask="url(#moonMask)" opacity="0.6"/>
+            <!-- Linee di contorno della luna -->
+            <path d="M 16 3 A 11 11 0 1 1 27 14 A 11 11 0 1 1 16 25 A 11 11 0 1 1 5 14 A 11 11 0 1 1 16 3 Z" stroke="rgba(148,150,204,0.5)" stroke-width="0.8" fill="none"/>
+            <!-- Linee dei crateri -->
+            <circle cx="11" cy="11" r="1.5" fill="none" stroke="rgba(148,150,204,0.2)" stroke-width="0.5"/>
+            <circle cx="19" cy="9" r="1" fill="none" stroke="rgba(148,150,204,0.15)" stroke-width="0.5"/>
+            <circle cx="14" cy="18" r="1.8" fill="none" stroke="rgba(148,150,204,0.18)" stroke-width="0.5"/>
+            <circle cx="21" cy="16" r="1" fill="none" stroke="rgba(148,150,204,0.12)" stroke-width="0.5"/>
+            <circle cx="10" cy="15" r="0.8" fill="none" stroke="rgba(148,150,204,0.15)" stroke-width="0.5"/>
+            <!-- Stella brillante -->
+            <circle cx="22" cy="6" r="0.6" fill="rgba(200,202,240,0.8)"/>
+            <circle cx="7" cy="8" r="0.5" fill="rgba(200,202,240,0.6)"/>
+            <circle cx="26" cy="13" r="0.4" fill="rgba(200,202,240,0.4)"/>
+        </svg>
+    </div>
+    <div class="cursor-dot" id="cursorDot"></div>
 
     <!-- HERO -->
     <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -649,32 +730,92 @@
 
             <div class="gallery-grid" id="gallery">
                 <div class="opera tall reveal" onclick="openLB(0)">
-                    <img src="https://www.instagram.com/p/DUsi991DCIg/?img_index=1" alt="" loading="lazy">
+                    <img src="https://picsum.photos/seed/jn-autumn1/600/1200.jpg" alt="Espansione" loading="lazy">
                     <div class="shade"></div>
                     <span class="year-tag">2024</span>
                     <div class="meta">
-                        <h3 class="text-[15px] font-medium mb-0.5"></h3>
-                        <p class="text-zinc-400 text-xs"> · 70×100</p>
+                        <h3 class="text-[15px] font-medium mb-0.5">Espansione</h3>
+                        <p class="text-zinc-400 text-xs">Olio su tela · 70×100</p>
                     </div>
                 </div>
 
                 <div class="opera reveal" onclick="openLB(1)">
-                    <img src="https://www.instagram.com/p/C19X-QkohFI/?img_index=1" alt="" loading="lazy">
+                    <img src="https://picsum.photos/seed/jn-leaf2/600/600.jpg" alt="Caduta dolce" loading="lazy">
                     <div class="shade"></div>
                     <span class="year-tag">2024</span>
                     <div class="meta">
-                        <h3 class="text-[15px] font-medium mb-0.5"></h3>
-                        <p class="text-zinc-400 text-xs"> · 50×50</p>
+                        <h3 class="text-[15px] font-medium mb-0.5">Caduta dolce</h3>
+                        <p class="text-zinc-400 text-xs">Acrilico e sabbia · 50×50</p>
                     </div>
                 </div>
 
                 <div class="opera reveal" onclick="openLB(2)">
-                    <img src="https://www.instagram.com/p/DEIIs_hIV_u/?img_index=1" alt="" loading="lazy">
+                    <img src="https://picsum.photos/seed/jn-purple3/600/600.jpg" alt="Rigenerazione" loading="lazy">
                     <div class="shade"></div>
                     <span class="year-tag">2024</span>
                     <div class="meta">
-                        <h3 class="text-[15px] font-medium mb-0.5"></h3>
-                        <p class="text-zinc-400 text-xs"> · 40×60</p>
+                        <h3 class="text-[15px] font-medium mb-0.5">Rigenerazione</h3>
+                        <p class="text-zinc-400 text-xs">Tecnica mista · 40×60</p>
+                    </div>
+                </div>
+
+                <div class="opera wide reveal" onclick="openLB(3)">
+                    <img src="https://picsum.photos/seed/jn-cycle4/1200/600.jpg" alt="Ciclo" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="year-tag">2023</span>
+                    <div class="meta">
+                        <h3 class="text-[15px] font-medium mb-0.5">Ciclo</h3>
+                        <p class="text-zinc-400 text-xs">Olio su lino · 80×120</p>
+                    </div>
+                </div>
+
+                <div class="opera reveal" onclick="openLB(4)">
+                    <img src="https://picsum.photos/seed/jn-skin5/600/600.jpg" alt="Pelle di terra" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="year-tag">2023</span>
+                    <div class="meta">
+                        <h3 class="text-[15px] font-medium mb-0.5">Pelle di terra</h3>
+                        <p class="text-zinc-400 text-xs">Mista su tavola · 60×60</p>
+                    </div>
+                </div>
+
+                <div class="opera reveal" onclick="openLB(5)">
+                    <img src="https://picsum.photos/seed/jn-not6/600/600.jpg" alt="Non umana" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="year-tag">2023</span>
+                    <div class="meta">
+                        <h3 class="text-[15px] font-medium mb-0.5">Non umana</h3>
+                        <p class="text-zinc-400 text-xs">Carbone e gesso · 50×70</p>
+                    </div>
+                </div>
+
+                <div class="opera tall reveal" onclick="openLB(6)">
+                    <img src="https://picsum.photos/seed/jn-roots7/600/1200.jpg" alt="Prima del silenzio" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="year-tag">2023</span>
+                    <div class="meta">
+                        <h3 class="text-[15px] font-medium mb-0.5">Prima del silenzio</h3>
+                        <p class="text-zinc-400 text-xs">Olio su tela · 90×130</p>
+                    </div>
+                </div>
+
+                <div class="opera reveal" onclick="openLB(7)">
+                    <img src="https://picsum.photos/seed/jn-ember8/600/600.jpg" alt="Brace" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="year-tag">2022</span>
+                    <div class="meta">
+                        <h3 class="text-[15px] font-medium mb-0.5">Brace</h3>
+                        <p class="text-zinc-400 text-xs">Acrilico e foglia · 40×40</p>
+                    </div>
+                </div>
+
+                <div class="opera wide reveal" onclick="openLB(8)">
+                    <img src="https://picsum.photos/seed/jn-under9/1200/600.jpg" alt="Sotto la superficie" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="year-tag">2022</span>
+                    <div class="meta">
+                        <h3 class="text-[15px] font-medium mb-0.5">Sotto la superficie</h3>
+                        <p class="text-zinc-400 text-xs">Tecnica mista su tela · 100×150</p>
                     </div>
                 </div>
             </div>
@@ -820,6 +961,49 @@
 
     <script>
         lucide.createIcons();
+
+        // ===== CURSORE PERSONALIZZATO =====
+        var cursorMoon = document.getElementById('cursorMoon');
+        var cursorDot = document.getElementById('cursorDot');
+        var mouseX = 0;
+        var mouseY = 0;
+        var moonX = 0;
+        var moonY = 0;
+        var dotX = 0;
+        var dotY = 0;
+        var isVisible = false;
+
+        document.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (!isVisible) {
+                isVisible = true;
+                cursorMoon.classList.add('visible');
+                cursorDot.classList.add('visible');
+            }
+        });
+
+        document.addEventListener('mouseleave', function() {
+            isVisible = false;
+            cursorMoon.classList.remove('visible');
+            cursorDot.classList.remove('visible');
+        });
+
+        function animateCursor() {
+            dotX += (mouseX - dotX) * 0.15;
+            dotY += (mouseY - dotY) * 0.15;
+            moonX += (mouseX - moonX) * 0.08;
+            moonY += (mouseY - moonY) * 0.08;
+
+            cursorDot.style.left = dotX + 'px';
+            cursorDot.style.top = dotY + 'px';
+            cursorMoon.style.left = (moonX - 16) + 'px';
+            cursorMoon.style.top = (moonY - 16) + 'px';
+
+            requestAnimationFrame(animateCursor);
+        }
+
+        animateCursor();
 
         // ===== GALLERY LIGHTBOX =====
         var works = [
