@@ -245,13 +245,6 @@
             border-color: rgba(124,127,205,0.35);
         }
 
-        .quote-mark {
-            font-size: 80px;
-            line-height: 1;
-            color: rgba(124,127,205,0.1);
-            font-family: Georgia, serif;
-        }
-
         html { scroll-behavior: smooth; }
 
         @keyframes scroll-left {
@@ -318,7 +311,6 @@
             .hero-img-wrap img { max-height: 600px; }
         }
 
-        /* ===== STORYTELLING ===== */
         .story-container {
             position: relative;
             width: 100%;
@@ -338,15 +330,8 @@
             transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1;
         }
-        .story-slide.active {
-            opacity: 1;
-            z-index: 2;
-        }
-        .story-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .story-slide.active { opacity: 1; z-index: 2; }
+        .story-slide img { width: 100%; height: 100%; object-fit: cover; }
         .story-slide .story-overlay {
             position: absolute;
             inset: 0;
@@ -361,7 +346,6 @@
             z-index: 3;
         }
 
-        /* Progress bar */
         .story-progress {
             position: absolute;
             top: 16px;
@@ -385,15 +369,9 @@
             width: 0%;
             transition: width 5s linear;
         }
-        .story-bar.done .story-bar-fill {
-            width: 100%;
-            transition: none;
-        }
-        .story-bar.active .story-bar-fill {
-            width: 100%;
-        }
+        .story-bar.done .story-bar-fill { width: 100%; transition: none; }
+        .story-bar.active .story-bar-fill { width: 100%; }
 
-        /* Pause indicator */
         .story-pause {
             position: absolute;
             top: 50%;
@@ -417,7 +395,6 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        /* Nav arrows storytelling */
         .story-nav {
             position: absolute;
             top: 0;
@@ -442,12 +419,8 @@
             opacity: 0;
             transition: all 0.3s ease;
         }
-        .story-nav:hover .story-nav-icon {
-            opacity: 1;
-            background: rgba(255,255,255,0.12);
-        }
+        .story-nav:hover .story-nav-icon { opacity: 1; background: rgba(255,255,255,0.12); }
 
-        /* Counter */
         .story-counter {
             position: absolute;
             bottom: 16px;
@@ -471,11 +444,7 @@
                 
                 <div class="reveal">
                     <p class="text-[#9496cc]/60 text-xs font-medium uppercase tracking-[0.25em] mb-8">Artista Visiva</p>
-                    <h1 class="hero-name mb-8">Jennina</h1>
-                    <p class="text-zinc-500 text-base md:text-lg font-light max-w-md leading-relaxed mb-12">
-                        L'autunno è espansione e rigenerazione.<br>
-                        Dipingo il ciclo eterno delle cose.
-                    </p>
+                    <h1 class="hero-name mb-12">Jennina</h1>
                     <div class="flex flex-wrap items-center gap-4">
                         <a href="#opere" class="btn-main">Vedi le opere</a>
                         <a href="https://www.instagram.com/iamjennina/" target="_blank" class="ig-link">
@@ -550,7 +519,6 @@
             </div>
 
             <div class="gallery-grid" id="gallery">
-
                 <div class="opera tall reveal" onclick="openLB(0)">
                     <img src="https://picsum.photos/seed/jn-autumn1/600/1200.jpg" alt="Espansione" loading="lazy">
                     <div class="shade"></div>
@@ -560,7 +528,6 @@
                         <p class="text-zinc-400 text-xs">Olio su tela · 70×100</p>
                     </div>
                 </div>
-
                 <div class="opera reveal" onclick="openLB(1)">
                     <img src="https://picsum.photos/seed/jn-leaf2/600/600.jpg" alt="Caduta dolce" loading="lazy">
                     <div class="shade"></div>
@@ -570,7 +537,6 @@
                         <p class="text-zinc-400 text-xs">Acrilico e sabbia · 50×50</p>
                     </div>
                 </div>
-
                 <div class="opera reveal" onclick="openLB(2)">
                     <img src="https://picsum.photos/seed/jn-purple3/600/600.jpg" alt="Rigenerazione" loading="lazy">
                     <div class="shade"></div>
@@ -580,7 +546,6 @@
                         <p class="text-zinc-400 text-xs">Tecnica mista · 40×60</p>
                     </div>
                 </div>
-
                 <div class="opera wide reveal" onclick="openLB(3)">
                     <img src="https://picsum.photos/seed/jn-cycle4/1200/600.jpg" alt="Ciclo" loading="lazy">
                     <div class="shade"></div>
@@ -590,7 +555,6 @@
                         <p class="text-zinc-400 text-xs">Olio su lino · 80×120</p>
                     </div>
                 </div>
-
                 <div class="opera reveal" onclick="openLB(4)">
                     <img src="https://picsum.photos/seed/jn-skin5/600/600.jpg" alt="Pelle di terra" loading="lazy">
                     <div class="shade"></div>
@@ -600,7 +564,6 @@
                         <p class="text-zinc-400 text-xs">Mista su tavola · 60×60</p>
                     </div>
                 </div>
-
                 <div class="opera reveal" onclick="openLB(5)">
                     <img src="https://picsum.photos/seed/jn-not6/600/600.jpg" alt="Non umana" loading="lazy">
                     <div class="shade"></div>
@@ -610,7 +573,6 @@
                         <p class="text-zinc-400 text-xs">Carbone e gesso · 50×70</p>
                     </div>
                 </div>
-
                 <div class="opera tall reveal" onclick="openLB(6)">
                     <img src="https://picsum.photos/seed/jn-roots7/600/1200.jpg" alt="Prima del silenzio" loading="lazy">
                     <div class="shade"></div>
@@ -620,7 +582,6 @@
                         <p class="text-zinc-400 text-xs">Olio su tela · 90×130</p>
                     </div>
                 </div>
-
                 <div class="opera reveal" onclick="openLB(7)">
                     <img src="https://picsum.photos/seed/jn-ember8/600/600.jpg" alt="Brace" loading="lazy">
                     <div class="shade"></div>
@@ -630,7 +591,6 @@
                         <p class="text-zinc-400 text-xs">Acrilico e foglia · 40×40</p>
                     </div>
                 </div>
-
                 <div class="opera wide reveal" onclick="openLB(8)">
                     <img src="https://picsum.photos/seed/jn-under9/1200/600.jpg" alt="Sotto la superficie" loading="lazy">
                     <div class="shade"></div>
@@ -640,7 +600,6 @@
                         <p class="text-zinc-400 text-xs">Tecnica mista su tela · 100×150</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -649,27 +608,16 @@
     <div class="line max-w-4xl mx-auto"></div>
     <section id="storytelling" class="py-24 md:py-32 relative">
         <div class="glow" style="top: 40%; left: 50%; transform: translateX(-50%);"></div>
-
         <div class="max-w-5xl mx-auto px-6">
             <div class="reveal mb-14 text-center">
                 <p class="text-[#9496cc]/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">Storytelling</p>
                 <h2 class="text-3xl md:text-4xl font-light tracking-tight">Un racconto visivo</h2>
                 <p class="text-zinc-600 text-sm mt-4 font-light">Si ferma al passaggio del mouse — clicca le frecce per navigare</p>
             </div>
-
             <div class="reveal">
-                <div class="story-container" id="storyContainer"
-                     onmouseenter="pauseStory()" onmouseleave="resumeStory()">
-
-                    <!-- Progress bars -->
+                <div class="story-container" id="storyContainer" onmouseenter="pauseStory()" onmouseleave="resumeStory()">
                     <div class="story-progress" id="storyProgress"></div>
-
-                    <!-- Pause icon -->
-                    <div class="story-pause">
-                        <i data-lucide="pause" class="w-5 h-5 text-white"></i>
-                    </div>
-
-                    <!-- Slides -->
+                    <div class="story-pause"><i data-lucide="pause" class="w-5 h-5 text-white"></i></div>
                     <div class="story-slide active" data-index="0">
                         <img src="https://picsum.photos/seed/story-begin/1400/800.jpg" alt="">
                         <div class="story-overlay"></div>
@@ -679,7 +627,6 @@
                             <p class="text-zinc-400 text-sm font-light mt-2 max-w-md">La tela è vuota. La mano si avvicina senza fretta.</p>
                         </div>
                     </div>
-
                     <div class="story-slide" data-index="1">
                         <img src="https://picsum.photos/seed/story-matter/1400/800.jpg" alt="">
                         <div class="story-overlay"></div>
@@ -689,7 +636,6 @@
                             <p class="text-zinc-400 text-sm font-light mt-2 max-w-md">Pigmenti, terra, polvere. Il colore esiste già nella materia.</p>
                         </div>
                     </div>
-
                     <div class="story-slide" data-index="2">
                         <img src="https://picsum.photos/seed/story-layer/1400/800.jpg" alt="">
                         <div class="story-overlay"></div>
@@ -699,7 +645,6 @@
                             <p class="text-zinc-400 text-sm font-light mt-2 max-w-md">Coprire per svelare. Ogni cancellazione è una decisione.</p>
                         </div>
                     </div>
-
                     <div class="story-slide" data-index="3">
                         <img src="https://picsum.photos/seed/story-light/1400/800.jpg" alt="">
                         <div class="story-overlay"></div>
@@ -709,7 +654,6 @@
                             <p class="text-zinc-400 text-sm font-light mt-2 max-w-md">Non è la mano che crea — è l'opera che si fa vedere.</p>
                         </div>
                     </div>
-
                     <div class="story-slide" data-index="4">
                         <img src="https://picsum.photos/seed/story-fall/1400/800.jpg" alt="">
                         <div class="story-overlay"></div>
@@ -719,7 +663,6 @@
                             <p class="text-zinc-400 text-sm font-light mt-2 max-w-md">L'opera si stacca e comincia a vivere da sola.</p>
                         </div>
                     </div>
-
                     <div class="story-slide" data-index="5">
                         <img src="https://picsum.photos/seed/story-end/1400/800.jpg" alt="">
                         <div class="story-overlay"></div>
@@ -729,59 +672,33 @@
                             <p class="text-zinc-400 text-sm font-light mt-2 max-w-md">Il ciclo ricomincia.</p>
                         </div>
                     </div>
-
-                    <!-- Nav -->
                     <div class="story-nav left" onclick="prevStory(event)">
-                        <div class="story-nav-icon">
-                            <i data-lucide="chevron-left" class="w-4 h-4 text-white"></i>
-                        </div>
+                        <div class="story-nav-icon"><i data-lucide="chevron-left" class="w-4 h-4 text-white"></i></div>
                     </div>
                     <div class="story-nav right" onclick="nextStory(event)">
-                        <div class="story-nav-icon">
-                            <i data-lucide="chevron-right" class="w-4 h-4 text-white"></i>
-                        </div>
+                        <div class="story-nav-icon"><i data-lucide="chevron-right" class="w-4 h-4 text-white"></i></div>
                     </div>
-
-                    <!-- Counter -->
                     <div class="story-counter" id="storyCounter">01 / 06</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- QUOTE -->
-    <div class="line max-w-4xl mx-auto"></div>
-    <section class="py-24 md:py-32 relative">
-        <div class="glow-warm" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
-        <div class="max-w-3xl mx-auto px-6 text-center reveal relative z-10">
-            <span class="quote-mark">"</span>
-            <p class="text-zinc-300 text-lg md:text-xl font-light leading-relaxed -mt-8 mb-4">
-                L'autunno non è fine. È espansione e rigenerazione. 
-                Ogni foglia che cade è una promessa che torna.
-            </p>
-            <p class="text-[#9496cc]/50 text-sm">— Jennina</p>
-        </div>
-    </section>
-    <div class="line max-w-4xl mx-auto"></div>
-
     <!-- ABOUT -->
+    <div class="line max-w-4xl mx-auto"></div>
     <section id="about" class="py-24 md:py-32 relative">
         <div class="glow-soft" style="bottom: 10%; right: -50px;"></div>
         <div class="glow-warm" style="top: 20%; left: -80px;"></div>
-
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-16 items-start">
-                
                 <div class="md:col-span-2 reveal">
                     <div class="frame rounded-[20px] overflow-hidden" style="padding: 6px; background: rgba(24,24,27,0.5);">
                         <img src="https://picsum.photos/seed/jennina-face/500/650.jpg" alt="Jennina" class="w-full h-[440px] object-cover rounded-[16px]" style="filter: saturate(0.8) contrast(1.05);">
                     </div>
                 </div>
-
                 <div class="md:col-span-3 reveal">
                     <p class="text-[#9496cc]/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">About</p>
                     <h2 class="text-3xl md:text-4xl font-light tracking-tight mb-8">Chi sono</h2>
-                    
                     <div class="space-y-4 text-zinc-400 font-light leading-relaxed text-[15px]">
                         <p>
                             Mi chiamo Jennina e vivo e lavoro in Italia. La mia ricerca nasce 
@@ -804,28 +721,9 @@
         </div>
     </section>
 
-    <div class="line max-w-4xl mx-auto"></div>
-
-    <!-- INSTAGRAM CTA -->
-    <section class="py-24 md:py-32 relative text-center">
-        <div class="glow" style="bottom: -100px; left: 50%; transform: translateX(-50%);"></div>
-
-        <div class="max-w-2xl mx-auto px-6 relative z-10 reveal">
-            <p class="text-[#9496cc]/60 text-xs font-medium uppercase tracking-[0.25em] mb-3">Seguimi</p>
-            <h2 class="text-3xl md:text-4xl font-light tracking-tight mb-5">Il processo creativo<br>su Instagram</h2>
-            <p class="text-zinc-500 font-light text-[15px] leading-relaxed mb-10 max-w-md mx-auto">
-                Dietro le quinte, opere in progress, pensieri sparsi. 
-                È lì che condivido il lato vivo del mio lavoro.
-            </p>
-            <a href="https://www.instagram.com/iamjennina/" target="_blank" class="btn-main text-base px-10 py-4 inline-flex items-center gap-3">
-                <i data-lucide="instagram" class="w-5 h-5"></i>
-                @iamjennina
-            </a>
-        </div>
-    </section>
-
     <!-- FOOTER -->
-    <footer class="border-t border-[#7c7fcd]/[0.04] py-8">
+    <div class="line max-w-4xl mx-auto"></div>
+    <footer class="py-8">
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-zinc-700 text-xs">© 2024 Jennina · I'm not human, I'm art</p>
             <div class="flex items-center gap-6">
@@ -861,7 +759,6 @@
     <script>
         lucide.createIcons();
 
-        // ===== GALLERY LIGHTBOX =====
         const works = [
             { img: 'https://picsum.photos/seed/jn-autumn1/1400/2000.jpg', title: 'Espansione', detail: 'Olio su tela · 70×100 cm · 2024' },
             { img: 'https://picsum.photos/seed/jn-leaf2/1400/1400.jpg', title: 'Caduta dolce', detail: 'Acrilico e sabbia · 50×50 cm · 2024' },
@@ -918,7 +815,6 @@
         let storyTimer = null;
         let storyPaused = false;
 
-        // Crea le barre di progresso
         const progressContainer = document.getElementById('storyProgress');
         for (let i = 0; i < totalSlides; i++) {
             const bar = document.createElement('div');
@@ -929,56 +825,32 @@
         const bars = document.querySelectorAll('.story-bar');
 
         function goToStory(index) {
-            // Rimuovi active dalla slide corrente
             slides[storyIndex].classList.remove('active');
-            
-            // Segna la barra corrente come "done"
             bars[storyIndex].classList.remove('active');
             bars[storyIndex].classList.add('done');
-
             storyIndex = (index + totalSlides) % totalSlides;
-
-            // Attiva nuova slide
             slides[storyIndex].classList.add('active');
-
-            // Reset e attiva barra nuova
             bars[storyIndex].classList.remove('done');
             bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'none';
             bars[storyIndex].querySelector('.story-bar-fill').style.width = '0%';
-            
-            // Forza reflow
             void bars[storyIndex].offsetWidth;
-            
             bars[storyIndex].classList.add('active');
             bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'width 5s linear';
             bars[storyIndex].querySelector('.story-bar-fill').style.width = '100%';
-
-            // Aggiorna contatore
-            document.getElementById('storyCounter').textContent = 
-                String(storyIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
-
-            // Reset timer
+            document.getElementById('storyCounter').textContent = String(storyIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
             clearTimeout(storyTimer);
-            if (!storyPaused) {
-                storyTimer = setTimeout(() => goToStory(storyIndex + 1), 5000);
-            }
+            if (!storyPaused) { storyTimer = setTimeout(() => goToStory(storyIndex + 1), 5000); }
         }
 
-        function nextStory(e) {
-            if (e) e.stopPropagation();
-            goToStory(storyIndex + 1);
-        }
+        function nextStory(e) { if (e) e.stopPropagation(); goToStory(storyIndex + 1); }
 
         function prevStory(e) {
             if (e) e.stopPropagation();
-            // Torna indietro: resetta anche le barre precedenti
             bars[storyIndex].classList.remove('active', 'done');
             bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'none';
             bars[storyIndex].querySelector('.story-bar-fill').style.width = '0%';
-            
             slides[storyIndex].classList.remove('active');
             storyIndex = (storyIndex - 1 + totalSlides) % totalSlides;
-            
             slides[storyIndex].classList.add('active');
             bars[storyIndex].classList.remove('done');
             bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'none';
@@ -987,54 +859,40 @@
             bars[storyIndex].classList.add('active');
             bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'width 5s linear';
             bars[storyIndex].querySelector('.story-bar-fill').style.width = '100%';
-
-            document.getElementById('storyCounter').textContent = 
-                String(storyIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
-
+            document.getElementById('storyCounter').textContent = String(storyIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
             clearTimeout(storyTimer);
-            if (!storyPaused) {
-                storyTimer = setTimeout(() => goToStory(storyIndex + 1), 5000);
-            }
+            if (!storyPaused) { storyTimer = setTimeout(() => goToStory(storyIndex + 1), 5000); }
         }
 
         function pauseStory() {
             storyPaused = true;
             clearTimeout(storyTimer);
             document.getElementById('storyContainer').classList.add('paused');
-            // Ferma animazione barra corrente
             const fill = bars[storyIndex].querySelector('.story-bar-fill');
-            const computed = getComputedStyle(fill).width;
             fill.style.transition = 'none';
-            fill.style.width = computed;
+            fill.style.width = getComputedStyle(fill).width;
         }
 
         function resumeStory() {
             storyPaused = false;
             document.getElementById('storyContainer').classList.remove('paused');
-            // Riprendi barra dal punto attuale
             const fill = bars[storyIndex].querySelector('.story-bar-fill');
-            const current = parseFloat(fill.style.width) || 0;
             const parent = fill.parentElement;
             const percent = (parseFloat(getComputedStyle(fill).width) / parent.offsetWidth) * 100;
-            
             fill.style.transition = 'none';
             fill.style.width = percent + '%';
             void fill.offsetWidth;
-            
             const remaining = 5000 * (1 - percent / 100);
             fill.style.transition = 'width ' + remaining + 'ms linear';
             fill.style.width = '100%';
-
             storyTimer = setTimeout(() => goToStory(storyIndex + 1), remaining);
         }
 
-        // Avvia lo storytelling quando diventa visibile
         let storyStarted = false;
         const storyObs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !storyStarted) {
                     storyStarted = true;
-                    // Avvia prima slide
                     bars[0].classList.add('active');
                     bars[0].querySelector('.story-bar-fill').style.transition = 'width 5s linear';
                     bars[0].querySelector('.story-bar-fill').style.width = '100%';
@@ -1053,7 +911,6 @@
                 }
             });
         }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-
         document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     </script>
 </body>
