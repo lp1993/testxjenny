@@ -26,12 +26,18 @@
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, filter 0.3s ease;
             opacity: 0;
+            filter: drop-shadow(0 0 6px rgba(124,127,205,0.25));
         }
 
         .cursor-moon.visible {
             opacity: 1;
+        }
+
+        .cursor-moon.hovering {
+            filter: drop-shadow(0 0 12px rgba(124,127,205,0.5));
+            transform: translate(-50%, -50%) scale(1.25);
         }
 
         .cursor-dot {
@@ -45,21 +51,24 @@
             pointer-events: none;
             z-index: 10000;
             transform: translate(-50%, -50%);
-            transition: transform 0.1s ease, opacity 0.3s ease;
+            transition: transform 0.1s ease, opacity 0.3s ease, background 0.3s ease;
             opacity: 0;
             mix-blend-mode: screen;
         }
 
         .cursor-dot.visible {
-            opacity:1;
+            opacity: 1;
         }
 
-        /* Mostra cursore normale sugli elementi interattivi */
+        .cursor-dot.hovering {
+            transform: translate(-50%, -50%) scale(1.8);
+            background: #b8bad8;
+        }
+
         a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close {
             cursor: pointer;
         }
 
-        /* Nascondi cursore predefinito su tutto il resto */
         *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause) {
             cursor: none;
         }
@@ -136,45 +145,9 @@
             opacity: 1;
         }
 
-        .opera .meta {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-            transform: translateY(8px);
-            opacity: 0;
-            transition: all 0.4s ease 0.08s;
-        }
-
-        .opera:hover .meta {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .opera .year-tag {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            color: rgba(255,255,255,0.5);
-            background: rgba(9,9,11,0.5);
-            backdrop-filter: blur(8px);
-            padding: 4px 10px;
-            border-radius: 100px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .opera:hover .year-tag {
-            opacity: 1;
-        }
-
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 6px;
         }
 
@@ -187,22 +160,10 @@
             aspect-ratio: auto;
         }
 
-        .gallery-grid .opera.wide {
-            grid-column: span 2;
-            aspect-ratio: 2/1;
-        }
-
         @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
             .gallery-grid .opera.tall {
                 grid-row: span 1;
                 aspect-ratio: 1;
-            }
-            .gallery-grid .opera.wide {
-                grid-column: span 2;
-                aspect-ratio: 2/1;
             }
         }
 
@@ -259,21 +220,8 @@
             border-color: rgba(124,127,205,0.35);
         }
 
-        .lb-btn.prev {
-            left: 20px;
-        }
-
-        .lb-btn.next {
-            right: 20px;
-        }
-
-        .lb-info {
-            position: absolute;
-            bottom: 28px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-        }
+        .lb-btn.prev { left: 20px; }
+        .lb-btn.next { right: 20px; }
 
         .lb-close {
             position: absolute;
@@ -330,9 +278,7 @@
             color: #b0b3dc;
         }
 
-        .frame {
-            position: relative;
-        }
+        .frame { position: relative; }
 
         .frame::before {
             content: "";
@@ -367,9 +313,7 @@
             border-color: rgba(124,127,205,0.35);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         .btn-main {
             background: linear-gradient(135deg, #6b6eb8, #7c7fcd);
@@ -454,18 +398,11 @@
         }
 
         @media (min-width: 768px) {
-            .story-container {
-                max-height: 75vh;
-                max-width: 450px;
-            }
+            .story-container { max-height: 75vh; max-width: 450px; }
         }
 
         @media (max-width: 767px) {
-            .story-container {
-                max-width: 400px;
-                margin-left: auto;
-                margin-right: auto;
-            }
+            .story-container { max-width: 400px; margin-left: auto; margin-right: auto; }
         }
 
         .story-slide {
@@ -476,16 +413,9 @@
             z-index: 1;
         }
 
-        .story-slide.active {
-            opacity: 1;
-            z-index: 2;
-        }
+        .story-slide.active { opacity: 1; z-index: 2; }
 
-        .story-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+        .story-slide img { width: 100%; height: 100%; object-fit: contain; }
 
         .story-progress {
             position: absolute;
@@ -513,14 +443,8 @@
             transition: width 5s linear;
         }
 
-        .story-bar.done .story-bar-fill {
-            width: 100%;
-            transition: none;
-        }
-
-        .story-bar.active .story-bar-fill {
-            width: 100%;
-        }
+        .story-bar.done .story-bar-fill { width: 100%; transition: none; }
+        .story-bar.active .story-bar-fill { width: 100%; }
 
         .story-pause {
             position: absolute;
@@ -557,17 +481,8 @@
             align-items: center;
         }
 
-        .story-nav.left {
-            left: 0;
-            justify-content: flex-start;
-            padding-left: 12px;
-        }
-
-        .story-nav.right {
-            right: 0;
-            justify-content: flex-end;
-            padding-right: 12px;
-        }
+        .story-nav.left { left: 0; justify-content: flex-start; padding-left: 12px; }
+        .story-nav.right { right: 0; justify-content: flex-end; padding-right: 12px; }
 
         .story-nav-icon {
             width: 36px;
@@ -582,10 +497,7 @@
             transition: all 0.3s ease;
         }
 
-        .story-nav:hover .story-nav-icon {
-            opacity: 1;
-            background: rgba(255,255,255,0.12);
-        }
+        .story-nav:hover .story-nav-icon { opacity: 1; background: rgba(255,255,255,0.12); }
 
         .story-counter {
             position: absolute;
@@ -601,7 +513,6 @@
             display: inline-block;
             padding: 5px 14px;
             border-radius: 100px;
-            border: 1px border-radius: 100px;
             border: 1px solid rgba(124,127,205,0.15);
             color: #9496cc;
             font-size: 12px;
@@ -637,35 +548,13 @@
 </head>
 <body class="grid-bg">
 
-    <!-- CURSORE PERSONALIZZATO: Mezzaluna + Puntino -->
+    <!-- CURSORE PERSONALIZZATO: Dot + Mezzaluna semplice -->
     <div class="cursor-moon" id="cursorMoon">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <radialGradient id="moonGlow" cx="50%" cy="40%" r="60%" fx="50%" fy="40%">
-                    <stop offset="0%" stop-color="#7c7fcd" stop-opacity="0.3"/>
-                    <stop offset="100%" stop-color="#7c7fcd" stop-opacity="0"/>
-                </radialGradient>
-                <mask id="moonMask">
-                    <circle cx="16" cy="13" r="12" fill="white"/>
-                    <circle cx="22" cy="8" r="7" fill="black"/>
-                    <circle cx="10" cy="7" r="6" fill="black"/>
-                    <circle cx="16" cy="21" r="8" fill="black"/>
-                </mask>
-            </defs>
-            <!-- Sfumatura morbida della luna -->
-            <circle cx="16" cy="14" r="11" fill="url(#moonGlow)" mask="url(#moonMask)" opacity="0.6"/>
-            <!-- Linee di contorno della luna -->
-            <path d="M 16 3 A 11 11 0 1 1 27 14 A 11 11 0 1 1 16 25 A 11 11 0 1 1 5 14 A 11 11 0 1 1 16 3 Z" stroke="rgba(148,150,204,0.5)" stroke-width="0.8" fill="none"/>
-            <!-- Linee dei crateri -->
-            <circle cx="11" cy="11" r="1.5" fill="none" stroke="rgba(148,150,204,0.2)" stroke-width="0.5"/>
-            <circle cx="19" cy="9" r="1" fill="none" stroke="rgba(148,150,204,0.15)" stroke-width="0.5"/>
-            <circle cx="14" cy="18" r="1.8" fill="none" stroke="rgba(148,150,204,0.18)" stroke-width="0.5"/>
-            <circle cx="21" cy="16" r="1" fill="none" stroke="rgba(148,150,204,0.12)" stroke-width="0.5"/>
-            <circle cx="10" cy="15" r="0.8" fill="none" stroke="rgba(148,150,204,0.15)" stroke-width="0.5"/>
-            <!-- Stella brillante -->
-            <circle cx="22" cy="6" r="0.6" fill="rgba(200,202,240,0.8)"/>
-            <circle cx="7" cy="8" r="0.5" fill="rgba(200,202,240,0.6)"/>
-            <circle cx="26" cy="13" r="0.4" fill="rgba(200,202,240,0.4)"/>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                  stroke="rgba(148,150,204,0.5)"
+                  stroke-width="1.2"
+                  fill="rgba(124,127,205,0.06)"/>
         </svg>
     </div>
     <div class="cursor-dot" id="cursorDot"></div>
@@ -730,93 +619,23 @@
 
             <div class="gallery-grid" id="gallery">
                 <div class="opera tall reveal" onclick="openLB(0)">
-                    <img src="https://picsum.photos/seed/jn-autumn1/600/1200.jpg" alt="Espansione" loading="lazy">
+                    <img src="https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3" alt="Le Anime Pure Si Riconoscono" loading="lazy">
                     <div class="shade"></div>
-                    <span class="year-tag">2024</span>
-                    <div class="meta">
-                        <h3 class="text-[15px] font-medium mb-0.5">Espansione</h3>
-                        <p class="text-zinc-400 text-xs">Olio su tela · 70×100</p>
-                    </div>
                 </div>
 
                 <div class="opera reveal" onclick="openLB(1)">
-                    <img src="https://picsum.photos/seed/jn-leaf2/600/600.jpg" alt="Caduta dolce" loading="lazy">
+                    <img src="https://z-cdn-media.chatglm.cn/files/4e85852a-7307-452c-9214-d36dc492b748.jpg?auth_key=1883672854-8363dad8d7db46309960fdc5c0745a29-0-cc95aac67840f4199485dd67ec41a4af" alt="Deer Hunting Zone" loading="lazy">
                     <div class="shade"></div>
-                    <span class="year-tag">2024</span>
-                    <div class="meta">
-                        <h3 class="text-[15px] font-medium mb-0.5">Caduta dolce</h3>
-                        <p class="text-zinc-400 text-xs">Acrilico e sabbia · 50×50</p>
-                    </div>
                 </div>
 
                 <div class="opera reveal" onclick="openLB(2)">
-                    <img src="https://picsum.photos/seed/jn-purple3/600/600.jpg" alt="Rigenerazione" loading="lazy">
+                    <img src="https://z-cdn-media.chatglm.cn/files/45395629-2311-424f-9292-2b4f751c933c.jpg?auth_key=1883672854-99a74c94bb4c47af833c58615cb7cb6d-0-b05a61ccaa56c24c87c836e7538e3765" alt="Kakashi Sensei" loading="lazy">
                     <div class="shade"></div>
-                    <span class="year-tag">2024</span>
-                    <div class="meta">
-                        <h3 class="text-[15px] font-medium mb-0.5">Rigenerazione</h3>
-                        <p class="text-zinc-400 text-xs">Tecnica mista · 40×60</p>
-                    </div>
                 </div>
 
-                <div class="opera wide reveal" onclick="openLB(3)">
-                    <img src="https://picsum.photos/seed/jn-cycle4/1200/600.jpg" alt="Ciclo" loading="lazy">
+                <div class="opera reveal" onclick="openLB(3)">
+                    <img src="https://z-cdn-media.chatglm.cn/files/e46e38ce-4d21-4cad-9510-21d00d750cb8.jpg?auth_key=1883672854-89e4f36fdde445dfbbdde44a82f57625-0-4bb6c6d0c9b4d29bdadfb46f33ff7585" alt="My Safe Place" loading="lazy">
                     <div class="shade"></div>
-                    <span class="year-tag">2023</span>
-                    <div class="meta">
-                        <h3 class="text-[15px] font-medium mb-0.5">Ciclo</h3>
-                        <p class="text-zinc-400 text-xs">Olio su lino · 80×120</p>
-                    </div>
-                </div>
-
-                <div class="opera reveal" onclick="openLB(4)">
-                    <img src="https://picsum.photos/seed/jn-skin5/600/600.jpg" alt="Pelle di terra" loading="lazy">
-                    <div class="shade"></div>
-                    <span class="year-tag">2023</span>
-                    <div class="meta">
-                        <h3 class="text-[15px] font-medium mb-0.5">Pelle di terra</h3>
-                        <p class="text-zinc-400 text-xs">Mista su tavola · 60×60</p>
-                    </div>
-                </div>
-
-                <div class="opera reveal" onclick="openLB(5)">
-                    <img src="https://picsum.photos/seed/jn-not6/600/600.jpg" alt="Non umana" loading="lazy">
-                    <div class="shade"></div>
-                    <span class="year-tag">2023</span>
-                    <div class="meta">
-                        <h3 class="text-[15px] font-medium mb-0.5">Non umana</h3>
-                        <p class="text-zinc-400 text-xs">Carbone e gesso · 50×70</p>
-                    </div>
-                </div>
-
-                <div class="opera tall reveal" onclick="openLB(6)">
-                    <img src="https://picsum.photos/seed/jn-roots7/600/1200.jpg" alt="Prima del silenzio" loading="lazy">
-                    <div class="shade"></div>
-                    <span class="year-tag">2023</span>
-                    <div class="meta">
-                        <h3 class="text-[15px] font-medium mb-0.5">Prima del silenzio</h3>
-                        <p class="text-zinc-400 text-xs">Olio su tela · 90×130</p>
-                    </div>
-                </div>
-
-                <div class="opera reveal" onclick="openLB(7)">
-                    <img src="https://picsum.photos/seed/jn-ember8/600/600.jpg" alt="Brace" loading="lazy">
-                    <div class="shade"></div>
-                    <span class="year-tag">2022</span>
-                    <div class="meta">
-                        <h3 class="text-[15px] font-medium mb-0.5">Brace</h3>
-                        <p class="text-zinc-400 text-xs">Acrilico e foglia · 40×40</p>
-                    </div>
-                </div>
-
-                <div class="opera wide reveal" onclick="openLB(8)">
-                    <img src="https://picsum.photos/seed/jn-under9/1200/600.jpg" alt="Sotto la superficie" loading="lazy">
-                    <div class="shade"></div>
-                    <span class="year-tag">2022</span>
-                    <div class="meta">
-                        <h3 class="text-[15px] font-medium mb-0.5">Sotto la superficie</h3>
-                        <p class="text-zinc-400 text-xs">Tecnica mista su tela · 100×150</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -843,23 +662,18 @@
                     <div class="story-slide active" data-index="0">
                         <img src="https://z-cdn-media.chatglm.cn/files/3ca8524c-1b0d-4e1e-a58c-4916fb8bbf8b.jpg?auth_key=1883577833-5535d4f2ae554eb28bb2ba8f943c2f68-0-51064163c2d88c3c76b8f27273ca14eb" alt="">
                     </div>
-
                     <div class="story-slide" data-index="1">
                         <img src="https://z-cdn-media.chatglm.cn/files/412d53df-85df-4bf2-9ba1-c0a245077572.jpg?auth_key=1883577833-bd31ee5cfab04d60be9dc22bcf056b88-0-77af54fd1c696a115a2ba22bebab00e2" alt="">
                     </div>
-
                     <div class="story-slide" data-index="2">
                         <img src="https://z-cdn-media.chatglm.cn/files/4f527e47-5c37-48c0-84f7-b02f2d16058a.jpg?auth_key=1883577833-a364131fb9184d33a849e523dc2602bf-0-7771a388ee5e4eea1a7c5162f8055858" alt="">
                     </div>
-
                     <div class="story-slide" data-index="3">
                         <img src="https://z-cdn-media.chatglm.cn/files/cec9c04d-587b-4ea4-8d43-c0989c0d55b5.jpg?auth_key=1883577833-44f159e5fb464dae861b0ff292d3d5b0-0-08fc5b82ae932a9dbf176c7747f45e13" alt="">
                     </div>
-
                     <div class="story-slide" data-index="4">
                         <img src="https://z-cdn-media.chatglm.cn/files/93c09c4a-2d0c-4838-9110-811c75555478.jpg?auth_key=1883577833-d5d6c17f8cfe49f7b1fe63c68f023419-0-94c80492cce4b79c47f16be5966c549f" alt="">
                     </div>
-
                     <div class="story-slide" data-index="5">
                         <img src="https://z-cdn-media.chatglm.cn/files/57598671-6833-48a5-8b2f-b9e367fe219f.jpg?auth_key=1883577833-7c1bcb237a934ff1ab78f24e4513de31-0-19e93d630be39d4e77c85eed907e325f" alt="">
                     </div>
@@ -869,7 +683,6 @@
                             <i data-lucide="chevron-left" class="w-4 h-4 text-white"></i>
                         </div>
                     </div>
-
                     <div class="story-nav right" onclick="nextStory(event)">
                         <div class="story-nav-icon">
                             <i data-lucide="chevron-right" class="w-4 h-4 text-white"></i>
@@ -952,11 +765,6 @@
         <button class="lb-btn next" onclick="navLB(1, event)">
             <i data-lucide="chevron-right" class="w-5 h-5 text-white"></i>
         </button>
-        <div class="lb-info">
-            <p class="text-white text-sm font-medium" id="lb-title"></p>
-            <p class="text-zinc-500 text-xs mt-1" id="lb-detail"></p>
-            <p class="text-[#7c7fcd]/30 text-[11px] mt-2" id="lb-count"></p>
-        </div>
     </div>
 
     <script>
@@ -965,13 +773,12 @@
         // ===== CURSORE PERSONALIZZATO =====
         var cursorMoon = document.getElementById('cursorMoon');
         var cursorDot = document.getElementById('cursorDot');
-        var mouseX = 0;
-        var mouseY = 0;
-        var moonX = 0;
-        var moonY = 0;
-        var dotX = 0;
-        var dotY = 0;
+        var mouseX = 0, mouseY = 0;
+        var moonX = 0, moonY = 0;
+        var dotX = 0, dotY = 0;
         var isVisible = false;
+        var prevMouseX = 0, prevMouseY = 0;
+        var moonRotation = 0;
 
         document.addEventListener('mousemove', function(e) {
             mouseX = e.clientX;
@@ -980,6 +787,8 @@
                 isVisible = true;
                 cursorMoon.classList.add('visible');
                 cursorDot.classList.add('visible');
+                prevMouseX = mouseX;
+                prevMouseY = mouseY;
             }
         });
 
@@ -989,40 +798,56 @@
             cursorDot.classList.remove('visible');
         });
 
+        var hoverTargets = document.querySelectorAll('a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close');
+        hoverTargets.forEach(function(el) {
+            el.addEventListener('mouseenter', function() {
+                cursorMoon.classList.add('hovering');
+                cursorDot.classList.add('hovering');
+            });
+            el.addEventListener('mouseleave', function() {
+                cursorMoon.classList.remove('hovering');
+                cursorDot.classList.remove('hovering');
+            });
+        });
+
         function animateCursor() {
-            dotX += (mouseX - dotX) * 0.15;
-            dotY += (mouseY - dotY) * 0.15;
-            moonX += (mouseX - moonX) * 0.08;
-            moonY += (mouseY - moonY) * 0.08;
+            var dx = mouseX - prevMouseX;
+            var dy = mouseY - prevMouseY;
+            var speed = Math.sqrt(dx * dx + dy * dy);
+            var targetRotation = dx * 1.2;
+            moonRotation += (targetRotation - moonRotation) * 0.06;
+            prevMouseX += (mouseX - prevMouseX) * 0.05;
+            prevMouseY += (mouseY - prevMouseY) * 0.05;
+            var moonScale = 1 + Math.min(speed * 0.003, 0.25);
+
+            dotX += (mouseX - dotX) * 0.18;
+            dotY += (mouseY - dotY) * 0.18;
+            moonX += (mouseX - moonX) * 0.07;
+            moonY += (mouseY - moonY) * 0.07;
 
             cursorDot.style.left = dotX + 'px';
             cursorDot.style.top = dotY + 'px';
-            cursorMoon.style.left = (moonX - 16) + 'px';
-            cursorMoon.style.top = (moonY - 16) + 'px';
+            cursorMoon.style.left = (moonX - 13) + 'px';
+            cursorMoon.style.top = (moonY - 13) + 'px';
+            cursorMoon.style.transform = 'translate(-50%, -50%) rotate(' + moonRotation + 'deg) scale(' + moonScale + ')';
 
             requestAnimationFrame(animateCursor);
         }
-
         animateCursor();
 
         // ===== GALLERY LIGHTBOX =====
         var works = [
-            { img: 'https://picsum.photos/seed/jn-autumn1/1400/2000.jpg', title: 'Espansione', detail: 'Olio su tela · 70×100 cm · 2024' },
-            { img: 'https://picsum.photos/seed/jn-leaf2/1400/1400.jpg', title: 'Caduta dolce', detail: 'Acrilico e sabbia · 50×50 cm · 2024' },
-            { img: 'https://picsum.photos/seed/jn-purple3/1400/1400.jpg', title: 'Rigenerazione', detail: 'Tecnica mista · 40×60 cm · 2024' },
-            { img: 'https://picsum.photos/seed/jn-cycle4/2000/1000.jpg', title: 'Ciclo', detail: 'Olio su lino · 80×120 cm · 2023' },
-            { img: 'https://picsum.photos/seed/jn-skin5/1400/1400.jpg', title: 'Pelle di terra', detail: 'Mista su tavola · 60×60 cm · 2023' },
-            { img: 'https://picsum.photos/seed/jn-not6/1400/1400.jpg', title: 'Non umana', detail: 'Carbone e gesso · 50×70 cm · 2023' },
-            { img: 'https://picsum.photos/seed/jn-roots7/1400/2000.jpg', title: 'Prima del silenzio', detail: 'Olio su tela · 90×130 cm · 2023' },
-            { img: 'https://picsum.photos/seed/jn-ember8/1400/1400.jpg', title: 'Brace', detail: 'Acrilico e foglia · 40×40 cm · 2022' },
-            { img: 'https://picsum.photos/seed/jn-under9/2000/1000.jpg', title: 'Sotto la superficie', detail: 'Tecnica mista su tela · 100×150 cm · 2022' }
+            { img: 'https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3' },
+            { img: 'https://z-cdn-media.chatglm.cn/files/4e85852a-7307-452c-9214-d36dc492b748.jpg?auth_key=1883672854-8363dad8d7db46309960fdc5c0745a29-0-cc95aac67840f4199485dd67ec41a4af' },
+            { img: 'https://z-cdn-media.chatglm.cn/files/45395629-2311-424f-9292-2b4f751c933c.jpg?auth_key=1883672854-99a74c94bb4c47af833c58615cb7cb6d-0-b05a61ccaa56c24c87c836e7538e3765' },
+            { img: 'https://z-cdn-media.chatglm.cn/files/e46e38ce-4d21-4cad-9510-21d00d750cb8.jpg?auth_key=1883672854-89e4f36fdde445dfbbdde44a82f57625-0-4bb6c6d0c9b4d29bdadfb46f33ff7585' }
         ];
 
         var cur = 0;
 
         function openLB(i) {
             cur = i;
-            updateLB();
+            document.getElementById('lb-img').src = works[cur].img;
             document.getElementById('lightbox').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
@@ -1037,15 +862,7 @@
         function navLB(dir, e) {
             e.stopPropagation();
             cur = (cur + dir + works.length) % works.length;
-            updateLB();
-        }
-
-        function updateLB() {
             document.getElementById('lb-img').src = works[cur].img;
-            document.getElementById('lb-img').alt = works[cur].title;
-            document.getElementById('lb-title').textContent = works[cur].title;
-            document.getElementById('lb-detail').textContent = works[cur].detail;
-            document.getElementById('lb-count').textContent = (cur + 1) + ' / ' + works.length;
         }
 
         document.addEventListener('keydown', function(e) {
@@ -1078,9 +895,7 @@
             slides[storyIndex].classList.remove('active');
             bars[storyIndex].classList.remove('active');
             bars[storyIndex].classList.add('done');
-
             storyIndex = (index + totalSlides) % totalSlides;
-
             slides[storyIndex].classList.add('active');
             bars[storyIndex].classList.remove('done');
             bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'none';
@@ -1089,9 +904,7 @@
             bars[storyIndex].classList.add('active');
             bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'width 5s linear';
             bars[storyIndex].querySelector('.story-bar-fill').style.width = '100%';
-
             document.getElementById('storyCounter').textContent = String(storyIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
-
             clearTimeout(storyTimer);
             if (!storyPaused) {
                 storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, 5000);
@@ -1105,14 +918,11 @@
 
         function prevStory(e) {
             if (e) e.stopPropagation();
-
             bars[storyIndex].classList.remove('active', 'done');
             bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'none';
             bars[storyIndex].querySelector('.story-bar-fill').style.width = '0%';
             slides[storyIndex].classList.remove('active');
-
             storyIndex = (storyIndex - 1 + totalSlides) % totalSlides;
-
             slides[storyIndex].classList.add('active');
             bars[storyIndex].classList.remove('done');
             bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'none';
@@ -1121,9 +931,7 @@
             bars[storyIndex].classList.add('active');
             bars[storyIndex].querySelector('.story-bar-fill').style.transition = 'width 5s linear';
             bars[storyIndex].querySelector('.story-bar-fill').style.width = '100%';
-
             document.getElementById('storyCounter').textContent = String(storyIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
-
             clearTimeout(storyTimer);
             if (!storyPaused) {
                 storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, 5000);
@@ -1142,19 +950,15 @@
         function resumeStory() {
             storyPaused = false;
             document.getElementById('storyContainer').classList.remove('paused');
-
             var fill = bars[storyIndex].querySelector('.story-bar-fill');
             var parent = fill.parentElement;
             var percent = (parseFloat(getComputedStyle(fill).width) / parent.offsetWidth) * 100;
-
             fill.style.transition = 'none';
             fill.style.width = percent + '%';
             void fill.offsetWidth;
-
             var remaining = 5000 * (1 - percent / 100);
             fill.style.transition = 'width ' + remaining + 'ms linear';
             fill.style.width = '100%';
-
             storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, remaining);
         }
 
