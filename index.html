@@ -13,7 +13,6 @@
             --indigo-soft: #9496cc;
             --indigo-pale: #b8bad8;
             --indigo-dim: rgba(124,127,205,0.06);
-            --indigo-glow: rgba(124,127,205,0.12);
             --warm: rgba(180,83,9,0.04);
             --surface: #09090b;
             --card: #111114;
@@ -23,223 +22,103 @@
             --text-secondary: #a1a3b8;
             --text-muted: #5a5c6e;
         }
-
         * { font-family: 'Inter', sans-serif; }
-
-        body {
-            background: var(--surface);
-            color: var(--text);
-            cursor: none;
-            overflow-x: hidden;
-        }
+        body { background: var(--surface); color: var(--text); cursor: none; overflow-x: hidden; }
 
         body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.02;
+            content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.02;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 128px 128px;
         }
 
-        /* ===== STRISCE DI LUCE DINAMICHE ===== */
-        .light-strips {
+        /* ===== BAGLIORI AMBIENTALI MODERNI ===== */
+        .ambient-glow {
             position: fixed;
-            inset: 0;
-            z-index: 1;
+            border-radius: 50%;
             pointer-events: none;
-            overflow: hidden;
-        }
-
-        .light-strip {
-            position: absolute;
-            left: -20%;
-            width: 140%;
+            z-index: 0;
             mix-blend-mode: screen;
-            will-change: transform, opacity, background;
+            will-change: opacity, transform;
         }
-
-        .light-strip:nth-child(1) {
-            top: 8%; height: 280px;
-            background: linear-gradient(90deg, transparent 0%, rgba(124,127,205,0.15) 20%, rgba(124,127,205,0.22) 50%, rgba(124,127,205,0.15) 80%, transparent 100%);
-            filter: blur(60px);
-            transform: rotate(-3deg);
-            animation: drift1 28s ease-in-out infinite, color1 22s ease-in-out infinite;
-        }
-        .light-strip:nth-child(2) {
-            top: 25%; height: 220px;
-            background: linear-gradient(90deg, transparent 0%, rgba(200,120,50,0.12) 25%, rgba(180,83,9,0.18) 50%, rgba(124,127,205,0.12) 75%, transparent 100%);
-            filter: blur(55px);
-            transform: rotate(2deg);
-            animation: drift2 24s ease-in-out infinite, color2 30s ease-in-out infinite;
-        }
-        .light-strip:nth-child(3) {
-            top: 42%; height: 320px;
-            background: linear-gradient(90deg, transparent 5%, rgba(100,80,180,0.14) 30%, rgba(140,110,210,0.2) 55%, rgba(124,127,205,0.14) 80%, transparent 95%);
-            filter: blur(65px);
-            transform: rotate(-1.5deg);
-            animation: drift3 32s ease-in-out infinite, color3 26s ease-in-out infinite;
-        }
-        .light-strip:nth-child(4) {
-            top: 60%; height: 240px;
-            background: linear-gradient(90deg, transparent 0%, rgba(180,83,9,0.12) 20%, rgba(220,130,60,0.16) 45%, rgba(180,120,200,0.12) 70%, transparent 100%);
-            filter: blur(50px);
-            transform: rotate(3.5deg);
-            animation: drift4 20s ease-in-out infinite, color4 28s ease-in-out infinite;
-        }
-        .light-strip:nth-child(5) {
-            top: 76%; height: 200px;
-            background: linear-gradient(90deg, transparent 10%, rgba(148,150,204,0.13) 35%, rgba(124,127,205,0.18) 60%, rgba(100,140,220,0.13) 85%, transparent 90%);
-            filter: blur(50px);
-            transform: rotate(-2.5deg);
-            animation: drift5 26s ease-in-out infinite, color5 24s ease-in-out infinite;
-        }
-        .light-strip:nth-child(6) {
-            top: -8%; height: 500px;
-            background: linear-gradient(180deg, rgba(124,127,205,0.12) 0%, rgba(100,80,180,0.05) 50%, transparent 100%);
+        .ambient-glow:nth-child(1) {
+            width: 550px; height: 550px;
+            top: 15%; left: 25%;
+            background: radial-gradient(circle, rgba(124,127,205,0.1) 0%, rgba(124,127,205,0.02) 50%, transparent 70%);
             filter: blur(80px);
-            animation: drift6 35s ease-in-out infinite, color6 40s ease-in-out infinite;
+            animation: amb1 14s ease-in-out infinite;
         }
-        .light-strip:nth-child(7) {
-            bottom: -12%; top: auto; height: 420px;
-            background: linear-gradient(0deg, rgba(180,83,9,0.1) 0%, rgba(220,130,60,0.04) 50%, transparent 100%);
-            filter: blur(75px);
-            animation: drift7 30s ease-in-out infinite, color7 35s ease-in-out infinite;
+        .ambient-glow:nth-child(2) {
+            width: 480px; height: 420px;
+            top: 55%; right: 8%;
+            background: radial-gradient(circle, rgba(200,120,50,0.08) 0%, rgba(200,120,50,0.015) 50%, transparent 70%);
+            filter: blur(90px);
+            animation: amb2 11s ease-in-out infinite;
         }
-
-        @keyframes drift1 {
-            0%,100% { transform: rotate(-3deg) translateX(0); opacity: 0.9; }
-            25% { transform: rotate(-1deg) translateX(4%); opacity: 1; }
-            50% { transform: rotate(-4deg) translateX(-3%); opacity: 0.7; }
-            75% { transform: rotate(-2deg) translateX(2%); opacity: 0.95; }
+        .ambient-glow:nth-child(3) {
+            width: 500px; height: 500px;
+            top: 35%; left: 55%;
+            background: radial-gradient(circle, rgba(160,120,220,0.08) 0%, rgba(140,100,200,0.015) 50%, transparent 70%);
+            filter: blur(85px);
+            animation: amb3 17s ease-in-out infinite;
         }
-        @keyframes drift2 {
-            0%,100% { transform: rotate(2deg) translateX(0); opacity: 0.8; }
-            30% { transform: rotate(4deg) translateX(-4%); opacity: 1; }
-            60% { transform: rotate(1deg) translateX(3%); opacity: 0.65; }
-        }
-        @keyframes drift3 {
-            0%,100% { transform: rotate(-1.5deg) translateX(0); opacity: 0.75; }
-            35% { transform: rotate(0.5deg) translateX(3%); opacity: 1; }
-            70% { transform: rotate(-3deg) translateX(-2%); opacity: 0.8; }
-        }
-        @keyframes drift4 {
-            0%,100% { transform: rotate(3.5deg) translateX(0); opacity: 0.85; }
-            40% { transform: rotate(5deg) translateX(4%); opacity: 0.6; }
-            80% { transform: rotate(2deg) translateX(-3%); opacity: 1; }
-        }
-        @keyframes drift5 {
-            0%,100% { transform: rotate(-2.5deg) translateX(0); opacity: 0.8; }
-            50% { transform: rotate(-4.5deg) translateX(-3%); opacity: 1; }
-        }
-        @keyframes drift6 {
-            0%,100% { transform: translateY(0); opacity: 0.7; }
-            50% { transform: translateY(4%); opacity: 1; }
-        }
-        @keyframes drift7 {
-            0%,100% { transform: translateY(0); opacity: 0.6; }
-            50% { transform: translateY(-3%); opacity: 0.9; }
+        .ambient-glow:nth-child(4) {
+            width: 600px; height: 400px;
+            bottom: 10%; left: 10%;
+            background: radial-gradient(ellipse, rgba(100,150,230,0.06) 0%, rgba(100,150,230,0.01) 50%, transparent 70%);
+            filter: blur(100px);
+            animation: amb4 21s ease-in-out infinite;
         }
 
-        @keyframes color1 {
-            0%,100% { background: linear-gradient(90deg, transparent 0%, rgba(124,127,205,0.15) 20%, rgba(124,127,205,0.22) 50%, rgba(124,127,205,0.15) 80%, transparent 100%); }
-            33% { background: linear-gradient(90deg, transparent 0%, rgba(180,120,200,0.14) 20%, rgba(200,140,220,0.2) 50%, rgba(180,120,200,0.14) 80%, transparent 100%); }
-            66% { background: linear-gradient(90deg, transparent 0%, rgba(100,150,230,0.13) 20%, rgba(100,150,230,0.2) 50%, rgba(100,150,230,0.13) 80%, transparent 100%); }
+        @keyframes amb1 {
+            0%, 100% { opacity: 0; transform: translate(0, 0) scale(1); }
+            12% { opacity: 0.9; }
+            28% { opacity: 0.7; transform: translate(4%, -3%) scale(1.08); }
+            42% { opacity: 0; }
         }
-        @keyframes color2 {
-            0%,100% { background: linear-gradient(90deg, transparent 0%, rgba(200,120,50,0.12) 25%, rgba(180,83,9,0.18) 50%, rgba(124,127,205,0.12) 75%, transparent 100%); }
-            40% { background: linear-gradient(90deg, transparent 0%, rgba(124,127,205,0.14) 25%, rgba(100,80,180,0.2) 50%, rgba(160,120,220,0.14) 75%, transparent 100%); }
-            70% { background: linear-gradient(90deg, transparent 0%, rgba(220,130,60,0.13) 25%, rgba(200,100,50,0.18) 50%, rgba(180,83,9,0.13) 75%, transparent 100%); }
+        @keyframes amb2 {
+            0%, 100% { opacity: 0; transform: translate(0, 0) scale(1); }
+            18% { opacity: 0.85; }
+            32% { opacity: 0.6; transform: translate(-3%, 2%) scale(1.05); }
+            48% { opacity: 0; }
         }
-        @keyframes color3 {
-            0%,100% { background: linear-gradient(90deg, transparent 5%, rgba(100,80,180,0.14) 30%, rgba(140,110,210,0.2) 55%, rgba(124,127,205,0.14) 80%, transparent 95%); }
-            50% { background: linear-gradient(90deg, transparent 5%, rgba(124,127,205,0.15) 30%, rgba(180,140,230,0.22) 55%, rgba(160,120,220,0.15) 80%, transparent 95%); }
+        @keyframes amb3 {
+            0%, 100% { opacity: 0; transform: translate(0, 0) scale(1); }
+            8% { opacity: 0.7; }
+            22% { opacity: 1; transform: translate(3%, 3%) scale(1.12); }
+            38% { opacity: 0; }
         }
-        @keyframes color4 {
-            0%,100% { background: linear-gradient(90deg, transparent 0%, rgba(180,83,9,0.12) 20%, rgba(220,130,60,0.16) 45%, rgba(180,120,200,0.12) 70%, transparent 100%); }
-            35% { background: linear-gradient(90deg, transparent 0%, rgba(124,127,205,0.13) 20%, rgba(180,120,200,0.18) 45%, rgba(100,80,180,0.13) 70%, transparent 100%); }
-            70% { background: linear-gradient(90deg, transparent 0%, rgba(220,130,60,0.14) 20%, rgba(200,80,40,0.18) 45%, rgba(200,120,160,0.14) 70%, transparent 100%); }
-        }
-        @keyframes color5 {
-            0%,100% { background: linear-gradient(90deg, transparent 10%, rgba(148,150,204,0.13) 35%, rgba(124,127,205,0.18) 60%, rgba(100,140,220,0.13) 85%, transparent 90%); }
-            50% { background: linear-gradient(90deg, transparent 10%, rgba(124,127,205,0.15) 35%, rgba(180,140,220,0.2) 60%, rgba(160,120,220,0.15) 85%, transparent 90%); }
-        }
-        @keyframes color6 {
-            0%,100% { background: linear-gradient(180deg, rgba(124,127,205,0.12) 0%, rgba(100,80,180,0.05) 50%, transparent 100%); }
-            50% { background: linear-gradient(180deg, rgba(160,130,230,0.14) 0%, rgba(124,127,205,0.05) 50%, transparent 100%); }
-        }
-        @keyframes color7 {
-            0%,100% { background: linear-gradient(0deg, rgba(180,83,9,0.1) 0%, rgba(220,130,60,0.04) 50%, transparent 100%); }
-            50% { background: linear-gradient(0deg, rgba(220,130,60,0.12) 0%, rgba(180,83,9,0.04) 50%, transparent 100%); }
+        @keyframes amb4 {
+            0%, 100% { opacity: 0; transform: translate(0, 0) scale(1); }
+            15% { opacity: 0.6; }
+            30% { opacity: 0.8; transform: translate(2%, -2%) scale(1.06); }
+            45% { opacity: 0; }
         }
 
         /* ===== CURSORE ===== */
-        .cursor-moon {
-            position: fixed;
-            top: 0; left: 0;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.3s ease, filter 0.3s ease;
-            opacity: 0;
-            filter: drop-shadow(0 0 8px rgba(124,127,205,0.2));
-        }
+        .cursor-moon { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: opacity 0.3s ease, filter 0.3s ease; opacity: 0; filter: drop-shadow(0 0 8px rgba(124,127,205,0.2)); }
         .cursor-moon.visible { opacity: 1; }
-        .cursor-moon.hovering {
-            filter: drop-shadow(0 0 14px rgba(124,127,205,0.45));
-            transform: translate(-50%, -50%) scale(1.3);
-        }
-        .cursor-dot {
-            position: fixed;
-            top: 0; left: 0;
-            width: 5px; height: 5px;
-            background: var(--indigo);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 10000;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease, opacity 0.3s ease, background 0.3s ease;
-            opacity: 0;
-            mix-blend-mode: screen;
-        }
+        .cursor-moon.hovering { filter: drop-shadow(0 0 14px rgba(124,127,205,0.45)); transform: translate(-50%, -50%) scale(1.3); }
+        .cursor-dot { position: fixed; top: 0; left: 0; width: 5px; height: 5px; background: var(--indigo); border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: transform 0.1s ease, opacity 0.3s ease, background 0.3s ease; opacity: 0; mix-blend-mode: screen; }
         .cursor-dot.visible { opacity: 1; }
-        .cursor-dot.hovering {
-            transform: translate(-50%, -50%) scale(2);
-            background: var(--indigo-pale);
-        }
-
+        .cursor-dot.hovering { transform: translate(-50%, -50%) scale(2); background: var(--indigo-pale); }
         a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close { cursor: pointer; }
         *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause) { cursor: none; }
-
         .font-serif { font-family: 'Cormorant Garamond', Georgia, serif; }
 
-        .grid-bg {
-            background-image:
-                linear-gradient(rgba(124,127,205,0.012) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(124,127,205,0.012) 1px, transparent 1px);
-            background-size: 80px 80px;
-        }
-
+        .grid-bg { background-image: linear-gradient(rgba(124,127,205,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(124,127,205,0.012) 1px, transparent 1px); background-size: 80px 80px; }
         .glow { position: absolute; width: 600px; height: 500px; background: rgba(124,127,205,0.04); filter: blur(160px); border-radius: 9999px; pointer-events: none; }
         .glow-warm { position: absolute; width: 450px; height: 400px; background: var(--warm); filter: blur(130px); border-radius: 9999px; pointer-events: none; }
         .glow-soft { position: absolute; width: 400px; height: 320px; background: rgba(124,127,205,0.025); filter: blur(120px); border-radius: 9999px; pointer-events: none; }
 
         .line { height: 1px; background: linear-gradient(to right, transparent, var(--border) 30%, var(--border) 70%, transparent); }
-        .line-accent { height: 1px; background: linear-gradient(to right, transparent, rgba(124,127,205,0.15) 20%, rgba(124,127,205,0.15) 80%, transparent); }
-
-        .marquee-track { display: flex; animation: marquee 40s linear infinite; width: max-content; }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .marquee-item { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 4vw, 3rem); font-weight: 300; font-style: italic; white-space: nowrap; padding: 0 2.5rem; color: rgba(124,127,205,0.08); user-select: none; }
-        .marquee-dot { width: 4px; height: 4px; background: rgba(124,127,205,0.12); border-radius: 50%; flex-shrink: 0; align-self: center; }
 
         .hero-name {
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(4rem, 13vw, 11rem);
-            font-weight: 300; letter-spacing: -0.03em; line-height: 0.88;
+            font-weight: 300; letter-spacing: -0.03em; line-height: 0.95;
             background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 35%, var(--indigo-pale) 65%, var(--indigo) 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            padding-bottom: 0.08em;
         }
         .hero-tagline { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 3.8vw, 2.5rem); font-weight: 300; font-style: italic; letter-spacing: 0.08em; line-height: 1.2; color: var(--indigo-soft); }
         .hero-scroll-line { width: 1px; height: 64px; background: linear-gradient(to bottom, var(--indigo), transparent); animation: scrollPulse 2.5s ease-in-out infinite; }
@@ -248,13 +127,7 @@
         .hero-img-wrap { background: #0a0a0e; border-radius: 16px; display: flex; align-items: center; justify-content: center; padding: 12px; }
         .hero-img-wrap img { width: 100%; height: 100%; max-height: 680px; object-fit: contain; border-radius: 12px; }
         .frame { position: relative; }
-        .frame::before {
-            content: ""; position: absolute; inset: 0; border-radius: 20px; padding: 1px;
-            background: linear-gradient(160deg, rgba(124,127,205,0.2), transparent 35%, transparent 65%, rgba(180,83,9,0.08));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
-        }
+        .frame::before { content: ""; position: absolute; inset: 0; border-radius: 20px; padding: 1px; background: linear-gradient(160deg, rgba(124,127,205,0.2), transparent 35%, transparent 65%, rgba(180,83,9,0.08)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
 
         .btn-main { background: linear-gradient(135deg, #6b6eb8, var(--indigo)); color: #fff; padding: 13px 32px; border-radius: 100px; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; transition: all 0.4s ease; text-decoration: none; display: inline-block; }
         .btn-main:hover { background: linear-gradient(135deg, #5c5fb3, #6b6eb8); box-shadow: 0 0 40px rgba(124,127,205,0.12), 0 4px 20px rgba(124,127,205,0.08); transform: translateY(-1px); }
@@ -322,29 +195,21 @@
         .about-text { color: var(--text-secondary); font-weight: 300; line-height: 1.9; font-size: 14.5px; }
         .about-text p + p { margin-top: 20px; }
         footer { border-top: 1px solid var(--border); }
-
         .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .reveal.show { opacity: 1; transform: translateY(0); }
-
         html { scroll-behavior: smooth; }
         body::before { content: ""; position: fixed; inset: 0; background: radial-gradient(ellipse at 80% 100%, rgba(120,53,15,0.02) 0%, transparent 60%); pointer-events: none; z-index: 0; }
-
         @media (max-width: 768px) { .hero-name { letter-spacing: -0.02em; } .gallery-grid { gap: 4px; } }
-        @media (prefers-reduced-motion: reduce) { .light-strip, .marquee-track, .hero-scroll-line { animation: none !important; } }
+        @media (prefers-reduced-motion: reduce) { .ambient-glow, .hero-scroll-line { animation: none !important; } }
     </style>
 </head>
 <body class="grid-bg">
 
-    <!-- STRISCE DI LUCE -->
-    <div class="light-strips" aria-hidden="true">
-        <div class="light-strip"></div>
-        <div class="light-strip"></div>
-        <div class="light-strip"></div>
-        <div class="light-strip"></div>
-        <div class="light-strip"></div>
-        <div class="light-strip"></div>
-        <div class="light-strip"></div>
-    </div>
+    <!-- BAGLIORI AMBIENTALI -->
+    <div class="ambient-glow" aria-hidden="true"></div>
+    <div class="ambient-glow" aria-hidden="true"></div>
+    <div class="ambient-glow" aria-hidden="true"></div>
+    <div class="ambient-glow" aria-hidden="true"></div>
 
     <!-- CURSORE -->
     <div class="cursor-moon" id="cursorMoon">
@@ -355,7 +220,7 @@
     <div class="cursor-dot" id="cursorDot"></div>
 
     <!-- HERO -->
-    <section class="min-h-screen flex items-center justify-center relative overflow-hidden" style="padding-top: 80px;">
+    <section class="min-h-screen flex items-center justify-center relative overflow-x-hidden" style="padding-top: 80px; padding-bottom: 40px;">
         <div class="glow" style="top: 5%; left: 20%;"></div>
         <div class="glow-warm" style="bottom: 8%; right: 3%;"></div>
         <div class="max-w-7xl mx-auto px-6 w-full relative z-10">
@@ -365,10 +230,7 @@
                     <p class="hero-tagline mb-14">I'm Not Human</p>
                     <div class="flex flex-wrap items-center gap-4 mb-10">
                         <a href="#opere" class="btn-main">Vedi le opere</a>
-                        <a href="https://www.instagram.com/iamjennina/" target="_blank" class="ig-link">
-                            <i data-lucide="instagram" class="w-4 h-4"></i>
-                            @iamjennina
-                        </a>
+                        <a href="https://www.instagram.com/iamjennina/" target="_blank" class="ig-link"><i data-lucide="instagram" class="w-4 h-4"></i>@iamjennina</a>
                     </div>
                     <div class="flex flex-wrap gap-2">
                         <span class="skill-tag">Oniric Art</span>
@@ -394,29 +256,12 @@
         </div>
     </section>
 
-    <!-- MARQUEE -->
-    <div class="line-accent"></div>
-    <div class="py-8 overflow-hidden relative z-10">
-        <div class="marquee-track">
-            <span class="marquee-item">Le anime pure si riconoscono</span><span class="marquee-dot"></span>
-            <span class="marquee-item">I'm not human</span><span class="marquee-dot"></span>
-            <span class="marquee-item">Oltre risiede immensa bellezza</span><span class="marquee-dot"></span>
-            <span class="marquee-item">Deer hunting zone</span><span class="marquee-dot"></span>
-            <span class="marquee-item">My safe place</span><span class="marquee-dot"></span>
-            <span class="marquee-item">Le anime pure si riconoscono</span><span class="marquee-dot"></span>
-            <span class="marquee-item">I'm not human</span><span class="marquee-dot"></span>
-            <span class="marquee-item">Oltre risiede immensa bellezza</span><span class="marquee-dot"></span>
-            <span class="marquee-item">Deer hunting zone</span><span class="marquee-dot"></span>
-            <span class="marquee-item">My safe place</span><span class="marquee-dot"></span>
-        </div>
-    </div>
-    <div class="line-accent"></div>
-
     <!-- OPERE -->
+    <div class="line"></div>
     <section id="opere" class="py-28 md:py-36 relative">
         <div class="glow-soft" style="top: 25%; left: -100px;"></div>
         <div class="glow-warm" style="top: 55%; right: -120px;"></div>
-        <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-5xl mx-auto px-6">
             <div class="reveal mb-16">
                 <p class="section-eyebrow">Selezione</p>
                 <h2 class="section-title">Opere recenti</h2>
@@ -424,30 +269,26 @@
             <div class="gallery-grid" id="gallery">
                 <div class="opera tall reveal" onclick="openLB(0)">
                     <img src="https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3" alt="Le Anime Pure Si Riconoscono" loading="lazy">
-                    <div class="shade"></div>
-                    <span class="opera-number">I</span>
+                    <div class="shade"></div><span class="opera-number">I</span>
                 </div>
                 <div class="opera reveal" onclick="openLB(1)">
                     <img src="https://z-cdn-media.chatglm.cn/files/4e85852a-7307-452c-9214-d36dc492b748.jpg?auth_key=1883672854-8363dad8d7db46309960fdc5c0745a29-0-cc95aac67840f4199485dd67ec41a4af" alt="Deer Hunting Zone" loading="lazy">
-                    <div class="shade"></div>
-                    <span class="opera-number">II</span>
+                    <div class="shade"></div><span class="opera-number">II</span>
                 </div>
                 <div class="opera reveal" onclick="openLB(2)">
                     <img src="https://z-cdn-media.chatglm.cn/files/45395629-2311-424f-9292-2b4f751c933c.jpg?auth_key=1883672854-99a74c94bb4c47af833c58615cb7cb6d-0-b05a61ccaa56c24c87c836e7538e3765" alt="Kakashi Sensei" loading="lazy">
-                    <div class="shade"></div>
-                    <span class="opera-number">III</span>
+                    <div class="shade"></div><span class="opera-number">III</span>
                 </div>
                 <div class="opera reveal" onclick="openLB(3)">
                     <img src="https://z-cdn-media.chatglm.cn/files/e46e38ce-4d21-4cad-9510-21d00d750cb8.jpg?auth_key=1883672854-89e4f36fdde445dfbbdde44a82f57625-0-4bb6c6d0c9b4d29bdadfb46f33ff7585" alt="My Safe Place" loading="lazy">
-                    <div class="shade"></div>
-                    <span class="opera-number">IV</span>
+                    <div class="shade"></div><span class="opera-number">IV</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- STORYTELLING -->
-    <div class="line max-w-5xl mx-auto"></div>
+    <div class="line max-w-4xl mx-auto"></div>
     <section id="storytelling" class="py-28 md:py-36 relative">
         <div class="glow" style="top: 40%; left: 50%; transform: translateX(-50%);"></div>
         <div class="max-w-5xl mx-auto px-6">
@@ -475,16 +316,14 @@
     </section>
 
     <!-- ABOUT -->
-    <div class="line max-w-5xl mx-auto"></div>
+    <div class="line max-w-4xl mx-auto"></div>
     <section id="about" class="py-28 md:py-36 relative">
         <div class="glow-soft" style="bottom: 5%; right: -60px;"></div>
         <div class="glow-warm" style="top: 15%; left: -100px;"></div>
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-14 md:gap-20 items-start">
                 <div class="md:col-span-2 reveal">
-                    <div class="logo-bg">
-                        <img src="https://z-cdn-media.chatglm.cn/files/a634dd74-7b13-4193-8c3d-796f654a2f42.jpg?auth_key=1883579526-3f24e647d1f9449fb81ff96ff6" alt="I'm Not Human Logo">
-                    </div>
+                    <div class="logo-bg"><img src="https://z-cdn-media.chatglm.cn/files/a634dd74-7b13-4193-8c3d-796f654a2f42.jpg?auth_key=1883579526-3f24e647d1f9449fb81ff96ff6" alt="I'm Not Human Logo"></div>
                 </div>
                 <div class="md:col-span-3 reveal">
                     <p class="section-eyebrow">About</p>
@@ -522,6 +361,7 @@
     <script>
         lucide.createIcons();
 
+        /* ===== CURSORE ===== */
         var cursorMoon = document.getElementById('cursorMoon');
         var cursorDot = document.getElementById('cursorDot');
         var mouseX = 0, mouseY = 0, moonX = 0, moonY = 0, dotX = 0, dotY = 0;
@@ -529,19 +369,9 @@
 
         document.addEventListener('mousemove', function(e) {
             mouseX = e.clientX; mouseY = e.clientY;
-            if (!isVisible) {
-                isVisible = true;
-                cursorMoon.classList.add('visible');
-                cursorDot.classList.add('visible');
-                prevMouseX = mouseX; prevMouseY = mouseY;
-            }
+            if (!isVisible) { isVisible = true; cursorMoon.classList.add('visible'); cursorDot.classList.add('visible'); prevMouseX = mouseX; prevMouseY = mouseY; }
         });
-
-        document.addEventListener('mouseleave', function() {
-            isVisible = false;
-            cursorMoon.classList.remove('visible');
-            cursorDot.classList.remove('visible');
-        });
+        document.addEventListener('mouseleave', function() { isVisible = false; cursorMoon.classList.remove('visible'); cursorDot.classList.remove('visible'); });
 
         document.querySelectorAll('a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close').forEach(function(el) {
             el.addEventListener('mouseenter', function() { cursorMoon.classList.add('hovering'); cursorDot.classList.add('hovering'); });
@@ -549,35 +379,31 @@
         });
 
         function animateCursor() {
-            var dx = mouseX - prevMouseX, dy = mouseY - prevMouseY;
-            var speed = Math.sqrt(dx * dx + dy * dy);
+            var dx = mouseX - prevMouseX, speed = Math.sqrt(dx * dx + (mouseY - prevMouseY) * (mouseY - prevMouseY));
             moonRotation += (dx * 1.2 - moonRotation) * 0.06;
-            prevMouseX += (mouseX - prevMouseX) * 0.05;
-            prevMouseY += (mouseY - prevMouseY) * 0.05;
-            var moonScale = 1 + Math.min(speed * 0.003, 0.2);
+            prevMouseX += (mouseX - prevMouseX) * 0.05; prevMouseY += (mouseY - prevMouseY) * 0.05;
+            var s = 1 + Math.min(speed * 0.003, 0.2);
             dotX += (mouseX - dotX) * 0.18; dotY += (mouseY - dotY) * 0.18;
             moonX += (mouseX - moonX) * 0.065; moonY += (mouseY - moonY) * 0.065;
             cursorDot.style.left = dotX + 'px'; cursorDot.style.top = dotY + 'px';
             cursorMoon.style.left = (moonX - 12) + 'px'; cursorMoon.style.top = (moonY - 12) + 'px';
-            cursorMoon.style.transform = 'translate(-50%, -50%) rotate(' + moonRotation + 'deg) scale(' + moonScale + ')';
+            cursorMoon.style.transform = 'translate(-50%, -50%) rotate(' + moonRotation + 'deg) scale(' + s + ')';
             requestAnimationFrame(animateCursor);
         }
         animateCursor();
 
+        /* ===== LIGHTBOX ===== */
         var works = [
             'https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3',
             'https://z-cdn-media.chatglm.cn/files/4e85852a-7307-452c-9214-d36dc492b748.jpg?auth_key=1883672854-8363dad8d7db46309960fdc5c0745a29-0-cc95aac67840f4199485dd67ec41a4af',
             'https://z-cdn-media.chatglm.cn/files/45395629-2311-424f-9292-2b4f751c933c.jpg?auth_key=1883672854-99a74c94bb4c47af833c58615cb7cb6d-0-b05a61ccaa56c24c87c836e7538e3765',
             'https://z-cdn-media.chatglm.cn/files/e46e38ce-4d21-4cad-9510-21d00d750cb8.jpg?auth_key=1883672854-89e4f36fdde445dfbbdde44a82f57625-0-4bb6c6d0c9b4d29bdadfb46f33ff7585'
         ];
-        var roman = ['I', 'II', 'III', 'IV'];
-        var cur = 0;
-
+        var roman = ['I', 'II', 'III', 'IV'], cur = 0;
         function openLB(i) { cur = i; updateLB(); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow = 'hidden'; }
         function closeLB(e) { if (e.target.id === 'lightbox' || e.currentTarget.classList.contains('lb-close')) { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; } }
         function navLB(dir, e) { e.stopPropagation(); cur = (cur + dir + works.length) % works.length; updateLB(); }
         function updateLB() { document.getElementById('lb-img').src = works[cur]; document.getElementById('lbCounter').textContent = roman[cur] + ' / IV'; }
-
         document.addEventListener('keydown', function(e) {
             if (!document.getElementById('lightbox').classList.contains('open')) return;
             if (e.key === 'Escape') { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
@@ -585,105 +411,54 @@
             if (e.key === 'ArrowRight') navLB(1, e);
         });
 
-        var slides = document.querySelectorAll('.story-slide');
-        var totalSlides = slides.length;
-        var storyIndex = 0;
-        var storyTimer = null;
-        var storyPaused = false;
-
+        /* ===== STORYTELLING ===== */
+        var slides = document.querySelectorAll('.story-slide'), totalSlides = slides.length, storyIndex = 0, storyTimer = null, storyPaused = false;
         var progressContainer = document.getElementById('storyProgress');
-        for (var i = 0; i < totalSlides; i++) {
-            var bar = document.createElement('div');
-            bar.className = 'story-bar';
-            bar.innerHTML = '<div class="story-bar-fill"></div>';
-            progressContainer.appendChild(bar);
-        }
+        for (var i = 0; i < totalSlides; i++) { var bar = document.createElement('div'); bar.className = 'story-bar'; bar.innerHTML = '<div class="story-bar-fill"></div>'; progressContainer.appendChild(bar); }
         var bars = document.querySelectorAll('.story-bar');
 
         function goToStory(index) {
-            slides[storyIndex].classList.remove('active');
-            bars[storyIndex].classList.remove('active');
-            bars[storyIndex].classList.add('done');
+            slides[storyIndex].classList.remove('active'); bars[storyIndex].classList.remove('active'); bars[storyIndex].classList.add('done');
             storyIndex = (index + totalSlides) % totalSlides;
-            slides[storyIndex].classList.add('active');
-            bars[storyIndex].classList.remove('done');
-            var fill = bars[storyIndex].querySelector('.story-bar-fill');
-            fill.style.transition = 'none'; fill.style.width = '0%';
-            void bars[storyIndex].offsetWidth;
-            bars[storyIndex].classList.add('active');
-            fill.style.transition = 'width 5s linear'; fill.style.width = '100%';
+            slides[storyIndex].classList.add('active'); bars[storyIndex].classList.remove('done');
+            var f = bars[storyIndex].querySelector('.story-bar-fill'); f.style.transition = 'none'; f.style.width = '0%';
+            void bars[storyIndex].offsetWidth; bars[storyIndex].classList.add('active'); f.style.transition = 'width 5s linear'; f.style.width = '100%';
             document.getElementById('storyCounter').textContent = String(storyIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
-            clearTimeout(storyTimer);
-            if (!storyPaused) { storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, 5000); }
+            clearTimeout(storyTimer); if (!storyPaused) { storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, 5000); }
         }
-
         function nextStory(e) { if (e) e.stopPropagation(); goToStory(storyIndex + 1); }
-
         function prevStory(e) {
             if (e) e.stopPropagation();
-            bars[storyIndex].classList.remove('active', 'done');
-            var f1 = bars[storyIndex].querySelector('.story-bar-fill');
-            f1.style.transition = 'none'; f1.style.width = '0%';
-            slides[storyIndex].classList.remove('active');
-            storyIndex = (storyIndex - 1 + totalSlides) % totalSlides;
-            slides[storyIndex].classList.add('active');
-            bars[storyIndex].classList.remove('done');
-            var f2 = bars[storyIndex].querySelector('.story-bar-fill');
-            f2.style.transition = 'none'; f2.style.width = '0%';
-            void bars[storyIndex].offsetWidth;
-            bars[storyIndex].classList.add('active');
-            f2.style.transition = 'width 5s linear'; f2.style.width = '100%';
+            bars[storyIndex].classList.remove('active', 'done'); var f1 = bars[storyIndex].querySelector('.story-bar-fill'); f1.style.transition = 'none'; f1.style.width = '0%';
+            slides[storyIndex].classList.remove('active'); storyIndex = (storyIndex - 1 + totalSlides) % totalSlides;
+            slides[storyIndex].classList.add('active'); bars[storyIndex].classList.remove('done');
+            var f2 = bars[storyIndex].querySelector('.story-bar-fill'); f2.style.transition = 'none'; f2.style.width = '0%';
+            void bars[storyIndex].offsetWidth; bars[storyIndex].classList.add('active'); f2.style.transition = 'width 5s linear'; f2.style.width = '100%';
             document.getElementById('storyCounter').textContent = String(storyIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
-            clearTimeout(storyTimer);
-            if (!storyPaused) { storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, 5000); }
+            clearTimeout(storyTimer); if (!storyPaused) { storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, 5000); }
         }
-
-        function pauseStory() {
-            storyPaused = true;
-            clearTimeout(storyTimer);
-            document.getElementById('storyContainer').classList.add('paused');
-            var fill = bars[storyIndex].querySelector('.story-bar-fill');
-            fill.style.transition = 'none';
-            fill.style.width = getComputedStyle(fill).width;
-        }
-
+        function pauseStory() { storyPaused = true; clearTimeout(storyTimer); document.getElementById('storyContainer').classList.add('paused'); var f = bars[storyIndex].querySelector('.story-bar-fill'); f.style.transition = 'none'; f.style.width = getComputedStyle(f).width; }
         function resumeStory() {
-            storyPaused = false;
-            document.getElementById('storyContainer').classList.remove('paused');
-            var fill = bars[storyIndex].querySelector('.story-bar-fill');
-            var parent = fill.parentElement;
-            var percent = (parseFloat(getComputedStyle(fill).width) / parent.offsetWidth) * 100;
-            fill.style.transition = 'none'; fill.style.width = percent + '%';
-            void fill.offsetWidth;
-            var remaining = 5000 * (1 - percent / 100);
-            fill.style.transition = 'width ' + remaining + 'ms linear'; fill.style.width = '100%';
-            storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, remaining);
+            storyPaused = false; document.getElementById('storyContainer').classList.remove('paused');
+            var f = bars[storyIndex].querySelector('.story-bar-fill'), p = f.parentElement, pct = (parseFloat(getComputedStyle(f).width) / p.offsetWidth) * 100;
+            f.style.transition = 'none'; f.style.width = pct + '%'; void f.offsetWidth;
+            var rem = 5000 * (1 - pct / 100); f.style.transition = 'width ' + rem + 'ms linear'; f.style.width = '100%';
+            storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, rem);
         }
-
         var storyStarted = false;
-        var storyObs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting && !storyStarted) {
-                    storyStarted = true;
-                    bars[0].classList.add('active');
-                    var fill = bars[0].querySelector('.story-bar-fill');
-                    fill.style.transition = 'width 5s linear'; fill.style.width = '100%';
-                    storyTimer = setTimeout(function() { goToStory(1); }, 5000);
-                }
-            });
-        }, { threshold: 0.3 });
-        storyObs.observe(document.getElementById('storyContainer'));
+        new IntersectionObserver(function(entries) { entries.forEach(function(entry) { if (entry.isIntersecting && !storyStarted) { storyStarted = true; bars[0].classList.add('active'); var f = bars[0].querySelector('.story-bar-fill'); f.style.transition = 'width 5s linear'; f.style.width = '100%'; storyTimer = setTimeout(function() { goToStory(1); }, 5000); } }); }, { threshold: 0.3 }).observe(document.getElementById('storyContainer'));
 
-        var obs = new IntersectionObserver(function(entries) {
+        /* ===== SCROLL REVEAL ===== */
+        var revealObs = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry, i) {
                 if (entry.isIntersecting) {
                     setTimeout(function() { entry.target.classList.add('show'); }, i * 80);
-                    obs.unobserve(entry.target);
+                    revealObs.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
 
-        document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+        document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
     </script>
 </body>
 </html>
