@@ -2,7 +2,8 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#09090b">
     <title>Jennina — Artista</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -25,12 +26,14 @@
             --text-muted: #5a5c6e;
         }
 
-        * { font-family: 'Inter', sans-serif; }
+        * {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
             background: var(--surface);
             color: var(--text);
-            cursor: none;
             overflow-x: hidden;
         }
 
@@ -43,6 +46,18 @@
             opacity: 0.02;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 128px 128px;
+        }
+
+        /* ===== CURSORE (solo dispositivi con hover / puntatore fine) ===== */
+        @media (hover: hover) and (pointer: fine) {
+            body { cursor: none; }
+            a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close { cursor: pointer; }
+            *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause, .cursor-moon, .cursor-dot) { cursor: none; }
+        }
+
+        /* Su touch: nessun ritardo sul tap e tap highlight pulito */
+        a, button, .opera, .story-nav, .lb-btn, .lb-close, .btn-main, .ig-link, .btn-icon, .skill-tag {
+            touch-action: manipulation;
         }
 
         /* ===== BAGLIORI AMBIENTALI ===== */
@@ -123,7 +138,7 @@
             45% { opacity: 0; }
         }
 
-        /* ===== CURSORE ===== */
+        /* ===== CURSORE (elementi DOM) ===== */
         .cursor-moon {
             position: fixed;
             top: 0;
@@ -165,9 +180,6 @@
             transform: translate(-50%, -50%) scale(2);
             background: var(--indigo-pale);
         }
-
-        a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close { cursor: pointer; }
-        *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause) { cursor: none; }
 
         .font-serif { font-family: 'Cormorant Garamond', Georgia, serif; }
 
@@ -218,7 +230,7 @@
 
         .hero-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(4rem, 13vw, 11rem);
+            font-size: clamp(3.4rem, 16vw, 11rem);
             font-weight: 300;
             letter-spacing: -0.03em;
             line-height: 0.95;
@@ -295,12 +307,12 @@
         .btn-main {
             background: linear-gradient(135deg, #6b6eb8, var(--indigo));
             color: #fff;
-            padding: 13px 32px;
+            padding: 14px 30px;
             border-radius: 100px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 500;
             letter-spacing: 0.04em;
-            transition: all 0.4s ease;
+            transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
             text-decoration: none;
             display: inline-block;
         }
@@ -314,12 +326,12 @@
         .ig-link {
             background: linear-gradient(135deg, #6b6eb8, var(--indigo));
             color: #fff;
-            padding: 13px 28px;
+            padding: 14px 26px;
             border-radius: 100px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 500;
             letter-spacing: 0.04em;
-            transition: all 0.4s ease;
+            transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -341,7 +353,7 @@
             border-radius: 50%;
             background: linear-gradient(135deg, #6b6eb8, var(--indigo));
             color: #fff;
-            transition: all 0.4s ease;
+            transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
             text-decoration: none;
         }
 
@@ -353,14 +365,14 @@
 
         .skill-tag {
             display: inline-block;
-            padding: 5px 16px;
+            padding: 7px 16px;
             border-radius: 100px;
             border: 1px solid var(--border);
             color: var(--indigo-soft);
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 400;
             letter-spacing: 0.04em;
-            transition: all 0.3s ease;
+            transition: border-color 0.3s ease, background 0.3s ease;
         }
 
         .skill-tag:hover {
@@ -390,7 +402,7 @@
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+            font-size: clamp(2rem, 6vw, 3.5rem);
             font-weight: 300;
             letter-spacing: -0.02em;
             line-height: 1.15;
@@ -426,13 +438,20 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             opacity: 0.7;
             filter: saturate(0.8) contrast(0.95);
         }
 
         .opera:hover { border-radius: 14px; }
         .opera:hover img { transform: scale(1.05); opacity: 1; filter: saturate(1) contrast(1); }
+
+        /* Sui touch le opere risultano sempre leggibili (niente hover) */
+        @media (hover: none) and (pointer: coarse) {
+            .opera img { opacity: 0.88; filter: saturate(0.92) contrast(0.98); }
+            .opera .shade { opacity: 0.5; }
+            .opera .opera-number { opacity: 0.7; transform: translateY(0); }
+        }
 
         .opera .shade {
             position: absolute;
@@ -493,6 +512,7 @@
             transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             z-index: 1;
+            touch-action: pan-y;
         }
 
         .lightbox.open .lb-img { transform: scale(1); }
@@ -510,7 +530,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.35s ease;
+            transition: background 0.35s ease, border-color 0.35s ease;
             z-index: 2;
         }
 
@@ -535,7 +555,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.35s ease;
+            transition: background 0.35s ease;
             z-index: 2;
         }
 
@@ -566,7 +586,7 @@
         }
 
         @media (min-width: 768px) { .story-container { max-height: 75vh; max-width: 420px; } }
-        @media (max-width: 767px) { .story-container { max-width: 360px; margin-left: auto; margin-right: auto; } }
+        @media (max-width: 767px) { .story-container { max-width: 340px; margin-left: auto; margin-right: auto; } }
 
         .story-slide {
             position: absolute;
@@ -623,7 +643,7 @@
             justify-content: center;
             z-index: 15;
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
             pointer-events: none;
         }
 
@@ -643,6 +663,10 @@
         .story-nav.left { left: 0; justify-content: flex-start; padding-left: 14px; }
         .story-nav.right { right: 0; justify-content: flex-end; padding-right: 14px; }
 
+        /* Zona centrale tap-to-pause: visibile solo su touch */
+        .story-nav.center { left: 35%; right: 35%; width: 30%; display: none; }
+        @media (hover: none) and (pointer: coarse) { .story-nav.center { display: flex; } }
+
         .story-nav-icon {
             width: 34px;
             height: 34px;
@@ -653,10 +677,15 @@
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease, background 0.3s ease;
         }
 
         .story-nav:hover .story-nav-icon { opacity: 1; background: rgba(255,255,255,0.1); }
+
+        /* Frecce sempre visibili su touch */
+        @media (hover: none) and (pointer: coarse) {
+            .story-nav-icon { opacity: 0.5; }
+        }
 
         .story-counter {
             position: absolute;
@@ -689,7 +718,7 @@
             color: var(--text-secondary);
             font-weight: 300;
             line-height: 1.9;
-            font-size: 14.5px;
+            font-size: 15px;
         }
 
         .about-text p + p { margin-top: 20px; }
@@ -723,6 +752,37 @@
         @media (prefers-reduced-motion: reduce) {
             .ambient-glow, .hero-scroll-line { animation: none !important; }
         }
+
+        /* ===== ADATTAMENTI MOBILE ===== */
+        @media (max-width: 767px) {
+            .hero-pad { padding-top: calc(env(safe-area-inset-top, 0px) + 24px) !important; padding-bottom: 32px !important; }
+            .hero-scroll-indicator { display: none; }
+            .hero-img-wrap img { max-height: 440px; }
+
+            .logo-bg { min-height: 240px; padding: 26px 16px; }
+            .logo-bg img { max-height: 260px; }
+
+            /* Target touch più grandi per il lightbox + safe area */
+            .lb-btn { width: 46px; height: 46px; background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.1); }
+            .lb-btn.prev { left: max(12px, env(safe-area-inset-left, 0px)); }
+            .lb-btn.next { right: max(12px, env(safe-area-inset-right, 0px)); }
+            .lb-close { width: 46px; height: 46px; top: max(16px, env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); }
+            .lb-img { max-width: 92vw; max-height: 76vh; }
+            .lb-counter { bottom: max(20px, env(safe-area-inset-bottom, 0px)); }
+
+            .btn-main, .ig-link { padding: 13px 24px; }
+
+            .about-text { font-size: 14.5px; line-height: 1.85; }
+
+            footer .footer-row { gap: 18px; }
+        }
+
+        /* Hint testo storytelling: versione desktop/mobile */
+        .hint-mobile { display: none; }
+        @media (hover: none) and (pointer: coarse) {
+            .hint-desktop { display: none; }
+            .hint-mobile { display: inline; }
+        }
     </style>
 </head>
 <body class="grid-bg">
@@ -742,15 +802,15 @@
     <div class="cursor-dot" id="cursorDot"></div>
 
     <!-- HERO -->
-    <section class="min-h-screen flex items-center justify-center relative overflow-x-hidden" style="padding-top: 80px; padding-bottom: 40px;">
+    <section class="hero-pad min-h-[100svh] flex items-center justify-center relative overflow-x-hidden" style="padding-top: 80px; padding-bottom: 40px;">
         <div class="glow" style="top: 5%; left: 20%;"></div>
         <div class="glow-warm" style="bottom: 8%; right: 3%;"></div>
 
         <div class="max-w-7xl mx-auto px-6 w-full relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
                 <div class="reveal">
-                    <h1 class="hero-name mb-7">Jennina</h1>
-                    <p class="hero-tagline mb-14">I'm Not Human</p>
+                    <h1 class="hero-name mb-6">Jennina</h1>
+                    <p class="hero-tagline mb-10 md:mb-14">I'm Not Human</p>
 
                     <div class="flex flex-wrap items-center gap-4 mb-10">
                         <a href="#opere" class="btn-main">Vedi le opere</a>
@@ -780,7 +840,7 @@
             </div>
         </div>
 
-        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+        <div class="hero-scroll-indicator absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
             <span class="text-[10px] tracking-[0.25em] uppercase" style="color: var(--text-muted);">Scroll</span>
             <div class="hero-scroll-line"></div>
         </div>
@@ -788,12 +848,12 @@
 
     <!-- OPERE -->
     <div class="divider"></div>
-    <section id="opere" class="py-28 md:py-36 relative">
+    <section id="opere" class="py-16 md:py-28 lg:py-36 relative">
         <div class="glow-soft" style="top: 25%; left: -100px;"></div>
         <div class="glow-warm" style="top: 55%; right: -120px;"></div>
 
         <div class="max-w-5xl mx-auto px-6">
-            <div class="reveal mb-16">
+            <div class="reveal mb-12 md:mb-16">
                 <p class="section-eyebrow">Selezione</p>
                 <h2 class="section-title">Opere recenti</h2>
             </div>
@@ -825,14 +885,17 @@
 
     <!-- STORYTELLING -->
     <div class="divider"></div>
-    <section id="storytelling" class="py-28 md:py-36 relative">
+    <section id="storytelling" class="py-16 md:py-28 lg:py-36 relative">
         <div class="glow" style="top: 40%; left: 50%; transform: translateX(-50%);"></div>
 
         <div class="max-w-5xl mx-auto px-6">
-            <div class="reveal mb-16 text-center">
+            <div class="reveal mb-12 md:mb-16 text-center">
                 <p class="section-eyebrow justify-center" style="margin-bottom: 20px;">Processo creativo</p>
                 <h2 class="font-serif text-4xl md:text-5xl font-light tracking-tight" style="background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 40%, var(--indigo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Storytelling</h2>
-                <p class="text-sm mt-5 font-light" style="color: var(--text-muted);">Si ferma al passaggio del mouse — clicca le frecce per navigare</p>
+                <p class="text-sm mt-5 font-light" style="color: var(--text-muted);">
+                    <span class="hint-desktop">Si ferma al passaggio del mouse — clicca le frecce per navigare</span>
+                    <span class="hint-mobile">Tocca i lati per navigare · tocca al centro per la pausa</span>
+                </p>
             </div>
 
             <div class="reveal flex justify-center">
@@ -848,6 +911,7 @@
                     <div class="story-slide" data-index="5"><img src="https://z-cdn-media.chatglm.cn/files/57598671-6833-48a5-8b2f-b9e367fe219f.jpg?auth_key=1883577833-7c1bcb237a934ff1ab78f24e4513de31-0-19e93d630be39d4e77c85eed907e325f" alt=""></div>
 
                     <div class="story-nav left" onclick="prevStory(event)"><div class="story-nav-icon"><i data-lucide="chevron-left" class="w-4 h-4 text-white"></i></div></div>
+                    <div class="story-nav center" onclick="togglePause()" aria-label="Pausa"></div>
                     <div class="story-nav right" onclick="nextStory(event)"><div class="story-nav-icon"><i data-lucide="chevron-right" class="w-4 h-4 text-white"></i></div></div>
 
                     <div class="story-counter" id="storyCounter">01 / 06</div>
@@ -858,12 +922,12 @@
 
     <!-- ABOUT -->
     <div class="divider"></div>
-    <section id="about" class="py-28 md:py-36 relative">
+    <section id="about" class="py-16 md:py-28 lg:py-36 relative">
         <div class="glow-soft" style="bottom: 5%; right: -60px;"></div>
         <div class="glow-warm" style="top: 15%; left: -100px;"></div>
 
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-14 md:gap-20 items-start">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-20 items-start">
                 <div class="md:col-span-2 reveal">
                     <div class="logo-bg">
                         <img src="https://z-cdn-media.chatglm.cn/files/a634dd74-7b13-4193-8c3d-796f654a2f42.jpg?auth_key=1883579526-3f24e647d1f9449fb81ff96ff6" alt="I'm Not Human Logo">
@@ -885,8 +949,8 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-10 relative z-10">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+    <footer class="py-10 relative z-10" style="padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 40px);">
+        <div class="footer-row max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
             <p style="color: var(--text-muted); font-size: 11px; letter-spacing: 0.06em;">© 2026 Jennina · I'm not human</p>
             <div class="flex items-center gap-5">
                 <a href="https://www.instagram.com/iamjennina/" target="_blank" style="color: var(--text-muted);" class="hover:text-[#c9a84c] transition-colors">
@@ -917,62 +981,66 @@
     <script>
         lucide.createIcons();
 
-        /* ===== CURSORE ===== */
-        var cursorMoon = document.getElementById('cursorMoon');
-        var cursorDot = document.getElementById('cursorDot');
-        var mouseX = 0, mouseY = 0;
-        var moonX = 0, moonY = 0, dotX = 0, dotY = 0;
-        var isVisible = false, prevMouseX = 0, prevMouseY = 0, moonRotation = 0;
+        var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-        document.addEventListener('mousemove', function(e) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            if (!isVisible) {
-                isVisible = true;
-                cursorMoon.classList.add('visible');
-                cursorDot.classList.add('visible');
-                prevMouseX = mouseX;
-                prevMouseY = mouseY;
+        /* ===== CURSORE (solo desktop / dispositivi con puntatore fine) ===== */
+        if (canHover) {
+            var cursorMoon = document.getElementById('cursorMoon');
+            var cursorDot = document.getElementById('cursorDot');
+            var mouseX = 0, mouseY = 0;
+            var moonX = 0, moonY = 0, dotX = 0, dotY = 0;
+            var isVisible = false, prevMouseX = 0, prevMouseY = 0, moonRotation = 0;
+
+            document.addEventListener('mousemove', function(e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                if (!isVisible) {
+                    isVisible = true;
+                    cursorMoon.classList.add('visible');
+                    cursorDot.classList.add('visible');
+                    prevMouseX = mouseX;
+                    prevMouseY = mouseY;
+                }
+            });
+
+            document.addEventListener('mouseleave', function() {
+                isVisible = false;
+                cursorMoon.classList.remove('visible');
+                cursorDot.classList.remove('visible');
+            });
+
+            document.querySelectorAll('a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close').forEach(function(el) {
+                el.addEventListener('mouseenter', function() {
+                    cursorMoon.classList.add('hovering');
+                    cursorDot.classList.add('hovering');
+                });
+                el.addEventListener('mouseleave', function() {
+                    cursorMoon.classList.remove('hovering');
+                    cursorDot.classList.remove('hovering');
+                });
+            });
+
+            function animateCursor() {
+                var dx = mouseX - prevMouseX;
+                var dy = mouseY - prevMouseY;
+                var speed = Math.sqrt(dx * dx + dy * dy);
+                moonRotation += (dx * 1.2 - moonRotation) * 0.06;
+                prevMouseX += (mouseX - prevMouseX) * 0.05;
+                prevMouseY += (mouseY - prevMouseY) * 0.05;
+                var s = 1 + Math.min(speed * 0.003, 0.2);
+                dotX += (mouseX - dotX) * 0.18;
+                dotY += (mouseY - dotY) * 0.18;
+                moonX += (mouseX - moonX) * 0.065;
+                moonY += (mouseY - moonY) * 0.065;
+                cursorDot.style.left = dotX + 'px';
+                cursorDot.style.top = dotY + 'px';
+                cursorMoon.style.left = (moonX - 12) + 'px';
+                cursorMoon.style.top = (moonY - 12) + 'px';
+                cursorMoon.style.transform = 'translate(-50%, -50%) rotate(' + moonRotation + 'deg) scale(' + s + ')';
+                requestAnimationFrame(animateCursor);
             }
-        });
-
-        document.addEventListener('mouseleave', function() {
-            isVisible = false;
-            cursorMoon.classList.remove('visible');
-            cursorDot.classList.remove('visible');
-        });
-
-        document.querySelectorAll('a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close').forEach(function(el) {
-            el.addEventListener('mouseenter', function() {
-                cursorMoon.classList.add('hovering');
-                cursorDot.classList.add('hovering');
-            });
-            el.addEventListener('mouseleave', function() {
-                cursorMoon.classList.remove('hovering');
-                cursorDot.classList.remove('hovering');
-            });
-        });
-
-        function animateCursor() {
-            var dx = mouseX - prevMouseX;
-            var dy = mouseY - prevMouseY;
-            var speed = Math.sqrt(dx * dx + dy * dy);
-            moonRotation += (dx * 1.2 - moonRotation) * 0.06;
-            prevMouseX += (mouseX - prevMouseX) * 0.05;
-            prevMouseY += (mouseY - prevMouseY) * 0.05;
-            var s = 1 + Math.min(speed * 0.003, 0.2);
-            dotX += (mouseX - dotX) * 0.18;
-            dotY += (mouseY - dotY) * 0.18;
-            moonX += (mouseX - moonX) * 0.065;
-            moonY += (mouseY - moonY) * 0.065;
-            cursorDot.style.left = dotX + 'px';
-            cursorDot.style.top = dotY + 'px';
-            cursorMoon.style.left = (moonX - 12) + 'px';
-            cursorMoon.style.top = (moonY - 12) + 'px';
-            cursorMoon.style.transform = 'translate(-50%, -50%) rotate(' + moonRotation + 'deg) scale(' + s + ')';
-            requestAnimationFrame(animateCursor);
+            animateCursor();
         }
-        animateCursor();
 
         /* ===== LIGHTBOX ===== */
         var works = [
@@ -991,14 +1059,14 @@
         }
 
         function closeLB(e) {
-            if (e.target.id === 'lightbox' || e.currentTarget.classList.contains('lb-close')) {
+            if (e.target.id === 'lightbox' || (e.currentTarget && e.currentTarget.classList.contains('lb-close'))) {
                 document.getElementById('lightbox').classList.remove('open');
                 document.body.style.overflow = '';
             }
         }
 
         function navLB(dir, e) {
-            e.stopPropagation();
+            if (e && e.stopPropagation) e.stopPropagation();
             cur = (cur + dir + works.length) % works.length;
             updateLB();
         }
@@ -1017,6 +1085,27 @@
             if (e.key === 'ArrowLeft') navLB(-1, e);
             if (e.key === 'ArrowRight') navLB(1, e);
         });
+
+        /* Swipe orizzontale nel lightbox (mobile) */
+        (function() {
+            var lb = document.getElementById('lightbox');
+            var startX = 0, startY = 0, tracking = false;
+            lb.addEventListener('touchstart', function(e) {
+                if (!lb.classList.contains('open')) return;
+                startX = e.changedTouches[0].clientX;
+                startY = e.changedTouches[0].clientY;
+                tracking = true;
+            }, { passive: true });
+            lb.addEventListener('touchend', function(e) {
+                if (!tracking) return;
+                tracking = false;
+                var dx = e.changedTouches[0].clientX - startX;
+                var dy = e.changedTouches[0].clientY - startY;
+                if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+                    navLB(dx > 0 ? -1 : 1);
+                }
+            }, { passive: true });
+        })();
 
         /* ===== STORYTELLING ===== */
         var slides = document.querySelectorAll('.story-slide');
@@ -1094,6 +1183,7 @@
         }
 
         function resumeStory() {
+            if (!storyPaused) return;
             storyPaused = false;
             document.getElementById('storyContainer').classList.remove('paused');
             var f = bars[storyIndex].querySelector('.story-bar-fill');
@@ -1106,6 +1196,12 @@
             f.style.transition = 'width ' + rem + 'ms linear';
             f.style.width = '100%';
             storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, rem);
+        }
+
+        /* Toggle pausa al tap sul centro (mobile) */
+        function togglePause() {
+            if (storyPaused) resumeStory();
+            else pauseStory();
         }
 
         var storyStarted = false;
