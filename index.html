@@ -49,9 +49,11 @@
         }
 
         /* ===== CURSORE (solo dispositivi con hover / puntatore fine) ===== */
+        /* cursor: pointer è sempre attivo sugli elementi interattivi (aiuta iOS a registrare i tap) */
+        a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close { cursor: pointer; }
+
         @media (hover: hover) and (pointer: fine) {
             body { cursor: none; }
-            a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close { cursor: pointer; }
             *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause, .cursor-moon, .cursor-dot) { cursor: none; }
         }
 
@@ -1050,15 +1052,21 @@
             'https://z-cdn-media.chatglm.cn/files/e46e38ce-4d21-4cad-9510-21d00d750cb8.jpg?auth_key=1883672854-89e4f36fdde445dfbbdde44a82f57625-0-4bb6c6d0c9b4d29bdadfb46f33ff7585'
         ];
         var roman = ['I', 'II', 'III', 'IV'], cur = 0;
+        var lbOpenedAt = 0;
 
         function openLB(i) {
             cur = i;
             updateLB();
             document.getElementById('lightbox').classList.add('open');
             document.body.style.overflow = 'hidden';
+            lbOpenedAt = Date.now();
         }
 
         function closeLB(e) {
+            // Guard contro il "ghost click": il gesto che ha aperto il lightbox
+            // può generare un click sintetico sull'overlay nei ~350ms successivi,
+            // richiudendolo subito. Lo ignoriamo in quella finestra.
+            if (Date.now() - lbOpenedAt < 350) return;
             if (e.target.id === 'lightbox' || (e.currentTarget && e.currentTarget.classList.contains('lb-close'))) {
                 document.getElementById('lightbox').classList.remove('open');
                 document.body.style.overflow = '';
