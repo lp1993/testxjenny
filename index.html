@@ -487,9 +487,6 @@
             z-index: 200;
             background: rgba(6,6,8,0.96);
             backdrop-filter: blur(30px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.5s ease;
@@ -505,16 +502,25 @@
             pointer-events: none;
         }
 
+        /* Viewport scrollabile: contiene l'immagine e permette pan/zoom
+           se l'immagine è più grande dello schermo (dimensione originale). */
+        .lb-viewport {
+            position: absolute;
+            inset: 0;
+            overflow: auto;
+            display: flex;
+            -webkit-overflow-scrolling: touch;
+        }
+
         .lightbox .lb-img {
-            max-width: 86vw;
-            max-height: 84vh;
+            margin: auto;           /* centra se più piccola, permette scroll se più grande */
+            max-width: none;        /* dimensione naturale, nessun rimpicciolimento */
+            max-height: none;
             border-radius: 14px;
-            object-fit: contain;
             transform: scale(0.9);
             transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             z-index: 1;
-            touch-action: pan-y;
         }
 
         .lightbox.open .lb-img { transform: scale(1); }
@@ -735,7 +741,7 @@
 
         .reveal.show { opacity: 1; transform: translateY(0); }
 
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
 
         body::before {
             content: "";
@@ -769,7 +775,9 @@
             .lb-btn.prev { left: max(12px, env(safe-area-inset-left, 0px)); }
             .lb-btn.next { right: max(12px, env(safe-area-inset-right, 0px)); }
             .lb-close { width: 46px; height: 46px; top: max(16px, env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); }
-            .lb-img { max-width: 92vw; max-height: 76vh; }
+            /* Immagine a dimensione naturale anche su mobile: pinch-zoom nativo del browser
+               per ingrandire/scrollare se più grande dello schermo. */
+            .lb-viewport { touch-action: manipulation; }
             .lb-counter { bottom: max(20px, env(safe-area-inset-bottom, 0px)); }
 
             .btn-main, .ig-link { padding: 13px 24px; }
@@ -850,7 +858,7 @@
 
     <!-- OPERE -->
     <div class="divider"></div>
-    <section id="opere" class="py-16 md:py-28 lg:py-36 relative">
+    <section id="opere" class="py-16 md:py-28 lg:py-36 relative overflow-hidden">
         <div class="glow-soft" style="top: 25%; left: -100px;"></div>
         <div class="glow-warm" style="top: 55%; right: -120px;"></div>
 
@@ -887,7 +895,7 @@
 
     <!-- STORYTELLING -->
     <div class="divider"></div>
-    <section id="storytelling" class="py-16 md:py-28 lg:py-36 relative">
+    <section id="storytelling" class="py-16 md:py-28 lg:py-36 relative overflow-hidden">
         <div class="glow" style="top: 40%; left: 50%; transform: translateX(-50%);"></div>
 
         <div class="max-w-5xl mx-auto px-6">
@@ -924,7 +932,7 @@
 
     <!-- ABOUT -->
     <div class="divider"></div>
-    <section id="about" class="py-16 md:py-28 lg:py-36 relative">
+    <section id="about" class="py-16 md:py-28 lg:py-36 relative overflow-hidden">
         <div class="glow-soft" style="bottom: 5%; right: -60px;"></div>
         <div class="glow-warm" style="top: 15%; left: -100px;"></div>
 
@@ -973,7 +981,9 @@
         <button class="lb-btn prev" onclick="navLB(-1, event)">
             <i data-lucide="chevron-left" class="w-4 h-4 text-white" style="opacity: 0.4;"></i>
         </button>
-        <img class="lb-img" id="lb-img" src="" alt="">
+        <div class="lb-viewport">
+            <img class="lb-img" id="lb-img" src="" alt="">
+        </div>
         <button class="lb-btn next" onclick="navLB(1, event)">
             <i data-lucide="chevron-right" class="w-4 h-4 text-white" style="opacity: 0.4;"></i>
         </button>
@@ -1067,7 +1077,10 @@
             // può generare un click sintetico sull'overlay nei ~350ms successivi,
             // richiudendolo subito. Lo ignoriamo in quella finestra.
             if (Date.now() - lbOpenedAt < 350) return;
-            if (e.target.id === 'lightbox' || (e.currentTarget && e.currentTarget.classList.contains('lb-close'))) {
+            // Chiude solo se si clicca lo sfondo (lightbox o viewport vuoto),
+            // non se si clicca l'immagine (per permettere pinch-zoom/pan).
+            var isCloseBtn = e.currentTarget && e.currentTarget.classList.contains('lb-close');
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lb-viewport') || isCloseBtn) {
                 document.getElementById('lightbox').classList.remove('open');
                 document.body.style.overflow = '';
             }
@@ -1109,7 +1122,9 @@
                 tracking = false;
                 var dx = e.changedTouches[0].clientX - startX;
                 var dy = e.changedTouches[0].clientY - startY;
-                if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+                // Swipe orizzontale netto: naviga tra le opere.
+                // (Il pinch-zoom sull'immagine resta gestito nativamente dal browser.)
+                if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
                     navLB(dx > 0 ? -1 : 1);
                 }
             }, { passive: true });
