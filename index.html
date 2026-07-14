@@ -500,30 +500,51 @@
             inset: 0;
             background: radial-gradient(ellipse at center, transparent 40%, rgba(6,6,8,0.5) 100%);
             pointer-events: none;
+            z-index: 0;
         }
 
-        /* Viewport scrollabile: contiene l'immagine e permette pan/zoom
-           se l'immagine è più grande dello schermo (dimensione originale). */
+        /* Area immagine: overflow:auto + flex + margin:auto centrano l'immagine
+           quando è più piccola dello schermo e la rendono scrollabile in tutte le
+           direzioni quando è ingrandita (dimensione originale). */
         .lb-viewport {
             position: absolute;
             inset: 0;
+            z-index: 2;
             overflow: auto;
             display: flex;
+            padding: 16px;
+            box-sizing: border-box;
             -webkit-overflow-scrolling: touch;
         }
 
+        /* Vista d'insieme: immagine grande, centrata, sempre visibile. */
         .lightbox .lb-img {
-            margin: auto;           /* centra se più piccola, permette scroll se più grande */
-            max-width: none;        /* dimensione naturale, nessun rimpicciolimento */
-            max-height: none;
+            margin: auto;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
             border-radius: 14px;
-            transform: scale(0.9);
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: scale(0.92);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+            user-select: none;
+            -webkit-user-drag: none;
             position: relative;
-            z-index: 1;
+            cursor: zoom-in;
         }
 
-        .lightbox.open .lb-img { transform: scale(1); }
+        .lightbox.open .lb-img { transform: scale(1); opacity: 1; }
+
+        /* Stato "dimensione originale": nessun limite — l'immagine si mostra
+           ai suoi pixel naturali e si naviga scrollando/pannando nel viewport. */
+        .lightbox.zoomed .lb-img {
+            max-width: none;
+            max-height: none;
+            object-fit: initial;
+            cursor: zoom-out;
+        }
 
         .lb-btn {
             position: absolute;
@@ -981,8 +1002,8 @@
         <button class="lb-btn prev" onclick="navLB(-1, event)">
             <i data-lucide="chevron-left" class="w-4 h-4 text-white" style="opacity: 0.4;"></i>
         </button>
-        <div class="lb-viewport">
-            <img class="lb-img" id="lb-img" src="" alt="">
+        <div class="lb-viewport" onclick="toggleZoomLB(event)">
+            <img class="lb-img" id="lb-img" src="" alt="" draggable="false">
         </div>
         <button class="lb-btn next" onclick="navLB(1, event)">
             <i data-lucide="chevron-right" class="w-4 h-4 text-white" style="opacity: 0.4;"></i>
@@ -1063,11 +1084,15 @@
         ];
         var roman = ['I', 'II', 'III', 'IV'], cur = 0;
         var lbOpenedAt = 0;
+        var lbLightbox, lbImg;
 
         function openLB(i) {
             cur = i;
+            lbLightbox = document.getElementById('lightbox');
+            lbImg = document.getElementById('lb-img');
             updateLB();
-            document.getElementById('lightbox').classList.add('open');
+            lbLightbox.classList.add('open');
+            lbLightbox.classList.remove('zoomed');
             document.body.style.overflow = 'hidden';
             lbOpenedAt = Date.now();
         }
@@ -1077,11 +1102,34 @@
             // può generare un click sintetico sull'overlay nei ~350ms successivi,
             // richiudendolo subito. Lo ignoriamo in quella finestra.
             if (Date.now() - lbOpenedAt < 350) return;
-            // Chiude solo se si clicca lo sfondo (lightbox o viewport vuoto),
-            // non se si clicca l'immagine (per permettere pinch-zoom/pan).
+            // Chiude solo se si clicca lo sfondo (overlay esterno o tasto close),
+            // NON se si clicca l'immagine (il cui tap gestisce lo zoom).
             var isCloseBtn = e.currentTarget && e.currentTarget.classList.contains('lb-close');
-            if (e.target.id === 'lightbox' || e.target.classList.contains('lb-viewport') || isCloseBtn) {
-                document.getElementById('lightbox').classList.remove('open');
+            if (e.target.id === 'lightbox' || isCloseBtn) {
+                lbLightbox.classList.remove('open', 'zoomed');
+                document.body.style.overflow = '';
+            }
+        }
+
+        /* Tap/clic sull'immagine: alterna tra vista d'insieme e dimensione originale.
+           Tap sull'area vuota del viewport: chiude il lightbox. */
+        function toggleZoomLB(e) {
+            // Ignora il "ghost click" del tap che ha appena aperto il lightbox.
+            if (Date.now() - lbOpenedAt < 350) return;
+            e.stopPropagation();
+            // Click sull'immagine → alterna zoom.
+            if (e.target === lbImg) {
+                var wasZoomed = lbLightbox.classList.contains('zoomed');
+                lbLightbox.classList.toggle('zoomed');
+                // Ripristina lo scroll del viewport quando si torna alla vista d'insieme.
+                if (wasZoomed) {
+                    var vp = lbImg.parentElement;
+                    vp.scrollLeft = 0;
+                    vp.scrollTop = 0;
+                }
+            } else {
+                // Click su area vuota → chiudi.
+                lbLightbox.classList.remove('open', 'zoomed');
                 document.body.style.overflow = '';
             }
         }
@@ -1095,6 +1143,13 @@
         function updateLB() {
             document.getElementById('lb-img').src = works[cur];
             document.getElementById('lb-counter').textContent = roman[cur] + ' / IV';
+            // Azzera scroll e zoom quando si cambia immagine.
+            if (lbLightbox) {
+                lbLightbox.classList.remove('zoomed');
+                var vp = document.getElementById('lb-img').parentElement;
+                vp.scrollLeft = 0;
+                vp.scrollTop = 0;
+            }
         }
 
         document.addEventListener('keydown', function(e) {
@@ -1122,8 +1177,10 @@
                 tracking = false;
                 var dx = e.changedTouches[0].clientX - startX;
                 var dy = e.changedTouches[0].clientY - startY;
+                // In modalità "dimensione originale" il dito serve a pan-nare
+                // l'immagine (scroll nativo del viewport): non cambio foto.
+                if (lbLightbox && lbLightbox.classList.contains('zoomed')) return;
                 // Swipe orizzontale netto: naviga tra le opere.
-                // (Il pinch-zoom sull'immagine resta gestito nativamente dal browser.)
                 if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
                     navLB(dx > 0 ? -1 : 1);
                 }
