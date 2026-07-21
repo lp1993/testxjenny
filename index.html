@@ -48,14 +48,14 @@
             background-size: 128px 128px;
         }
 
-        a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .audio-toggle-btn { cursor: pointer; }
+        a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag { cursor: pointer; }
 
         @media (hover: hover) and (pointer: fine) {
             body { cursor: none; }
-            *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause, .cursor-moon, .cursor-dot, .audio-toggle-btn) { cursor: none; }
+            *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause, .cursor-moon, .cursor-dot) { cursor: none; }
         }
 
-        a, button, .opera, .story-nav, .lb-btn, .lb-close, .btn-main, .ig-link, .btn-icon, .skill-tag, .audio-toggle-btn {
+        a, button, .opera, .story-nav, .lb-btn, .lb-close, .btn-main, .ig-link, .btn-icon, .skill-tag {
             touch-action: manipulation;
         }
 
@@ -228,64 +228,15 @@
         }
         .hint-mobile { display: none; }
         @media (hover: none) and (pointer: coarse) { .hint-desktop { display: none; } .hint-mobile { display: inline; } }
-        
-        /* STILE PULSANTE MUSICA */
-        .audio-toggle-btn { 
-            position: fixed; 
-            bottom: max(24px, env(safe-area-inset-bottom, 24px)); 
-            right: 24px; 
-            z-index: 100; 
-            width: 46px; 
-            height: 46px; 
-            border-radius: 50%; 
-            background: rgba(17, 17, 20, 0.6); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(124,127,205,0.15); 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            transition: all 0.3s ease; 
-        }
-        .audio-toggle-btn:hover { 
-            background: rgba(124,127,205,0.2); 
-            border-color: rgba(124,127,205,0.4); 
-            transform: scale(1.05); 
-        }
-        .audio-toggle-btn.active { 
-            border-color: rgba(124,127,205,0.4); 
-            box-shadow: 0 0 20px rgba(124,127,205,0.15); 
-        }
-        
-        /* BARRINE AUDIO ANIMATE */
-        .audio-bars { display: flex; align-items: flex-end; gap: 2px; height: 14px; }
-        .audio-bars span { display: block; width: 2.5px; border-radius: 2px; background: var(--indigo-soft); }
-        .audio-toggle-btn:not(.active) .audio-bars span { animation: none; height: 3px !important; }
-        .audio-bars span:nth-child(1) { animation: sound 0.8s ease-in-out infinite; }
-        .audio-bars span:nth-child(2) { animation: sound 0.7s ease-in-out infinite 0.15s; }
-        .audio-bars span:nth-child(3) { animation: sound 0.9s ease-in-out infinite 0.05s; }
-        .audio-bars span:nth-child(4) { animation: sound 0.75s ease-in-out infinite 0.25s; }
-        @keyframes sound {
-            0%, 100% { height: 3px; }
-            50% { height: 14px; }
-        }
     </style>
 </head>
 <body class="grid-bg">
 
-    <!-- ELEMENTI AUDIO -->
+    <!-- ELEMENTO AUDIO -->
     <audio id="bgMusic" loop preload="auto">
-        <!-- SOSTITUISCI QUESTO SRC CON IL LINK DELLA TUA CANZONE (es. ./musica.mp3) -->
+        <!-- SOSTITUISCI IL LINK QUI SOTTO CON IL TUO FILE MP3 -->
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
-
-    <button class="audio-toggle-btn" id="audioToggle" aria-label="Play / Pause Music">
-        <div class="audio-bars">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </button>
 
     <div class="ambient-glow" aria-hidden="true"></div>
     <div class="ambient-glow" aria-hidden="true"></div>
@@ -307,13 +258,21 @@
                 <div class="reveal">
                     <h1 class="hero-name mb-6">Jennina</h1>
                     <p class="hero-tagline mb-10 md:mb-14">I'm Not Human</p>
+
                     <div class="flex flex-wrap items-center gap-4 mb-10">
+                        <!-- PULSANTE PLAY/PAUSA MUSICa -->
+                        <button class="btn-icon" id="audioToggle" aria-label="Play Music">
+                            <i data-lucide="play" class="w-5 h-5" id="playIcon"></i>
+                            <i data-lucide="pause" class="w-5 h-5" id="pauseIcon" style="display: none;"></i>
+                        </button>
+
                         <a href="#opere" class="btn-main">Vedi le opere</a>
                         <a href="https://www.instagram.com/iamjennina/" target="_blank" class="ig-link">
                             <i data-lucide="instagram" class="w-4 h-4"></i>
                             @iamjennina
                         </a>
                     </div>
+
                     <div class="flex flex-wrap gap-2">
                         <span class="skill-tag">Oniric Art</span>
                         <span class="skill-tag">Storytelling</span>
@@ -489,7 +448,7 @@
                 cursorDot.classList.remove('visible');
             });
 
-            document.querySelectorAll('a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .audio-toggle-btn').forEach(function(el) {
+            document.querySelectorAll('a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close').forEach(function(el) {
                 el.addEventListener('mouseenter', function() {
                     cursorMoon.classList.add('hovering');
                     cursorDot.classList.add('hovering');
@@ -521,23 +480,27 @@
             animateCursor();
         }
 
-        /* ===== MUSIC PLAYER ===== */
+        /* ===== MUSIC PLAYER (INSERITO NELL'HERO) ===== */
         var audio = document.getElementById('bgMusic');
         var audioToggle = document.getElementById('audioToggle');
+        var playIcon = document.getElementById('playIcon');
+        var pauseIcon = document.getElementById('pauseIcon');
         var isPlaying = false;
 
-        // Volume impostato al 20% (0.2) per non essere troppo alto
+        // Volume al 20%
         audio.volume = 0.2; 
 
         audioToggle.addEventListener('click', function() {
             if (isPlaying) {
                 audio.pause();
                 isPlaying = false;
-                audioToggle.classList.remove('active');
+                playIcon.style.display = '';
+                pauseIcon.style.display = 'none';
             } else {
                 audio.play().then(function() {
                     isPlaying = true;
-                    audioToggle.classList.add('active');
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = '';
                 }).catch(function(err) {
                     console.error("Errore riproduzione audio:", err);
                 });
