@@ -48,8 +48,6 @@
             background-size: 128px 128px;
         }
 
-        /* ===== CURSORE (solo dispositivi con hover / puntatore fine) ===== */
-        /* cursor: pointer è sempre attivo sugli elementi interattivi (aiuta iOS a registrare i tap) */
         a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close { cursor: pointer; }
 
         @media (hover: hover) and (pointer: fine) {
@@ -57,12 +55,10 @@
             *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause, .cursor-moon, .cursor-dot) { cursor: none; }
         }
 
-        /* Su touch: nessun ritardo sul tap e tap highlight pulito */
         a, button, .opera, .story-nav, .lb-btn, .lb-close, .btn-main, .ig-link, .btn-icon, .skill-tag {
             touch-action: manipulation;
         }
 
-        /* ===== BAGLIORI AMBIENTALI ===== */
         .ambient-glow {
             position: fixed;
             border-radius: 50%;
@@ -140,7 +136,6 @@
             45% { opacity: 0; }
         }
 
-        /* ===== CURSORE (elementi DOM) ===== */
         .cursor-moon {
             position: fixed;
             top: 0;
@@ -222,7 +217,6 @@
             pointer-events: none;
         }
 
-        /* ===== LINEA DIVISORIA DORATA ===== */
         .divider {
             height: 1px;
             background: linear-gradient(to right, transparent 5%, var(--gold-dim) 30%, var(--gold) 50%, var(--gold-dim) 70%, transparent 95%);
@@ -448,7 +442,6 @@
         .opera:hover { border-radius: 14px; }
         .opera:hover img { transform: scale(1.05); opacity: 1; filter: saturate(1) contrast(1); }
 
-        /* Sui touch le opere risultano sempre leggibili (niente hover) */
         @media (hover: none) and (pointer: coarse) {
             .opera img { opacity: 0.88; filter: saturate(0.92) contrast(0.98); }
             .opera .shade { opacity: 0.5; }
@@ -503,9 +496,6 @@
             z-index: 0;
         }
 
-        /* Area immagine: overflow:auto + flex + margin:auto centrano l'immagine
-           quando è più piccola dello schermo e la rendono scrollabile in tutte le
-           direzioni quando è ingrandita (dimensione originale). */
         .lb-viewport {
             position: absolute;
             inset: 0;
@@ -517,7 +507,6 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Vista d'insieme: immagine grande, centrata, sempre visibile. */
         .lightbox .lb-img {
             margin: auto;
             width: auto;
@@ -537,8 +526,6 @@
 
         .lightbox.open .lb-img { transform: scale(1); opacity: 1; }
 
-        /* Stato "dimensione originale": nessun limite — l'immagine si mostra
-           ai suoi pixel naturali e si naviga scrollando/pannando nel viewport. */
         .lightbox.zoomed .lb-img {
             max-width: none;
             max-height: none;
@@ -692,7 +679,6 @@
         .story-nav.left { left: 0; justify-content: flex-start; padding-left: 14px; }
         .story-nav.right { right: 0; justify-content: flex-end; padding-right: 14px; }
 
-        /* Zona centrale tap-to-pause: visibile solo su touch */
         .story-nav.center { left: 35%; right: 35%; width: 30%; display: none; }
         @media (hover: none) and (pointer: coarse) { .story-nav.center { display: flex; } }
 
@@ -711,7 +697,6 @@
 
         .story-nav:hover .story-nav-icon { opacity: 1; background: rgba(255,255,255,0.1); }
 
-        /* Frecce sempre visibili su touch */
         @media (hover: none) and (pointer: coarse) {
             .story-nav-icon { opacity: 0.5; }
         }
@@ -782,7 +767,6 @@
             .ambient-glow, .hero-scroll-line { animation: none !important; }
         }
 
-        /* ===== ADATTAMENTI MOBILE ===== */
         @media (max-width: 767px) {
             .hero-pad { padding-top: calc(env(safe-area-inset-top, 0px) + 24px) !important; padding-bottom: 32px !important; }
             .hero-scroll-indicator { display: none; }
@@ -791,13 +775,11 @@
             .logo-bg { min-height: 240px; padding: 26px 16px; }
             .logo-bg img { max-height: 260px; }
 
-            /* Target touch più grandi per il lightbox + safe area */
             .lb-btn { width: 46px; height: 46px; background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.1); }
             .lb-btn.prev { left: max(12px, env(safe-area-inset-left, 0px)); }
             .lb-btn.next { right: max(12px, env(safe-area-inset-right, 0px)); }
             .lb-close { width: 46px; height: 46px; top: max(16px, env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); }
-            /* Immagine a dimensione naturale anche su mobile: pinch-zoom nativo del browser
-               per ingrandire/scrollare se più grande dello schermo. */
+            
             .lb-viewport { touch-action: manipulation; }
             .lb-counter { bottom: max(20px, env(safe-area-inset-bottom, 0px)); }
 
@@ -808,7 +790,6 @@
             footer .footer-row { gap: 18px; }
         }
 
-        /* Hint testo storytelling: versione desktop/mobile */
         .hint-mobile { display: none; }
         @media (hover: none) and (pointer: coarse) {
             .hint-desktop { display: none; }
@@ -818,13 +799,11 @@
 </head>
 <body class="grid-bg">
 
-    <!-- BAGLIORI AMBIENTALI -->
     <div class="ambient-glow" aria-hidden="true"></div>
     <div class="ambient-glow" aria-hidden="true"></div>
     <div class="ambient-glow" aria-hidden="true"></div>
     <div class="ambient-glow" aria-hidden="true"></div>
 
-    <!-- CURSORE -->
     <div class="cursor-moon" id="cursorMoon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="rgba(148,150,204,0.45)" stroke-width="1.1" fill="rgba(124,127,205,0.05)"/>
@@ -832,7 +811,6 @@
     </div>
     <div class="cursor-dot" id="cursorDot"></div>
 
-    <!-- HERO -->
     <section class="hero-pad min-h-[100svh] flex items-center justify-center relative overflow-x-hidden" style="padding-top: 80px; padding-bottom: 40px;">
         <div class="glow" style="top: 5%; left: 20%;"></div>
         <div class="glow-warm" style="bottom: 8%; right: 3%;"></div>
@@ -877,7 +855,6 @@
         </div>
     </section>
 
-    <!-- OPERE -->
     <div class="divider"></div>
     <section id="opere" class="py-16 md:py-28 lg:py-36 relative overflow-hidden">
         <div class="glow-soft" style="top: 25%; left: -100px;"></div>
@@ -914,7 +891,6 @@
         </div>
     </section>
 
-    <!-- STORYTELLING -->
     <div class="divider"></div>
     <section id="storytelling" class="py-16 md:py-28 lg:py-36 relative overflow-hidden">
         <div class="glow" style="top: 40%; left: 50%; transform: translateX(-50%);"></div>
@@ -951,7 +927,6 @@
         </div>
     </section>
 
-    <!-- ABOUT -->
     <div class="divider"></div>
     <section id="about" class="py-16 md:py-28 lg:py-36 relative overflow-hidden">
         <div class="glow-soft" style="bottom: 5%; right: -60px;"></div>
@@ -979,7 +954,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="py-10 relative z-10" style="padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 40px);">
         <div class="footer-row max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
             <p style="color: var(--text-muted); font-size: 11px; letter-spacing: 0.06em;">© 2026 Jennina · I'm not human</p>
@@ -994,7 +968,6 @@
         </div>
     </footer>
 
-    <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox" onclick="closeLB(event)">
         <button class="lb-close" onclick="closeLB(event)">
             <i data-lucide="x" class="w-4 h-4 text-white" style="opacity: 0.5;"></i>
@@ -1016,7 +989,6 @@
 
         var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-        /* ===== CURSORE (solo desktop / dispositivi con puntatore fine) ===== */
         if (canHover) {
             var cursorMoon = document.getElementById('cursorMoon');
             var cursorDot = document.getElementById('cursorDot');
@@ -1075,7 +1047,6 @@
             animateCursor();
         }
 
-        /* ===== LIGHTBOX ===== */
         var works = [
             'https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3',
             'https://z-cdn-media.chatglm.cn/files/4e85852a-7307-452c-9214-d36dc492b748.jpg?auth_key=1883672854-8363dad8d7db46309960fdc5c0745a29-0-cc95aac67840f4199485dd67ec41a4af',
@@ -1092,18 +1063,17 @@
             lbImg = document.getElementById('lb-img');
             updateLB();
             lbLightbox.classList.add('open');
-            lbLightbox.classList.remove('zoomed');
+            
+            // --- MODIFICA APPLICATA ---
+            // Forza l'apertura diretta a "dimensione originale"
+            lbLightbox.classList.add('zoomed');
+            
             document.body.style.overflow = 'hidden';
             lbOpenedAt = Date.now();
         }
 
         function closeLB(e) {
-            // Guard contro il "ghost click": il gesto che ha aperto il lightbox
-            // può generare un click sintetico sull'overlay nei ~350ms successivi,
-            // richiudendolo subito. Lo ignoriamo in quella finestra.
             if (Date.now() - lbOpenedAt < 350) return;
-            // Chiude solo se si clicca lo sfondo (overlay esterno o tasto close),
-            // NON se si clicca l'immagine (il cui tap gestisce lo zoom).
             var isCloseBtn = e.currentTarget && e.currentTarget.classList.contains('lb-close');
             if (e.target.id === 'lightbox' || isCloseBtn) {
                 lbLightbox.classList.remove('open', 'zoomed');
@@ -1111,24 +1081,18 @@
             }
         }
 
-        /* Tap/clic sull'immagine: alterna tra vista d'insieme e dimensione originale.
-           Tap sull'area vuota del viewport: chiude il lightbox. */
         function toggleZoomLB(e) {
-            // Ignora il "ghost click" del tap che ha appena aperto il lightbox.
             if (Date.now() - lbOpenedAt < 350) return;
             e.stopPropagation();
-            // Click sull'immagine → alterna zoom.
             if (e.target === lbImg) {
                 var wasZoomed = lbLightbox.classList.contains('zoomed');
                 lbLightbox.classList.toggle('zoomed');
-                // Ripristina lo scroll del viewport quando si torna alla vista d'insieme.
                 if (wasZoomed) {
                     var vp = lbImg.parentElement;
                     vp.scrollLeft = 0;
                     vp.scrollTop = 0;
                 }
             } else {
-                // Click su area vuota → chiudi.
                 lbLightbox.classList.remove('open', 'zoomed');
                 document.body.style.overflow = '';
             }
@@ -1143,7 +1107,6 @@
         function updateLB() {
             document.getElementById('lb-img').src = works[cur];
             document.getElementById('lb-counter').textContent = roman[cur] + ' / IV';
-            // Azzera scroll e zoom quando si cambia immagine.
             if (lbLightbox) {
                 lbLightbox.classList.remove('zoomed');
                 var vp = document.getElementById('lb-img').parentElement;
@@ -1155,14 +1118,13 @@
         document.addEventListener('keydown', function(e) {
             if (!document.getElementById('lightbox').classList.contains('open')) return;
             if (e.key === 'Escape') {
-                document.getElementById('lightbox').classList.remove('open');
+                document.getElementById('lightbox').classList.remove('open', 'zoomed');
                 document.body.style.overflow = '';
             }
             if (e.key === 'ArrowLeft') navLB(-1, e);
             if (e.key === 'ArrowRight') navLB(1, e);
         });
 
-        /* Swipe orizzontale nel lightbox (mobile) */
         (function() {
             var lb = document.getElementById('lightbox');
             var startX = 0, startY = 0, tracking = false;
@@ -1177,17 +1139,13 @@
                 tracking = false;
                 var dx = e.changedTouches[0].clientX - startX;
                 var dy = e.changedTouches[0].clientY - startY;
-                // In modalità "dimensione originale" il dito serve a pan-nare
-                // l'immagine (scroll nativo del viewport): non cambio foto.
                 if (lbLightbox && lbLightbox.classList.contains('zoomed')) return;
-                // Swipe orizzontale netto: naviga tra le opere.
                 if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
                     navLB(dx > 0 ? -1 : 1);
                 }
             }, { passive: true });
         })();
 
-        /* ===== STORYTELLING ===== */
         var slides = document.querySelectorAll('.story-slide');
         var totalSlides = slides.length;
         var storyIndex = 0;
@@ -1278,7 +1236,6 @@
             storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, rem);
         }
 
-        /* Toggle pausa al tap sul centro (mobile) */
         function togglePause() {
             if (storyPaused) resumeStory();
             else pauseStory();
@@ -1299,7 +1256,6 @@
         }, { threshold: 0.3 });
         storyObs.observe(document.getElementById('storyContainer'));
 
-        /* ===== SCROLL REVEAL ===== */
         var revealObs = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry, i) {
                 if (entry.isIntersecting) {
