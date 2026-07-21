@@ -48,7 +48,7 @@
             background-size: 128px 128px;
         }
 
-        a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close { cursor: pointer; }
+        a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag { cursor: pointer; }
 
         @media (hover: hover) and (pointer: fine) {
             body { cursor: none; }
@@ -139,7 +139,7 @@
         .opera:hover { border-radius: 14px; }
         .opera:hover img { transform: scale(1.05); opacity: 1; filter: saturate(1) contrast(1); }
         
-        /* FIX FONDAMENTALE: Fa sì che il clic non venga bloccato dagli elementi sovrapposti */
+        /* Fa sì che il clic non venga bloccato dagli elementi sovrapposti nella griglia */
         .opera .shade, .opera .opera-number { pointer-events: none; }
 
         @media (hover: none) and (pointer: coarse) { .opera img { opacity: 0.88; filter: saturate(0.92) contrast(0.98); } .opera .shade { opacity: 0.5; } .opera .opera-number { opacity: 0.7; transform: translateY(0); } }
@@ -148,32 +148,37 @@
         .opera .opera-number { position: absolute; bottom: 16px; left: 18px; font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.25); letter-spacing: 0.05em; opacity: 0; transform: translateY(6px); transition: all 0.4s ease 0.05s; }
         .opera:hover .opera-number { opacity: 1; transform: translateY(0); }
         
-        /* LIGHTBOX */
+        /* LIGHTBOX PROPORZIONATO */
         .lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(6,6,8,0.96); backdrop-filter: blur(30px); opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
         .lightbox.open { opacity: 1; pointer-events: all; }
         .lightbox::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 40%, rgba(6,6,8,0.5) 100%); pointer-events: none; z-index: 0; }
         
-        .lb-viewport { position: absolute; inset: 0; z-index: 2; overflow: auto; display: flex; padding: 16px; box-sizing: border-box; -webkit-overflow-scrolling: touch; }
+        .lb-viewport { position: absolute; inset: 0; z-index: 2; overflow: auto; display: flex; align-items: center; justify-content: center; padding: 60px 16px 16px 16px; box-sizing: border-box; -webkit-overflow-scrolling: touch; }
         
-        .lightbox .lb-img { margin: auto; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 14px; transform: scale(0.92); opacity: 0; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease; user-select: none; -webkit-user-drag: none; position: relative; }
-        .lightbox.open .lb-img { transform: scale(1); opacity: 1; }
-        
-        /* FORZATURA ASSOLUTA DIMENSIONE ORIGINALE */
-        .lightbox.zoomed .lb-img {
-            max-width: none !important;
-            max-height: none !important;
-            width: auto !important;
-            height: auto !important;
-            object-fit: initial !important;
+        /* Questo fa in modo che si adatti sempre allo schermo senza sformarsi */
+        .lightbox .lb-img { 
+            max-width: 100%; 
+            max-height: 100%; 
+            width: auto; 
+            height: auto; 
+            object-fit: contain; 
+            border-radius: 14px; 
+            transform: scale(0.92); 
+            opacity: 0; 
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease; 
+            user-select: none; 
+            -webkit-user-drag: none; 
         }
+        .lightbox.open .lb-img { transform: scale(1); opacity: 1; }
 
-        .lb-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.35s ease, border-color 0.35s ease; z-index: 10; }
+        /* Bottoni messi sopra tutto per sicurezza assoluta del click */
+        .lb-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; z-index: 50; }
         .lb-btn:hover { background: rgba(124,127,205,0.1); border-color: rgba(124,127,205,0.2); }
         .lb-btn.prev { left: 24px; }
         .lb-btn.next { right: 24px; }
-        .lb-close { position: absolute; top: 24px; right: 24px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.35s ease; z-index: 10; }
+        .lb-close { position: absolute; top: 24px; right: 24px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; z-index: 50; }
         .lb-close:hover { background: rgba(255,255,255,0.08); }
-        .lb-counter { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); font-family: 'Cormorant Garamond', serif; font-size: 14px; color: rgba(255,255,255,0.15); letter-spacing: 0.15em; z-index: 10; }
+        .lb-counter { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); font-family: 'Cormorant Garamond', serif; font-size: 14px; color: rgba(255,255,255,0.15); letter-spacing: 0.15em; z-index: 50; pointer-events: none; }
 
         .story-container { position: relative; width: 100%; aspect-ratio: 9/16; max-height: 80vh; border-radius: 18px; overflow: hidden; background: #000; margin: 0 auto; box-shadow: 0 0 80px rgba(124,127,205,0.04), 0 20px 60px rgba(0,0,0,0.4); }
         @media (min-width: 768px) { .story-container { max-height: 75vh; max-width: 420px; } }
@@ -219,7 +224,7 @@
             .lb-btn.prev { left: max(12px, env(safe-area-inset-left, 0px)); }
             .lb-btn.next { right: max(12px, env(safe-area-inset-right, 0px)); }
             .lb-close { width: 46px; height: 46px; top: max(16px, env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); }
-            .lb-viewport { touch-action: manipulation; }
+            .lb-viewport { touch-action: manipulation; padding-top: 70px; }
             .lb-counter { bottom: max(20px, env(safe-area-inset-bottom, 0px)); }
             .btn-main, .ig-link { padding: 13px 24px; }
             .about-text { font-size: 14.5px; line-height: 1.85; }
@@ -386,18 +391,17 @@
     </footer>
 
     <!-- LIGHTBOX -->
-    <div class="lightbox" id="lightbox" onclick="closeLB(event)">
-        <button class="lb-close" onclick="closeLB(event)">
+    <div class="lightbox" id="lightbox">
+        <button class="lb-close" id="lbClose">
             <i data-lucide="x" class="w-4 h-4 text-white" style="opacity: 0.5;"></i>
         </button>
-        <button class="lb-btn prev" onclick="navLB(-1, event)">
+        <button class="lb-btn prev" id="lbPrev">
             <i data-lucide="chevron-left" class="w-4 h-4 text-white" style="opacity: 0.4;"></i>
         </button>
-        <!-- Aggiunto stopPropagation per evitare che il click sull'immagine chiuda la finestra -->
-        <div class="lb-viewport" id="lb-viewport" onclick="event.stopPropagation()">
+        <div class="lb-viewport" id="lb-viewport">
             <img class="lb-img" id="lb-img" src="" alt="" draggable="false">
         </div>
-        <button class="lb-btn next" onclick="navLB(1, event)">
+        <button class="lb-btn next" id="lbNext">
             <i data-lucide="chevron-right" class="w-4 h-4 text-white" style="opacity: 0.4;"></i>
         </button>
         <span class="lb-counter" id="lbCounter">I / IV</span>
@@ -465,7 +469,7 @@
             animateCursor();
         }
 
-        /* ===== LIGHTBOX SEMPLIFICATO E INFALLIBILE ===== */
+        /* ===== LIGHTBOX PERFETTO ===== */
         var works = [
             'https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3',
             'https://z-cdn-media.chatglm.cn/files/4e85852a-7307-452c-9214-d36dc492b748.jpg?auth_key=1883672854-8363dad8d7db46309960fdc5c0745a29-0-cc95aac67840f4199485dd67ec41a4af',
@@ -474,66 +478,71 @@
         ];
         var roman = ['I', 'II', 'III', 'IV'];
         var cur = 0;
+        var lb = document.getElementById('lightbox');
+        var lbImg = document.getElementById('lb-img');
+        var vp = document.getElementById('lb-viewport');
 
         function openLB(i) {
             cur = i;
-            var lb = document.getElementById('lightbox');
-            var img = document.getElementById('lb-img');
-            var vp = document.getElementById('lb-viewport');
-            
-            // Imposta la nuova immagine
-            img.src = works[cur];
+            lbImg.src = works[cur];
             document.getElementById('lbCounter').textContent = roman[cur] + ' / IV';
-            
-            // Resetta lo scroll della finestra
             vp.scrollTop = 0;
             vp.scrollLeft = 0;
-            
-            // Apre la finestra forzando la dimensione originale
-            lb.classList.add('open', 'zoomed');
-            
-            // Blocca lo scroll della pagina di fondo
+            lb.classList.add('open');
             document.body.style.overflow = 'hidden';
         }
 
-        function closeLB(e) {
-            // Ferma la propagazione se cliccato su un bottone interno
-            if (e.target.closest('.lb-btn') || e.target.closest('.lb-close')) {
-                e.stopPropagation();
-            }
-            
-            // Chiudi solo se si clicca sullo sfondo scuro
-            if (e.target.id === 'lightbox') {
-                var lb = document.getElementById('lightbox');
-                lb.classList.remove('open', 'zoomed');
-                document.body.style.overflow = '';
-            }
+        function closeLB() {
+            lb.classList.remove('open');
+            document.body.style.overflow = '';
         }
 
-        function navLB(dir, e) {
-            e.stopPropagation();
+        function navLB(dir) {
             cur = (cur + dir + works.length) % works.length;
-            
-            var img = document.getElementById('lb-img');
-            var vp = document.getElementById('lb-viewport');
-            
-            img.src = works[cur];
+            lbImg.src = works[cur];
             document.getElementById('lbCounter').textContent = roman[cur] + ' / IV';
-            
-            // Resetta lo scroll quando cambiamo foto
             vp.scrollTop = 0;
             vp.scrollLeft = 0;
         }
 
-        // Chiusura con tasto Esc
-        document.addEventListener('keydown', function(e) {
-            if (!document.getElementById('lightbox').classList.contains('open')) return;
-            if (e.key === 'Escape') {
-                document.getElementById('lightbox').classList.remove('open', 'zoomed');
-                document.body.style.overflow = '';
+        // GESTIONE CLICK INFALLIBILE:
+        // Ascoltiamo TUTTI i click sulla finestra e decidiamo cosa fare in base a cosa è stato cliccato
+        lb.addEventListener('click', function(e) {
+            if (!lb.classList.contains('open')) return;
+
+            // 1. Se è stato cliccato il bottone X (o un suo figlio, come l'icona)
+            if (e.target.closest('#lbClose')) {
+                closeLB();
+                return;
             }
-            if (e.key === 'ArrowLeft') navLB(-1, e);
-            if (e.key === 'ArrowRight') navLB(1, e);
+
+            // 2. Se è stata cliccata una freccia
+            if (e.target.closest('#lbPrev')) {
+                navLB(-1);
+                return;
+            }
+            if (e.target.closest('#lbNext')) {
+                navLB(1);
+                return;
+            }
+
+            // 3. Se è stata cliccata l'immagine (utile su mobile per non far chiudere per errore)
+            if (e.target === lbImg) {
+                return; 
+            }
+
+            // 4. Se è stato cliccato lo sfondo vuoto (il viewport o la finestra stessa) -> Chiudi
+            if (e.target.closest('.lb-viewport') || e.target === lb) {
+                closeLB();
+            }
+        });
+
+        // Chiusura con tastiera
+        document.addEventListener('keydown', function(e) {
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLB();
+            if (e.key === 'ArrowLeft') navLB(-1);
+            if (e.key === 'ArrowRight') navLB(1);
         });
 
 
