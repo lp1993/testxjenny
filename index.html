@@ -133,29 +133,48 @@
         .gallery-grid .opera { aspect-ratio: 1; }
         .gallery-grid .opera.tall { grid-row: span 2; aspect-ratio: auto; }
         @media (max-width: 768px) { .gallery-grid .opera.tall { grid-row: span 1; aspect-ratio: 1; } }
+        
         .opera { position: relative; overflow: hidden; border-radius: 10px; cursor: pointer; background: var(--card); transition: border-radius 0.5s ease; }
         .opera img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0.7; filter: saturate(0.8) contrast(0.95); }
         .opera:hover { border-radius: 14px; }
         .opera:hover img { transform: scale(1.05); opacity: 1; filter: saturate(1) contrast(1); }
+        
+        /* FIX FONDAMENTALE: Fa sì che il clic non venga bloccato dagli elementi sovrapposti */
+        .opera .shade, .opera .opera-number { pointer-events: none; }
+
         @media (hover: none) and (pointer: coarse) { .opera img { opacity: 0.88; filter: saturate(0.92) contrast(0.98); } .opera .shade { opacity: 0.5; } .opera .opera-number { opacity: 0.7; transform: translateY(0); } }
         .opera .shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(9,9,11,0.7) 0%, transparent 50%); opacity: 0; transition: opacity 0.6s ease; }
         .opera:hover .shade { opacity: 1; }
         .opera .opera-number { position: absolute; bottom: 16px; left: 18px; font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.25); letter-spacing: 0.05em; opacity: 0; transform: translateY(6px); transition: all 0.4s ease 0.05s; }
         .opera:hover .opera-number { opacity: 1; transform: translateY(0); }
+        
+        /* LIGHTBOX */
         .lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(6,6,8,0.96); backdrop-filter: blur(30px); opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
         .lightbox.open { opacity: 1; pointer-events: all; }
         .lightbox::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 40%, rgba(6,6,8,0.5) 100%); pointer-events: none; z-index: 0; }
+        
         .lb-viewport { position: absolute; inset: 0; z-index: 2; overflow: auto; display: flex; padding: 16px; box-sizing: border-box; -webkit-overflow-scrolling: touch; }
+        
         .lightbox .lb-img { margin: auto; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 14px; transform: scale(0.92); opacity: 0; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease; user-select: none; -webkit-user-drag: none; position: relative; }
         .lightbox.open .lb-img { transform: scale(1); opacity: 1; }
-        .lightbox.zoomed .lb-img { max-width: none; max-height: none; object-fit: initial; }
-        .lb-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.35s ease, border-color 0.35s ease; z-index: 2; }
+        
+        /* FORZATURA ASSOLUTA DIMENSIONE ORIGINALE */
+        .lightbox.zoomed .lb-img {
+            max-width: none !important;
+            max-height: none !important;
+            width: auto !important;
+            height: auto !important;
+            object-fit: initial !important;
+        }
+
+        .lb-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.35s ease, border-color 0.35s ease; z-index: 10; }
         .lb-btn:hover { background: rgba(124,127,205,0.1); border-color: rgba(124,127,205,0.2); }
         .lb-btn.prev { left: 24px; }
         .lb-btn.next { right: 24px; }
-        .lb-close { position: absolute; top: 24px; right: 24px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.35s ease; z-index: 2; }
+        .lb-close { position: absolute; top: 24px; right: 24px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.35s ease; z-index: 10; }
         .lb-close:hover { background: rgba(255,255,255,0.08); }
-        .lb-counter { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); font-family: 'Cormorant Garamond', serif; font-size: 14px; color: rgba(255,255,255,0.15); letter-spacing: 0.15em; z-index: 2; }
+        .lb-counter { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); font-family: 'Cormorant Garamond', serif; font-size: 14px; color: rgba(255,255,255,0.15); letter-spacing: 0.15em; z-index: 10; }
+
         .story-container { position: relative; width: 100%; aspect-ratio: 9/16; max-height: 80vh; border-radius: 18px; overflow: hidden; background: #000; margin: 0 auto; box-shadow: 0 0 80px rgba(124,127,205,0.04), 0 20px 60px rgba(0,0,0,0.4); }
         @media (min-width: 768px) { .story-container { max-height: 75vh; max-width: 420px; } }
         @media (max-width: 767px) { .story-container { max-width: 340px; margin-left: auto; margin-right: auto; } }
@@ -366,6 +385,7 @@
         </div>
     </footer>
 
+    <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox" onclick="closeLB(event)">
         <button class="lb-close" onclick="closeLB(event)">
             <i data-lucide="x" class="w-4 h-4 text-white" style="opacity: 0.5;"></i>
@@ -373,7 +393,8 @@
         <button class="lb-btn prev" onclick="navLB(-1, event)">
             <i data-lucide="chevron-left" class="w-4 h-4 text-white" style="opacity: 0.4;"></i>
         </button>
-        <div class="lb-viewport" onclick="handleViewportClick(event)">
+        <!-- Aggiunto stopPropagation per evitare che il click sull'immagine chiuda la finestra -->
+        <div class="lb-viewport" id="lb-viewport" onclick="event.stopPropagation()">
             <img class="lb-img" id="lb-img" src="" alt="" draggable="false">
         </div>
         <button class="lb-btn next" onclick="navLB(1, event)">
@@ -425,8 +446,7 @@
 
             function animateCursor() {
                 var dx = mouseX - prevMouseX;
-                var dy = mouseY - prevMouseY;
-                var speed = Math.sqrt(dx * dx + dy * dy);
+                var speed = Math.sqrt(dx * dx + (mouseY - prevMouseY) * (mouseY - prevMouseY));
                 moonRotation += (dx * 1.2 - moonRotation) * 0.06;
                 prevMouseX += (mouseX - prevMouseX) * 0.05;
                 prevMouseY += (mouseY - prevMouseY) * 0.05;
@@ -445,76 +465,67 @@
             animateCursor();
         }
 
-        /* ===== LIGHTBOX ===== */
+        /* ===== LIGHTBOX SEMPLIFICATO E INFALLIBILE ===== */
         var works = [
             'https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3',
             'https://z-cdn-media.chatglm.cn/files/4e85852a-7307-452c-9214-d36dc492b748.jpg?auth_key=1883672854-8363dad8d7db46309960fdc5c0745a29-0-cc95aac67840f4199485dd67ec41a4af',
             'https://z-cdn-media.chatglm.cn/files/45395629-2311-424f-9292-2b4f751c933c.jpg?auth_key=1883672854-99a74c94bb4c47af833c58615cb7cb6d-0-b05a61ccaa56c24c87c836e7538e3765',
             'https://z-cdn-media.chatglm.cn/files/e46e38ce-4d21-4cad-9510-21d00d750cb8.jpg?auth_key=1883672854-89e4f36fdde445dfbbdde44a82f57625-0-4bb6c6d0c9b4d29bdadfb46f33ff7585'
         ];
-        var roman = ['I', 'II', 'III', 'IV'], cur = 0;
-        var lbOpenedAt = 0;
-        var lbLightbox, lbImg;
+        var roman = ['I', 'II', 'III', 'IV'];
+        var cur = 0;
 
         function openLB(i) {
             cur = i;
-            lbLightbox = document.getElementById('lightbox');
-            lbImg = document.getElementById('lb-img');
+            var lb = document.getElementById('lightbox');
+            var img = document.getElementById('lb-img');
+            var vp = document.getElementById('lb-viewport');
             
-            // 1. Aggiorna immagine e contatore
-            document.getElementById('lb-img').src = works[cur];
-            document.getElementById('lb-counter').textContent = roman[cur] + ' / IV';
+            // Imposta la nuova immagine
+            img.src = works[cur];
+            document.getElementById('lbCounter').textContent = roman[cur] + ' / IV';
             
-            // 2. Azzera lo scroll per sicurezza
-            var vp = lbImg.parentElement;
-            vp.scrollLeft = 0;
+            // Resetta lo scroll della finestra
             vp.scrollTop = 0;
+            vp.scrollLeft = 0;
             
-            // 3. Apri la finestra E forza la classe "zoomed" (dimensione originale)
-            lbLightbox.classList.add('open', 'zoomed');
+            // Apre la finestra forzando la dimensione originale
+            lb.classList.add('open', 'zoomed');
             
+            // Blocca lo scroll della pagina di fondo
             document.body.style.overflow = 'hidden';
-            lbOpenedAt = Date.now();
         }
 
         function closeLB(e) {
-            if (Date.now() - lbOpenedAt < 350) return;
-            var isCloseBtn = e.currentTarget && e.currentTarget.classList.contains('lb-close');
-            if (e.target.id === 'lightbox' || isCloseBtn) {
-                lbLightbox.classList.remove('open', 'zoomed');
+            // Ferma la propagazione se cliccato su un bottone interno
+            if (e.target.closest('.lb-btn') || e.target.closest('.lb-close')) {
+                e.stopPropagation();
+            }
+            
+            // Chiudi solo se si clicca sullo sfondo scuro
+            if (e.target.id === 'lightbox') {
+                var lb = document.getElementById('lightbox');
+                lb.classList.remove('open', 'zoomed');
                 document.body.style.overflow = '';
             }
         }
 
-        // Gestione click dentro l'area dell'immagine
-        function handleViewportClick(e) {
-            if (Date.now() - lbOpenedAt < 350) return;
-            e.stopPropagation();
-            
-            // Se clicca sull'immagine non fare nulla (permette di trascinarla/scrollarla)
-            if (e.target === lbImg) {
-                return;
-            }
-            
-            // Se clicca sullo sfondo vuoto attorno all'immagine, chiudi il lightbox
-            lbLightbox.classList.remove('open', 'zoomed');
-            document.body.style.overflow = '';
-        }
-
         function navLB(dir, e) {
-            if (e && e.stopPropagation) e.stopPropagation();
+            e.stopPropagation();
             cur = (cur + dir + works.length) % works.length;
             
-            // Aggiorna l'immagine mantenendo la modalità "zoomed" (dimensione originale)
-            document.getElementById('lb-img').src = works[cur];
-            document.getElementById('lb-counter').textContent = roman[cur] + ' / IV';
+            var img = document.getElementById('lb-img');
+            var vp = document.getElementById('lb-viewport');
             
-            // Azzera lo scroll quando si cambia opera
-            var vp = document.getElementById('lb-img').parentElement;
-            vp.scrollLeft = 0;
+            img.src = works[cur];
+            document.getElementById('lbCounter').textContent = roman[cur] + ' / IV';
+            
+            // Resetta lo scroll quando cambiamo foto
             vp.scrollTop = 0;
+            vp.scrollLeft = 0;
         }
 
+        // Chiusura con tasto Esc
         document.addEventListener('keydown', function(e) {
             if (!document.getElementById('lightbox').classList.contains('open')) return;
             if (e.key === 'Escape') {
@@ -525,27 +536,6 @@
             if (e.key === 'ArrowRight') navLB(1, e);
         });
 
-        (function() {
-            var lb = document.getElementById('lightbox');
-            var startX = 0, startY = 0, tracking = false;
-            lb.addEventListener('touchstart', function(e) {
-                if (!lb.classList.contains('open')) return;
-                startX = e.changedTouches[0].clientX;
-                startY = e.changedTouches[0].clientY;
-                tracking = true;
-            }, { passive: true });
-            lb.addEventListener('touchend', function(e) {
-                if (!tracking) return;
-                tracking = false;
-                var dx = e.changedTouches[0].clientX - startX;
-                var dy = e.changedTouches[0].clientY - startY;
-                // Essendo sempre in "zoomed", disabilitiamo lo swipe per non conflittuare
-                // con lo scorrimento dell'immagine. Si usano le frecce per cambiare opera.
-                if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-                    // navLB(dx > 0 ? -1 : 1); // Disabilitato intenzionalmente
-                }
-            }, { passive: true });
-        })();
 
         /* ===== STORYTELLING ===== */
         var slides = document.querySelectorAll('.story-slide');
