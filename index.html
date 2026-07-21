@@ -139,7 +139,6 @@
         .opera:hover { border-radius: 14px; }
         .opera:hover img { transform: scale(1.05); opacity: 1; filter: saturate(1) contrast(1); }
         
-        /* Fa sì che il clic non venga bloccato dagli elementi sovrapposti nella griglia */
         .opera .shade, .opera .opera-number { pointer-events: none; }
 
         @media (hover: none) and (pointer: coarse) { .opera img { opacity: 0.88; filter: saturate(0.92) contrast(0.98); } .opera .shade { opacity: 0.5; } .opera .opera-number { opacity: 0.7; transform: translateY(0); } }
@@ -148,14 +147,12 @@
         .opera .opera-number { position: absolute; bottom: 16px; left: 18px; font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.25); letter-spacing: 0.05em; opacity: 0; transform: translateY(6px); transition: all 0.4s ease 0.05s; }
         .opera:hover .opera-number { opacity: 1; transform: translateY(0); }
         
-        /* LIGHTBOX PROPORZIONATO */
         .lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(6,6,8,0.96); backdrop-filter: blur(30px); opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
         .lightbox.open { opacity: 1; pointer-events: all; }
         .lightbox::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 40%, rgba(6,6,8,0.5) 100%); pointer-events: none; z-index: 0; }
         
         .lb-viewport { position: absolute; inset: 0; z-index: 2; overflow: auto; display: flex; align-items: center; justify-content: center; padding: 60px 16px 16px 16px; box-sizing: border-box; -webkit-overflow-scrolling: touch; }
         
-        /* Questo fa in modo che si adatti sempre allo schermo senza sformarsi */
         .lightbox .lb-img { 
             max-width: 100%; 
             max-height: 100%; 
@@ -171,7 +168,6 @@
         }
         .lightbox.open .lb-img { transform: scale(1); opacity: 1; }
 
-        /* Bottoni messi sopra tutto per sicurezza assoluta del click */
         .lb-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; z-index: 50; }
         .lb-btn:hover { background: rgba(124,127,205,0.1); border-color: rgba(124,127,205,0.2); }
         .lb-btn.prev { left: 24px; }
@@ -360,9 +356,11 @@
             <div class="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-20 items-start">
                 <div class="md:col-span-2 reveal">
                     <div class="logo-bg">
-                        <img src="https://z-cdn-media.chatglm.cn/files/a634dd74-7b13-4193-8c3d-796f654a2f42.jpg?auth_key=1883579526-3f24e647d1f9449fb81ff96ff6" alt="I'm Not Human Logo">
+                        <!-- QUI C'È IL NUOVO LOGO -->
+                        <img src="https://z-cdn-media.chatglm.cn/files/d6d25a91-8f3e-4c66-86de-897b72860e9c.png?auth_key=1884644266-04b254492077405d9f0308105ffeafa3-0-bc0eaeaf4c20a1360cf2c8a4f5190c00" alt="I'm Not Human Logo">
                     </div>
                 </div>
+
                 <div class="md:col-span-3 reveal">
                     <p class="section-eyebrow">About</p>
                     <h2 class="section-title mb-8">Chi sono</h2>
@@ -469,7 +467,7 @@
             animateCursor();
         }
 
-        /* ===== LIGHTBOX PERFETTO ===== */
+        /* ===== LIGHTBOX ===== */
         var works = [
             'https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3',
             'https://z-cdn-media.chatglm.cn/files/4e85852a-7307-452c-9214-d36dc492b748.jpg?auth_key=1883672854-8363dad8d7db46309960fdc5c0745a29-0-cc95aac67840f4199485dd67ec41a4af',
@@ -505,46 +503,21 @@
             vp.scrollLeft = 0;
         }
 
-        // GESTIONE CLICK INFALLIBILE:
-        // Ascoltiamo TUTTI i click sulla finestra e decidiamo cosa fare in base a cosa è stato cliccato
         lb.addEventListener('click', function(e) {
             if (!lb.classList.contains('open')) return;
-
-            // 1. Se è stato cliccato il bottone X (o un suo figlio, come l'icona)
-            if (e.target.closest('#lbClose')) {
-                closeLB();
-                return;
-            }
-
-            // 2. Se è stata cliccata una freccia
-            if (e.target.closest('#lbPrev')) {
-                navLB(-1);
-                return;
-            }
-            if (e.target.closest('#lbNext')) {
-                navLB(1);
-                return;
-            }
-
-            // 3. Se è stata cliccata l'immagine (utile su mobile per non far chiudere per errore)
-            if (e.target === lbImg) {
-                return; 
-            }
-
-            // 4. Se è stato cliccato lo sfondo vuoto (il viewport o la finestra stessa) -> Chiudi
-            if (e.target.closest('.lb-viewport') || e.target === lb) {
-                closeLB();
-            }
+            if (e.target.closest('#lbClose')) { closeLB(); return; }
+            if (e.target.closest('#lbPrev')) { navLB(-1); return; }
+            if (e.target.closest('#lbNext')) { navLB(1); return; }
+            if (e.target === lbImg) { return; }
+            if (e.target.closest('.lb-viewport') || e.target === lb) { closeLB(); }
         });
 
-        // Chiusura con tastiera
         document.addEventListener('keydown', function(e) {
             if (!lb.classList.contains('open')) return;
             if (e.key === 'Escape') closeLB();
             if (e.key === 'ArrowLeft') navLB(-1);
             if (e.key === 'ArrowRight') navLB(1);
         });
-
 
         /* ===== STORYTELLING ===== */
         var slides = document.querySelectorAll('.story-slide');
