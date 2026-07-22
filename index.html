@@ -122,7 +122,7 @@
         .btn-main:hover { background: linear-gradient(135deg, #5c5fb3, #6b6eb8); box-shadow: 0 0 40px rgba(124,127,205,0.12), 0 4px 20px rgba(124,127,205,0.08); transform: translateY(-1px); }
         .ig-link { background: linear-gradient(135deg, #6b6eb8, var(--indigo)); color: #fff; padding: 14px 26px; border-radius: 100px; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
         .ig-link:hover { background: linear-gradient(135deg, #5c5fb3, #6b6eb8); box-shadow: 0 0 40px rgba(124,127,205,0.12), 0 4px 20px rgba(124,127,205,0.08); transform: translateY(-1px); }
-        .btn-icon { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #6b6eb8, var(--indigo)); color: #fff; transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease; text-decoration: none; }
+        .btn-icon { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #6b6eb8, var(--indigo)); color: #fff; transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease; text-decoration: none; border: none; }
         .btn-icon:hover { background: linear-gradient(135deg, #5c5fb3, #6b6eb8); box-shadow: 0 0 30px rgba(124,127,205,0.12); transform: scale(1.06); }
         .skill-tag { display: inline-block; padding: 7px 16px; border-radius: 100px; border: 1px solid var(--border); color: var(--indigo-soft); font-size: 12px; font-weight: 400; letter-spacing: 0.04em; transition: border-color 0.3s ease, background 0.3s ease; }
         .skill-tag:hover { border-color: var(--border-hover); background: var(--indigo-dim); }
@@ -153,19 +153,7 @@
         
         .lb-viewport { position: absolute; inset: 0; z-index: 2; overflow: auto; display: flex; align-items: center; justify-content: center; padding: 60px 16px 16px 16px; box-sizing: border-box; -webkit-overflow-scrolling: touch; }
         
-        .lightbox .lb-img { 
-            max-width: 100%; 
-            max-height: 100%; 
-            width: auto; 
-            height: auto; 
-            object-fit: contain; 
-            border-radius: 14px; 
-            transform: scale(0.92); 
-            opacity: 0; 
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease; 
-            user-select: none; 
-            -webkit-user-drag: none; 
-        }
+        .lightbox .lb-img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 14px; transform: scale(0.92); opacity: 0; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease; user-select: none; -webkit-user-drag: none; }
         .lightbox.open .lb-img { transform: scale(1); opacity: 1; }
 
         .lb-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; z-index: 50; }
@@ -232,9 +220,7 @@
 </head>
 <body class="grid-bg">
 
-    <!-- ELEMENTO AUDIO -->
     <audio id="bgMusic" loop preload="auto">
-        <!-- SOSTITUISCI IL LINK QUI SOTTO CON IL TUO FILE MP3 -->
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
@@ -257,15 +243,16 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
                 <div class="reveal">
                     <h1 class="hero-name mb-6">Jennina</h1>
-                    <p class="hero-tagline mb-10 md:mb-14">I'm Not Human</p>
+                    
+                    <div class="flex items-center gap-4 mb-10 md:mb-14">
+                        <p class="hero-tagline" style="margin-bottom: 0;">I'm Not Human</p>
+                        <button class="btn-icon" id="audioToggle" aria-label="Play Music">
+                            <i data-lucide="play" class="w-4 h-4" id="playIcon"></i>
+                            <i data-lucide="pause" class="w-4 h-4" id="pauseIcon" style="display: none;"></i>
+                        </button>
+                    </div>
 
                     <div class="flex flex-wrap items-center gap-4 mb-10">
-                        <!-- PULSANTE PLAY/PAUSA MUSICa -->
-                        <button class="btn-icon" id="audioToggle" aria-label="Play Music">
-                            <i data-lucide="play" class="w-5 h-5" id="playIcon"></i>
-                            <i data-lucide="pause" class="w-5 h-5" id="pauseIcon" style="display: none;"></i>
-                        </button>
-
                         <a href="#opere" class="btn-main">Vedi le opere</a>
                         <a href="https://www.instagram.com/iamjennina/" target="_blank" class="ig-link">
                             <i data-lucide="instagram" class="w-4 h-4"></i>
@@ -302,9 +289,10 @@
         <div class="glow-soft" style="top: 25%; left: -100px;"></div>
         <div class="glow-warm" style="top: 55%; right: -120px;"></div>
         <div class="max-w-5xl mx-auto px-6">
-            <div class="reveal mb-12 md:mb-16">
-                <p class="section-eyebrow">Selezione</p>
-                <h2 class="section-title">Opere recenti</h2>
+            <!-- TITOLO CENTRATO COME STORYTELLING -->
+            <div class="reveal mb-12 md:mb-16 text-center">
+                <p class="section-eyebrow justify-center" style="margin-bottom: 20px;">Selezione</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-light tracking-tight" style="background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 40%, var(--indigo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Opere recenti</h2>
             </div>
             <div class="gallery-grid" id="gallery">
                 <div class="opera tall reveal" onclick="openLB(0)">
@@ -362,6 +350,17 @@
         </div>
     </section>
 
+    <!-- NUOVA SEZIONE STICKERS -->
+    <div class="divider"></div>
+    <section id="stickers" class="py-16 md:py-28 lg:py-36 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="reveal mb-12 md:mb-16 text-center">
+                <p class="section-eyebrow justify-center" style="margin-bottom: 20px;">Progetti</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-light tracking-tight" style="background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 40%, var(--indigo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Stickers</h2>
+            </div>
+        </div>
+    </section>
+
     <div class="divider"></div>
     <section id="about" class="py-16 md:py-28 lg:py-36 relative overflow-hidden">
         <div class="glow-soft" style="bottom: 5%; right: -60px;"></div>
@@ -375,8 +374,12 @@
                 </div>
 
                 <div class="md:col-span-3 reveal">
-                    <p class="section-eyebrow">About</p>
-                    <h2 class="section-title mb-8">Chi sono</h2>
+                    <!-- TITOLO CENTRATO COME STORYTELLING -->
+                    <div class="text-center mb-8">
+                        <p class="section-eyebrow justify-center" style="margin-bottom: 20px;">About</p>
+                        <h2 class="font-serif text-4xl md:text-5xl font-light tracking-tight" style="background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 40%, var(--indigo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Chi sono</h2>
+                    </div>
+
                     <div class="about-text">
                         <p>Mi chiamo Jennina e vivo e lavoro in Italia. La mia ricerca nasce dall'osservazione dei cicli della natura — soprattutto l'autunno, che vedo come momento di espansione, non di perdita.</p>
                         <p>Lavoro con olio, acrilico, pigmenti naturali e materiali di recupero. Le mie opere attraversano il blu, il viola, il marrone della terra: i colori di chi si lascia trasformare.</p>
@@ -401,7 +404,6 @@
         </div>
     </footer>
 
-    <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox">
         <button class="lb-close" id="lbClose">
             <i data-lucide="x" class="w-4 h-4 text-white" style="opacity: 0.5;"></i>
@@ -480,17 +482,17 @@
             animateCursor();
         }
 
-        /* ===== MUSIC PLAYER (INSERITO NELL'HERO) ===== */
+        /* ===== MUSIC PLAYER ===== */
         var audio = document.getElementById('bgMusic');
         var audioToggle = document.getElementById('audioToggle');
         var playIcon = document.getElementById('playIcon');
         var pauseIcon = document.getElementById('pauseIcon');
         var isPlaying = false;
 
-        // Volume al 20%
         audio.volume = 0.2; 
 
-        audioToggle.addEventListener('click', function() {
+        audioToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
             if (isPlaying) {
                 audio.pause();
                 isPlaying = false;
