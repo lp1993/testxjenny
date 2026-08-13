@@ -132,11 +132,12 @@
         
         .hero-name { 
             font-family: 'Cormorant Garamond', serif; 
-            font-size: clamp(3.5rem, 10vw, 8.5rem); /* Modificato per adattarsi a "I'm Not Human" */
-            font-weight: 300; 
+            font-size: clamp(3.5rem, 10vw, 8.5rem); 
+            font-weight: 400; /* Aumentato per migliore leggibilità su mobile */
             letter-spacing: -0.01em; 
-            line-height: 1.1; /* Modificato per evitare sovrapposizioni su più righe */
-            background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 35%, var(--indigo-pale) 65%, var(--indigo) 100%); 
+            line-height: 1.1; 
+            /* Gradiente reso più luminoso per evitare l'effetto sfumato/invisibile su schermi piccoli */
+            background: linear-gradient(160deg, #ffffff 0%, #e0e2f2 40%, #c4c6e2 80%, #b0b3d6 100%); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
             background-clip: text; 
@@ -152,12 +153,19 @@
         .hero-img-wrap img { width: 100%; height: 100%; max-height: 680px; object-fit: contain; border-radius: 12px; }
         .frame { position: relative; }
         .frame::before { content: ""; position: absolute; inset: 0; border-radius: 20px; padding: 1px; background: linear-gradient(160deg, rgba(124,127,205,0.2), transparent 35%, transparent 65%, rgba(180,83,9,0.08)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+        
         .btn-main { background: linear-gradient(135deg, #6b6eb8, var(--indigo)); color: #fff; padding: 14px 30px; border-radius: 100px; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease; text-decoration: none; display: inline-block; }
         .btn-main:hover { background: linear-gradient(135deg, #5c5fb3, #6b6eb8); box-shadow: 0 0 40px rgba(124,127,205,0.12), 0 4px 20px rgba(124,127,205,0.08); transform: translateY(-1px); }
         .ig-link { background: linear-gradient(135deg, #6b6eb8, var(--indigo)); color: #fff; padding: 14px 26px; border-radius: 100px; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
         .ig-link:hover { background: linear-gradient(135deg, #5c5fb3, #6b6eb8); box-shadow: 0 0 40px rgba(124,127,205,0.12), 0 4px 20px rgba(124,127,205,0.08); transform: translateY(-1px); }
+        
         .btn-icon { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #6b6eb8, var(--indigo)); color: #fff; transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease; text-decoration: none; border: none; }
         .btn-icon:hover { background: linear-gradient(135deg, #5c5fb3, #6b6eb8); box-shadow: 0 0 30px rgba(124,127,205,0.12); transform: scale(1.06); }
+        
+        /* Pulsante Audio Più Scuro */
+        .btn-audio { background: linear-gradient(135deg, #5557a0, #6365b0); }
+        .btn-audio:hover { background: linear-gradient(135deg, #4c4e96, #5a5ca6); box-shadow: 0 0 30px rgba(99,101,176,0.12); transform: scale(1.06); }
+
         .skill-tag { display: inline-block; padding: 7px 16px; border-radius: 100px; border: 1px solid var(--border); color: var(--indigo-soft); font-size: 12px; font-weight: 400; letter-spacing: 0.04em; transition: border-color 0.3s ease, background 0.3s ease; }
         .skill-tag:hover { border-color: var(--border-hover); background: var(--indigo-dim); }
         .section-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
@@ -182,8 +190,8 @@
         .opera:hover .opera-number { opacity: 1; transform: translateY(0); }
         
         .lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(6,6,8,0.96); backdrop-filter: blur(30px); opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
-        .lightbox.open { opacity: 1; pointer-events: all; }
-        .lightbox::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 40%, rgba(6,6,8,0.5) 100%); pointer-events: none; z-index: 0; }
+        .lightboxGlightbox.open { opacity: 1; pointer-events: all; }
+        .lightbox::before { content: ''; position: absolute; inset2 inset: 0; background: radial-gradient(ellipse at center, transparent 40%, rgba(6,6,8,0.5) 100%); pointer-events: none; z-index: 0; }
         
         .lb-viewport { position: absolute; inset: 0; z-index: 2; overflow: auto; display: flex; align-items: center; justify-content: center; padding: 60px 16px 16px 16px; box-sizing: border-box; -webkit-overflow-scrolling: touch; }
         
@@ -286,14 +294,12 @@
                     <!-- Titolo Principale: I'm Not Human (Non traducibile) -->
                     <h1 class="hero-name mb-6">I'm Not Human</h1>
                     
-                    <div class="flex items-center gap-4 mb-10 md:mb-14">
-                        <button class="btn-icon" id="audioToggle" aria-label="Play Music">
+                    <!-- Pulsanti in fila: Play -> View Works -> Instagram -->
+                    <div class="flex flex-wrap items-center gap-4 mb-10">
+                        <button class="btn-icon btn-audio" id="audioToggle" aria-label="Play Music">
                             <i data-lucide="play" class="w-4 h-4" id="playIcon"></i>
                             <i data-lucide="pause" class="w-4 h-4" id="pauseIcon" style="display: none;"></i>
                         </button>
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-4 mb-10">
                         <a href="#opere" class="btn-main" data-lang-en="View works" data-lang-it="Vedi le opere">View works</a>
                         <a href="https://www.instagram.com/iamjennina/" target="_blank" class="ig-link">
                             <i data-lucide="instagram" class="w-4 h-4"></i>
@@ -337,7 +343,7 @@
             <div class="gallery-grid" id="gallery">
                 <div class="opera tall reveal" onclick="openLB(0)">
                     <img src="https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3" alt="Pure Souls Recognize Each Other" loading="lazy">
-                    <div class="shade"></div>
+                    <div class="shade& shade"></div>
                     <span class="opera-number">I</span>
                 </div>
                 <div class="opera reveal" onclick="openLB(1)">
@@ -427,7 +433,8 @@
 
     <footer class="py-10 relative z-10" style="padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 40px);">
         <div class="footer-row max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <p style="color: var(--text-muted); font-size: 11px; letter-spacing: 0.06em;" data-lang-en="© 2026 Jennina · I'm not human" data-lang-it="© 2026 Jennina · Non sono umana">© 2026 Jennina · I'm not human</p>
+            <!-- Testo fisso in inglese, senza attributi data-lang -->
+            <p style="color: var(--text-muted); font-size: 11px; letter-spacing: 0.06em;">© 2026 Jennina · I'm not human</p>
             <div class="flex items-center gap-5">
                 <a href="https://www.instagram.com/iamjennina/" target="_blank" style="color: var(--text-muted);" class="hover:text-[#c9a84c] transition-colors">
                     <i data-lucide="instagram" class="w-4 h-4"></i>
@@ -466,7 +473,7 @@
         function setLanguage(lang) {
             currentLang = lang;
             translatableElements.forEach(function(el) {
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                if (el.tagName === 'INPUT' || el.tagName === 'TAG') {
                     el.placeholder = el.getAttribute('data-lang-' + lang);
                 } else {
                     el.innerHTML = el.getAttribute('data-lang-' + lang);
