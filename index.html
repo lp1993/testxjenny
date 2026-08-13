@@ -132,10 +132,10 @@
         
         .hero-name { 
             font-family: 'Cormorant Garamond', serif; 
-            font-size: clamp(4rem, 15vw, 11rem); 
+            font-size: clamp(3.5rem, 10vw, 8.5rem); /* Modificato per adattarsi a "I'm Not Human" */
             font-weight: 300; 
             letter-spacing: -0.01em; 
-            line-height: 0.95; 
+            line-height: 1.1; /* Modificato per evitare sovrapposizioni su più righe */
             background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 35%, var(--indigo-pale) 65%, var(--indigo) 100%); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
@@ -145,7 +145,6 @@
             padding-right: 4px;
         }
         
-        .hero-tagline { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 3.8vw, 2.5rem); font-weight: 300; font-style: italic; letter-spacing: 0.08em; line-height: 1.2; color: var(--indigo-soft); }
         .hero-scroll-line { width: 1px; height: 64px; background: linear-gradient(to bottom, var(--indigo), transparent); animation: scrollPulse 2.5s ease-in-out infinite; }
         @keyframes scrollPulse { 0%, 100% { opacity: 0.6; transform: scaleY(1); } 50% { opacity: 0.15; transform: scaleY(0.5); } }
         .hero-img-glow { position: absolute; inset: -50px; background: rgba(124,127,205,0.05); filter: blur(80px); border-radius: 50%; pointer-events: none; }
@@ -284,10 +283,10 @@
         <div class="max-w-7xl mx-auto px-6 w-full relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
                 <div class="reveal">
-                    <h1 class="hero-name mb-6">Jennina</h1>
+                    <!-- Titolo Principale: I'm Not Human (Non traducibile) -->
+                    <h1 class="hero-name mb-6">I'm Not Human</h1>
                     
                     <div class="flex items-center gap-4 mb-10 md:mb-14">
-                        <p class="hero-tagline" style="margin-bottom: 0;" data-lang-en="I'm Not Human" data-lang-it="Non Sono Umana">I'm Not Human</p>
                         <button class="btn-icon" id="audioToggle" aria-label="Play Music">
                             <i data-lucide="play" class="w-4 h-4" id="playIcon"></i>
                             <i data-lucide="pause" class="w-4 h-4" id="pauseIcon" style="display: none;"></i>
