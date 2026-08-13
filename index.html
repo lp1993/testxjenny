@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#09090b">
-    <title>Jennina — Artista</title>
+    <title>Jennina — Artist</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -48,16 +48,53 @@
             background-size: 128px 128px;
         }
 
-        a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag { cursor: pointer; }
+        a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lang-toggle { cursor: pointer; }
 
         @media (hover: hover) and (pointer: fine) {
             body { cursor: none; }
-            *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause, .cursor-moon, .cursor-dot) { cursor: none; }
+            *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause, .cursor-moon, .cursor-dot, .lang-toggle) { cursor: none; }
         }
 
-        a, button, .opera, .story-nav, .lb-btn, .lb-close, .btn-main, .ig-link, .btn-icon, .skill-tag {
+        a, button, .opera, .story-nav, .lb-btn, .lb-close, .btn-main, .ig-link, .btn-icon, .skill-tag, .lang-toggle {
             touch-action: manipulation;
         }
+
+        /* ===== LANGUAGE SWITCH ===== */
+        .lang-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 500;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            color: var(--indigo-soft);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .lang-toggle:hover {
+            background: rgba(124,127,205,0.1);
+            border-color: rgba(124,127,205,0.2);
+            color: var(--indigo-pale);
+        }
+        @media (max-width: 767px) {
+            .lang-toggle {
+                top: max(16px, env(safe-area-inset-top, 0px));
+                right: max(16px, env(safe-area-inset-right, 0px));
+                width: 38px;
+                height: 38px;
+            }
+        }
+        /* ===== END LANGUAGE SWITCH ===== */
 
         /* ===== REALISTIC STARS ===== */
         #stars-container { 
@@ -188,6 +225,7 @@
         .logo-bg:hover { border-color: var(--border-hover); }
         .logo-bg img { max-width: 100%; max-height: 400px; width: auto; height: auto; object-fit: contain; mix-blend-mode: screen; }
         .about-text { color: var(--text-secondary); font-weight: 300; line-height: 1.9; font-size: 15px; }
+        .about-text-justify { text-align: justify; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
         .about-text p + p { margin-top: 20px; }
         footer { border-top: 1px solid var(--border); }
         .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
@@ -226,6 +264,11 @@
         <source src="Musica/musica.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- LANGUAGE SWITCH BUTTON -->
+    <button id="langSwitch" class="lang-toggle" aria-label="Switch Language">
+        <span class="lang-label">IT</span>
+    </button>
+
     <div id="stars-container" aria-hidden="true"></div>
 
     <div class="cursor-moon" id="cursorMoon">
@@ -244,7 +287,7 @@
                     <h1 class="hero-name mb-6">Jennina</h1>
                     
                     <div class="flex items-center gap-4 mb-10 md:mb-14">
-                        <p class="hero-tagline" style="margin-bottom: 0;">I'm Not Human</p>
+                        <p class="hero-tagline" style="margin-bottom: 0;" data-lang-en="I'm Not Human" data-lang-it="Non Sono Umana">I'm Not Human</p>
                         <button class="btn-icon" id="audioToggle" aria-label="Play Music">
                             <i data-lucide="play" class="w-4 h-4" id="playIcon"></i>
                             <i data-lucide="pause" class="w-4 h-4" id="pauseIcon" style="display: none;"></i>
@@ -252,7 +295,7 @@
                     </div>
 
                     <div class="flex flex-wrap items-center gap-4 mb-10">
-                        <a href="#opere" class="btn-main">Vedi le opere</a>
+                        <a href="#opere" class="btn-main" data-lang-en="View works" data-lang-it="Vedi le opere">View works</a>
                         <a href="https://www.instagram.com/iamjennina/" target="_blank" class="ig-link">
                             <i data-lucide="instagram" class="w-4 h-4"></i>
                             @iamjennina
@@ -260,18 +303,18 @@
                     </div>
 
                     <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag">Oniric Art</span>
-                        <span class="skill-tag">Storytelling</span>
-                        <span class="skill-tag">Naruto Fan Art</span>
-                        <span class="skill-tag">Stickers</span>
-                        <span class="skill-tag">Symbolism</span>
+                        <span class="skill-tag" data-lang-en="Oniric Art" data-lang-it="Arte Onirica">Oniric Art</span>
+                        <span class="skill-tag" data-lang-en="Storytelling" data-lang-it="Storytelling">Storytelling</span>
+                        <span class="skill-tag" data-lang-en="Naruto Fan Art" data-lang-it="Fan Art Naruto">Naruto Fan Art</span>
+                        <span class="skill-tag" data-lang-en="Stickers" data-lang-it="Stickers">Stickers</span>
+                        <span class="skill-tag" data-lang-en="Symbolism" data-lang-it="Simbolismo">Symbolism</span>
                     </div>
                 </div>
                 <div class="reveal relative">
                     <div class="hero-img-glow"></div>
                     <div class="frame rounded-[20px] overflow-hidden relative" style="background: var(--card); padding: 5px;">
                         <div class="hero-img-wrap">
-                            <img src="https://z-cdn-media.chatglm.cn/files/b9e3fe81-efc4-4f7c-b9ca-f3f70675c5c3.jpg?auth_key=1883319429-6fbe31f6470640959a9707b0f8253b3a-0-3dcd605a681a917f8a5f5de03f089063" alt="Oltre... risiede immensa bellezza">
+                            <img src="https://z-cdn-media.chatglm.cn/files/b9e3fe81-efc4-4f7c-b9ca-f3f70675c5c3.jpg?auth_key=1883319429-6fbe31f6470640959a9707b0f8253b3a-0-3dcd605a681a917f8a5f5de03f089063" alt="Beyond... immense beauty resides">
                         </div>
                     </div>
                 </div>
@@ -289,12 +332,12 @@
         <div class="glow-warm" style="top: 55%; right: -120px;"></div>
         <div class="max-w-5xl mx-auto px-6">
             <div class="reveal mb-12 md:mb-16 text-center">
-                <p class="section-eyebrow justify-center" style="margin-bottom: 20px;">Selezione</p>
-                <h2 class="font-serif text-4xl md:text-5xl font-light tracking-tight" style="background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 40%, var(--indigo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Opere recenti</h2>
+                <p class="section-eyebrow justify-center" style="margin-bottom: 20px;" data-lang-en="Selection" data-lang-it="Selezione">Selection</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-light tracking-tight" style="background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 40%, var(--indigo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" data-lang-en="Recent works" data-lang-it="Opere recenti">Recent works</h2>
             </div>
             <div class="gallery-grid" id="gallery">
                 <div class="opera tall reveal" onclick="openLB(0)">
-                    <img src="https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3" alt="Le Anime Pure Si Riconoscono" loading="lazy">
+                    <img src="https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3" alt="Pure Souls Recognize Each Other" loading="lazy">
                     <div class="shade"></div>
                     <span class="opera-number">I</span>
                 </div>
@@ -322,11 +365,11 @@
         <div class="glow" style="top: 40%; left: 50%; transform: translateX(-50%);"></div>
         <div class="max-w-5xl mx-auto px-6">
             <div class="reveal mb-12 md:mb-16 text-center">
-                <p class="section-eyebrow justify-center" style="margin-bottom: 20px;">Processo creativo</p>
-                <h2 class="font-serif text-4xl md:text-5xl font-light tracking-tight" style="background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 40%, var(--indigo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Storytelling</h2>
+                <p class="section-eyebrow justify-center" style="margin-bottom: 20px;" data-lang-en="Creative process" data-lang-it="Processo creativo">Creative process</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-light tracking-tight" style="background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 40%, var(--indigo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" data-lang-en="Storytelling" data-lang-it="Storytelling">Storytelling</h2>
                 <p class="text-sm mt-5 font-light" style="color: var(--text-muted);">
-                    <span class="hint-desktop">Si ferma al passaggio del mouse — clicca le frecce per navigare</span>
-                    <span class="hint-mobile">Tocca i lati per navigare · tocca al centro per la pausa</span>
+                    <span class="hint-desktop" data-lang-en="Pauses on hover — click arrows to navigate" data-lang-it="Si ferma al passaggio del mouse — clicca le frecce per navigare">Pauses on hover — click arrows to navigate</span>
+                    <span class="hint-mobile" data-lang-en="Tap sides to navigate · tap center to pause" data-lang-it="Tocca i lati per navigare · tocca al centro per la pausa">Tap sides to navigate · tap center to pause</span>
                 </p>
             </div>
             <div class="reveal flex justify-center">
@@ -352,8 +395,8 @@
     <section id="stickers" class="py-16 md:py-28 lg:py-36 relative overflow-hidden">
         <div class="max-w-5xl mx-auto px-6">
             <div class="reveal mb-12 md:mb-16 text-center">
-                <p class="section-eyebrow justify-center" style="margin-bottom: 20px;">Progetti</p>
-                <h2 class="font-serif text-4xl md:text-5xl font-light tracking-tight" style="background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 40%, var(--indigo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Stickers</h2>
+                <p class="section-eyebrow justify-center" style="margin-bottom: 20px;" data-lang-en="Projects" data-lang-it="Progetti">Projects</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-light tracking-tight" style="background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 40%, var(--indigo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" data-lang-en="Stickers" data-lang-it="Stickers">Stickers</h2>
             </div>
         </div>
     </section>
@@ -365,14 +408,14 @@
         
         <div class="max-w-3xl mx-auto px-6">
             <div class="reveal mb-12 md:mb-16 text-center">
-                <p class="section-eyebrow justify-center" style="margin-bottom: 20px;">About</p>
-                <h2 class="font-serif text-4xl md:text-5xl font-light tracking-tight" style="background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 40%, var(--indigo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Chi sono</h2>
+                <p class="section-eyebrow justify-center" style="margin-bottom: 20px;" data-lang-en="About" data-lang-it="Info">About</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-light tracking-tight" style="background: linear-gradient(160deg, #ffffff 0%, #d4d5e8 40%, var(--indigo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" data-lang-en="About me" data-lang-it="Chi sono">About me</h2>
             </div>
 
-            <div class="reveal about-text text-center mb-16 md:mb-20">
-                <p>Mi chiamo Jennina e vivo e lavoro in Italia. La mia ricerca nasce dall'osservazione dei cicli della natura — soprattutto l'autunno, che vedo come momento di espansione, non di perdita.</p>
-                <p>Lavoro con olio, acrilico, pigmenti naturali e materiali di recupero. Le mie opere attraversano il blu, il viola, il marrone della terra: i colori di chi si lascia trasformare.</p>
-                <p>Il mio lavoro vive tra la tela e il digitale. Su Instagram racconto il processo, i pensieri e le opere in progress. Non sono solo un'artista — sono un ciclo in movimento.</p>
+            <div class="reveal about-text about-text-justify mb-16 md:mb-20">
+                <p data-lang-en="My name is Jennina and I live and work in Italy. My research stems from observing the cycles of nature — especially autumn, which I see as a moment of expansion, not loss." data-lang-it="Mi chiamo Jennina e vivo e lavoro in Italia. La mia ricerca nasce dall'osservazione dei cicli della natura — soprattutto l'autunno, che vedo come momento di espansione, non di perdita.">My name is Jennina and I live and work in Italy. My research stems from observing the cycles of nature — especially autumn, which I see as a moment of expansion, not loss.</p>
+                <p data-lang-en="I work with oil, acrylic, natural pigments, and recycled materials. My works traverse blue, purple, and the brown of the earth: the colors of those who allow themselves to be transformed." data-lang-it="Lavoro con olio, acrilico, pigmenti naturali e materiali di recupero. Le mie opere attraversano il blu, il viola, il marrone della terra: i colori di chi si lascia trasformare.">I work with oil, acrylic, natural pigments, and recycled materials. My works traverse blue, purple, and the brown of the earth: the colors of those who allow themselves to be transformed.</p>
+                <p data-lang-en="My work lives between the canvas and the digital. On Instagram, I share the process, thoughts, and works in progress. I am not just an artist — I am a cycle in motion." data-lang-it="Il mio lavoro vive tra la tela e il digitale. Su Instagram racconto il processo, i pensieri e le opere in progress. Non sono solo un'artista — sono un ciclo in movimento.">My work lives between the canvas and the digital. On Instagram, I share the process, thoughts, and works in progress. I am not just an artist — I am a cycle in motion.</p>
             </div>
 
             <div class="reveal flex justify-center">
@@ -385,7 +428,7 @@
 
     <footer class="py-10 relative z-10" style="padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 40px);">
         <div class="footer-row max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <p style="color: var(--text-muted); font-size: 11px; letter-spacing: 0.06em;">© 2026 Jennina · I'm not human</p>
+            <p style="color: var(--text-muted); font-size: 11px; letter-spacing: 0.06em;" data-lang-en="© 2026 Jennina · I'm not human" data-lang-it="© 2026 Jennina · Non sono umana">© 2026 Jennina · I'm not human</p>
             <div class="flex items-center gap-5">
                 <a href="https://www.instagram.com/iamjennina/" target="_blank" style="color: var(--text-muted);" class="hover:text-[#c9a84c] transition-colors">
                     <i data-lucide="instagram" class="w-4 h-4"></i>
@@ -415,6 +458,31 @@
 
     <script>
         lucide.createIcons();
+
+        /* ===== LANGUAGE SWITCHER LOGIC ===== */
+        var currentLang = 'en';
+        var langSwitch = document.getElementById('langSwitch');
+        var translatableElements = document.querySelectorAll('[data-lang-en]');
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            translatableElements.forEach(function(el) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = el.getAttribute('data-lang-' + lang);
+                } else {
+                    el.innerHTML = el.getAttribute('data-lang-' + lang);
+                }
+            });
+            document.documentElement.lang = lang;
+            langSwitch.querySelector('.lang-label').textContent = lang === 'en' ? 'IT' : 'EN';
+            document.title = lang === 'en' ? 'Jennina — Artist' : 'Jennina — Artista';
+        }
+
+        langSwitch.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var newLang = currentLang === 'en' ? 'it' : 'en';
+            setLanguage(newLang);
+        });
 
         /* ===== REALISTIC STARRY SKY GENERATOR ===== */
         (function() {
@@ -496,7 +564,7 @@
                 cursorDot.classList.remove('visible');
             });
 
-            document.querySelectorAll('a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close').forEach(function(el) {
+            document.querySelectorAll('a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .lang-toggle').forEach(function(el) {
                 el.addEventListener('mouseenter', function() {
                     cursorMoon.classList.add('hovering');
                     cursorDot.classList.add('hovering');
@@ -550,7 +618,7 @@
                     playIcon.style.display = 'none';
                     pauseIcon.style.display = '';
                 }).catch(function(err) {
-                    console.error("Errore riproduzione audio:", err);
+                    console.error("Audio playback error:", err);
                 });
             }
         });
@@ -692,7 +760,7 @@
 
         var revealObs = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry, i) {
-                if (entry.isIntersecting) { setTimeout(function() { entry.target.classList.add('show'); }, i * 80); revealObs.unobserve(entry.target); }
+                if (entry.isIntersecting) { setTimeout(function() { entry.target0 entry.target.classList.add('show'); }, i * 80); revealObs.unobserve(entry.target); }
             });
         }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
         document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
