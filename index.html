@@ -133,11 +133,11 @@
         .hero-name { 
             font-family: 'Cormorant Garamond', serif; 
             font-size: clamp(3.5rem, 10vw, 8.5rem); 
-            font-weight: 400; /* Aumentato per migliore leggibilità su mobile */
+            font-weight: 400; 
             letter-spacing: -0.01em; 
             line-height: 1.1; 
-            /* Gradiente reso più luminoso per evitare l'effetto sfumato/invisibile su schermi piccoli */
-            background: linear-gradient(160deg, #ffffff 0%, #e0e2f2 40%, #c4c6e2 80%, #b0b3d6 100%); 
+            /* Angolo cambiato a 135deg: il bianco puro parte dall'alto a sinistra */
+            background: linear-gradient(135deg, #ffffff 0%, #e2e4f4 40%, #c8cae0 80%, #b4b6d8 100%); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
             background-clip: text; 
@@ -190,8 +190,8 @@
         .opera:hover .opera-number { opacity: 1; transform: translateY(0); }
         
         .lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(6,6,8,0.96); backdrop-filter: blur(30px); opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
-        .lightboxGlightbox.open { opacity: 1; pointer-events: all; }
-        .lightbox::before { content: ''; position: absolute; inset2 inset: 0; background: radial-gradient(ellipse at center, transparent 40%, rgba(6,6,8,0.5) 100%); pointer-events: none; z-index: 0; }
+        .lightbox.open { opacity: 1; pointer-events: all; }
+        .lightbox::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 40%, rgba(6,6,8,0.5) 100%); pointer-events: none; z-index: 0; }
         
         .lb-viewport { position: absolute; inset: 0; z-index: 2; overflow: auto; display: flex; align-items: center; justify-content: center; padding: 60px 16px 16px 16px; box-sizing: border-box; -webkit-overflow-scrolling: touch; }
         
@@ -343,7 +343,7 @@
             <div class="gallery-grid" id="gallery">
                 <div class="opera tall reveal" onclick="openLB(0)">
                     <img src="https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3" alt="Pure Souls Recognize Each Other" loading="lazy">
-                    <div class="shade& shade"></div>
+                    <div class="shade"></div>
                     <span class="opera-number">I</span>
                 </div>
                 <div class="opera reveal" onclick="openLB(1)">
@@ -473,7 +473,7 @@
         function setLanguage(lang) {
             currentLang = lang;
             translatableElements.forEach(function(el) {
-                if (el.tagName === 'INPUT' || el.tagName === 'TAG') {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
                     el.placeholder = el.getAttribute('data-lang-' + lang);
                 } else {
                     el.innerHTML = el.getAttribute('data-lang-' + lang);
