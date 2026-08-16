@@ -7,7 +7,8 @@
     <title>Jennina — Artist</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Aggiunto Raleway ai Google Fonts e corretto rel="stylesheet" -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --indigo: #7c7fcd;
@@ -131,12 +132,11 @@
         .divider { height: 1px; background: linear-gradient(to right, transparent 5%, var(--gold-dim) 30%, var(--gold) 50%, var(--gold-dim) 70%, transparent 95%); max-width: 900px; margin: 0 auto; }
         
         .hero-name { 
-            font-family: 'Cormorant Garamond', serif; 
+            font-family: 'Raleway', sans-serif;
             font-size: clamp(3.5rem, 10vw, 8.5rem); 
-            font-weight: 400; 
-            letter-spacing: -0.01em; 
+            font-weight: 300; 
+            letter-spacing: 0.05em; 
             line-height: 1.1; 
-            /* Aumentato contrasto per renderlo leggibile sull'immagine di sfondo */
             background: linear-gradient(135deg, #ffffff 0%, #e2e4f4 40%, #c8cae0 80%, #d4d6f0 100%); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
@@ -211,7 +211,7 @@
         .story-bar-fill { height: 100%; background: rgba(255,255,255,0.6); border-radius: 100px; width: 0%; transition: width 5s linear; }
         .story-bar.done .story-bar-fill { width: 100%; transition: none; }
         .story-bar.active .story-bar-fill { width: 100%; }
-        .story-pause { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); width: 52px; height: 52px; border-radius: 50%; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 15; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; pointer-events< | > pointer-events: none; }
+        .story-pause { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); width: 52px; height: 52px; border-radius: 50%; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 15; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
         .story-container.paused .story-pause { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         .story-nav { position: absolute; top: 0; bottom: 0; width: 35%; z-index: 12; cursor: pointer; display: flex; align-items: center; }
         .story-nav.left { left: 0; justify-content: flex-start; padding-left: 14px; }
@@ -276,16 +276,16 @@
     </div>
     <div class="cursor-dot" id="cursorDot"></div>
 
-    <!-- NUOVO HERO BANNER FULL-WIDTH -->
+    <!-- HERO BANNER FULL-WIDTH -->
     <section class="hero-pad min-h-[100svh] flex items-center justify-center relative overflow-x-hidden" style="padding-top: 80px; padding-bottom: 40px;">
         <div class="max-w-7xl mx-auto px-6 w-full relative z-10">
             
             <!-- Contenitore Banner -->
             <div class="relative w-full min-h-[65vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden rounded-[20px] border" style="border-color: var(--border);">
                 
-                <!-- Immagine di sfondo (SOSTITUISCI URL_DEL_TUO_BANNER_QUI con il tuo link) -->
-                <img src="Opera_senza_titolo_banner.png" class="absolute inset-0 w-full h-full object-cover scale-105 opacity-50" alt="I'm Not Human Banner">
-        
+                <!-- Immagine di sfondo -->
+                <img src="URL_DEL_TUO_BANNER_QUI" class="absolute inset-0 w-full h-full object-cover scale-105 opacity-50" alt="I'm Not Human Banner">
+                
                 <!-- Sovrapposizione scura per far risaltare il testo -->
                 <div class="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/60 to-[#09090b]/40"></div>
                 
@@ -431,7 +431,8 @@
                 <a href="https://www.instagram.com/iamjennina/" target="_blank" style="color: var(--text-muted);" class="hover:text-[#c9a84c] transition-colors">
                     <i data-lucide="instagram" class="w-4 h-4"></i>
                 </a>
-                <a href="mailto:jenninaspank@gmail.com" class="btn-icon" style="width: 38px; height: 38px;">
+                <!-- EMAIL AGGIORNATA -->
+                <a href="mailto:imnothuman.shop@protonmail.com" class="btn-icon" style="width: 38px; height: 38px;">
                     <i data-lucide="mail" class="w-4 h-4"></i>
                 </a>
             </div>
@@ -439,7 +440,7 @@
     </footer>
 
     <div class="lightbox" id="lightbox">
-        <button class="lb-close"D lb-close" id="lbClose">
+        <button class="lb-close" id="lbClose">
             <i data-lucide="x" class="w-4 h-4 text-white" style="opacity: 0.5;"></i>
         </button>
         <button class="lb-btn prev" id="lbPrev">
