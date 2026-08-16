@@ -357,6 +357,51 @@
                     <div class="shade"></div>
                     <span class="opera-number">V</span>
                 </div>
+                <div class="opera reveal" onclick="openLB(5)">
+                    <img src="immagine2.png" alt="Deidara" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="opera-number">VI</span>
+                </div>
+                <div class="opera reveal" onclick="openLB(6)">
+                    <img src="immagine3.png" alt="Dog" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="opera-number">VII</span>
+                </div>
+                <div class="opera reveal" onclick="openLB(7)">
+                    <img src="immagine4.png" alt="Self" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="opera-number">VIII</span>
+                </div>
+                 <div class="opera reveal" onclick="openLB(8)">
+                    <img src="immagine5.png" alt="Uchica" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="opera-number">IX</span>
+                </div>
+                 <div class="opera reveal" onclick="openLB(9)">
+                    <img src="immagine6.png" alt="Deidara" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="opera-number">X</span>
+                </div>
+                <div class="opera reveal" onclick="openLB(10)">
+                    <img src="immagine7.png" alt="Horse" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="opera-number">XI</span>
+                </div>
+                <div class="opera reveal" onclick="openLB(11)">
+                    <img src="immagine8.png" alt="Family" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="opera-number">XII</span>
+                </div>
+                <div class="opera reveal" onclick="openLB(12)">
+                    <img src="immagine9.png" alt="Itachi" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="opera-number">XIII</span>
+                </div>
+                  <div class="opera reveal" onclick="openLB(13)">
+                    <img src="immagine11.png" alt="Repetition" loading="lazy">
+                    <div class="shade"></div>
+                    <span class="opera-number">XIV</span>
+                </div>
             </div>
         </div>
     </section>
@@ -634,8 +679,17 @@
             'https://z-cdn-media.chatglm.cn/files/45395629-2311-424f-9292-2b4f751c933c.jpg?auth_key=1883672854-99a74c94bb4c47af833c58615cb7cb6d-0-b05a61ccaa56c24c87c836e7538e3765',
             'https://z-cdn-media.chatglm.cn/files/e46e38ce-4d21-4cad-9510-21d00d750cb8.jpg?auth_key=1883672854-89e4f36fdde445dfbbdde44a82f57625-0-4bb6c6d0c9b4d29bdadfb46f33ff7585',
             'immagine1.png'
+            'immagine2.png'
+            'immagine3.png'
+            'immagine4.png'
+            'immagine5.png'
+            'immagine6.png'
+            'immagine7.png'
+            'immagine8.png'
+            'immagine9.png'
+            'immagine11.png'
         ];
-        var roman = ['I', 'II', 'III', 'IV', 'V' ];
+        var roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'];
         var cur = 0;
         var lb = document.getElementById('lightbox');
         var lbImg = document.getElementById('lb-img');
@@ -644,7 +698,7 @@
         function openLB(i) {
             cur = i;
             lbImg.src = works[cur];
-            document.getElementById('lbCounter').textContent = roman[cur] + ' / V';
+            document.getElementById('lbCounter').textContent = roman[cur] + ' / XIV';
             vp.scrollTop = 0;
             vp.scrollLeft = 0;
             lb.classList.add('open');
@@ -659,7 +713,7 @@
         function navLB(dir) {
             cur = (cur + dir + works.length) % works.length;
             lbImg.src = works[cur];
-            document.getElementById('lbCounter').textContent = roman[cur] + ' / V';
+            document.getElementById('lbCounter').textContent = roman[cur] + ' / XIV';
             vp.scrollTop = 0;
             vp.scrollLeft = 0;
         }
