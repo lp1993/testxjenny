@@ -457,7 +457,7 @@
         <button class="lb-btn next" id="lbNext">
             <i data-lucide="chevron-right" class="w-4 h-4 text-white" style="opacity: 0.4;"></i>
         </button>
-        <span class="lb-counter" id="lbCounter">I / IV</span>
+        <span class="lb-counter" id="lbCounter">I / V</span>
     </div>
 
     <script>
@@ -632,9 +632,10 @@
             'https://z-cdn-media.chatglm.cn/files/b8932a13-d870-433f-92a2-8ce78f98a698.jpg?auth_key=1883672854-d88ae460cefb4c0d812bb3f37ccc8fd6-0-2748e3b24c173e3c513e7ab2c77d5cb3',
             'https://z-cdn-media.chatglm.cn/files/4e85852a-7307-452c-9214-d36dc492b748.jpg?auth_key=1883672854-8363dad8d7db46309960fdc5c0745a29-0-cc95aac67840f4199485dd67ec41a4af',
             'https://z-cdn-media.chatglm.cn/files/45395629-2311-424f-9292-2b4f751c933c.jpg?auth_key=1883672854-99a74c94bb4c47af833c58615cb7cb6d-0-b05a61ccaa56c24c87c836e7538e3765',
-            'https://z-cdn-media.chatglm.cn/files/e46e38ce-4d21-4cad-9510-21d00d750cb8.jpg?auth_key=1883672854-89e4f36fdde445dfbbdde44a82f57625-0-4bb6c6d0c9b4d29bdadfb46f33ff7585'
+            'https://z-cdn-media.chatglm.cn/files/e46e38ce-4d21-4cad-9510-21d00d750cb8.jpg?auth_key=1883672854-89e4f36fdde445dfbbdde44a82f57625-0-4bb6c6d0c9b4d29bdadfb46f33ff7585',
+            'immagine1.png'
         ];
-        var roman = ['I', 'II', 'III', 'IV'];
+        var roman = ['I', 'II', 'III', 'IV', 'V' ];
         var cur = 0;
         var lb = document.getElementById('lightbox');
         var lbImg = document.getElementById('lb-img');
@@ -643,7 +644,7 @@
         function openLB(i) {
             cur = i;
             lbImg.src = works[cur];
-            document.getElementById('lbCounter').textContent = roman[cur] + ' / IV';
+            document.getElementById('lbCounter').textContent = roman[cur] + ' / V';
             vp.scrollTop = 0;
             vp.scrollLeft = 0;
             lb.classList.add('open');
@@ -658,7 +659,7 @@
         function navLB(dir) {
             cur = (cur + dir + works.length) % works.length;
             lbImg.src = works[cur];
-            document.getElementById('lbCounter').textContent = roman[cur] + ' / IV';
+            document.getElementById('lbCounter').textContent = roman[cur] + ' / V';
             vp.scrollTop = 0;
             vp.scrollLeft = 0;
         }
