@@ -49,14 +49,14 @@
             background-size: 128px 128px;
         }
 
-        a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lang-toggle { cursor: pointer; }
+        a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lang-toggle, .btn-etsy, .btn-redbubble { cursor: pointer; }
 
         @media (hover: hover) and (pointer: fine) {
             body { cursor: none; }
-            *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause, .cursor-moon, .cursor-dot, .lang-toggle) { cursor: none; }
+            *:not(a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .story-pause, .cursor-moon, .cursor-dot, .lang-toggle, .btn-etsy, .btn-redbubble) { cursor: none; }
         }
 
-        a, button, .opera, .story-nav, .lb-btn, .lb-close, .btn-main, .ig-link, .btn-icon, .skill-tag, .lang-toggle {
+        a, button, .opera, .story-nav, .lb-btn, .lb-close, .btn-main, .ig-link, .btn-icon, .skill-tag, .lang-toggle, .btn-etsy, .btn-redbubble {
             touch-action: manipulation;
         }
 
@@ -159,6 +159,16 @@
         
         .btn-audio { background: linear-gradient(135deg, #5557a0, #6365b0); }
         .btn-audio:hover { background: linear-gradient(135deg, #4c4e96, #5a5ca6); box-shadow: 0 0 30px rgba(99,101,176,0.12); transform: scale(1.06); }
+
+        /* ===== STORE BUTTONS ===== */
+        .btn-etsy { background: linear-gradient(135deg, #d45b00, #F56400); color: #fff; padding: 10px 22px; border-radius: 100px; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; position: relative; }
+        .btn-etsy:hover { background: linear-gradient(135deg, #b34d00, #d45b00); box-shadow: 0 0 30px rgba(245,100,0,0.15); transform: translateY(-1px); }
+
+        .btn-redbubble { background: linear-gradient(135deg, #c22e32, #E2373C); color: #fff; padding: 10px 22px; border-radius: 100px; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; position: relative; }
+        .btn-redbubble:hover { background: linear-gradient(135deg, #a62529, #c22e32); box-shadow: 0 0 30px rgba(226,55,60,0.15); transform: translateY(-1px); }
+
+        .store-wip { position: absolute; top: -7px; right: -12px; font-size: 8px; font-weight: 700; letter-spacing: 0.05em; background: rgba(255,255,255,0.2); color: #fff; padding: 2px 5px; border-radius: 50px; text-transform: uppercase; pointer-events: none; line-height: 1; box-shadow: 0 2px 4px rgba(0,0,0,0.3); backdrop-filter: blur(4px); }
+        /* ===== END STORE BUTTONS ===== */
 
         .skill-tag { display: inline-block; padding: 7px 16px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.15); color: #fff; font-size: 12px; font-weight: 400; letter-spacing: 0.04em; transition: border-color 0.3s ease, background 0.3s ease; backdrop-filter: blur(4px); }
         .skill-tag:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); }
@@ -305,13 +315,27 @@
                         </a>
                     </div>
 
-                    <div class="flex flex-wrap gap-2 justify-center">
+                    <div class="flex flex-wrap gap-2 justify-center mb-6">
                         <span class="skill-tag" data-lang-en="Oniric Art" data-lang-it="Arte Onirica">Oniric Art</span>
                         <span class="skill-tag" data-lang-en="Storytelling" data-lang-it="Storytelling">Storytelling</span>
                         <span class="skill-tag" data-lang-en="Naruto Fan Art" data-lang-it="Fan Art Naruto">Naruto Fan Art</span>
                         <span class="skill-tag" data-lang-en="Stickers" data-lang-it="Stickers">Stickers</span>
                         <span class="skill-tag" data-lang-en="Symbolism" data-lang-it="Simbolismo">Symbolism</span>
                     </div>
+
+                    <!-- STORE BUTTONS -->
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        <a href="#" target="_blank" class="btn-etsy">
+                            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                            Etsy
+                        </a>
+                        <a href="#" target="_blank" class="btn-redbubble">
+                            <i data-lucide="image" class="w-4 h-4"></i>
+                            Redbubble
+                            <span class="store-wip">WIP</span>
+                        </a>
+                    </div>
+
                 </div>
             </div>
             
@@ -616,7 +640,7 @@
                 cursorDot.classList.remove('visible');
             });
 
-            document.querySelectorAll('a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .lang-toggle').forEach(function(el) {
+            document.querySelectorAll('a, button, .opera, .story-nav, .ig-link, .btn-main, .btn-icon, .skill-tag, .lb-btn, .lb-close, .lang-toggle, .btn-etsy, .btn-redbubble').forEach(function(el) {
                 el.addEventListener('mouseenter', function() {
                     cursorMoon.classList.add('hovering');
                     cursorDot.classList.add('hovering');
