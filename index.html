@@ -7,7 +7,6 @@
     <title>Jennina — Artist</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Aggiunto Raleway ai Google Fonts e corretto rel="stylesheet" -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -442,9 +441,13 @@
                     <span class="hint-mobile" data-lang-en="Tap sides to navigate · tap center to pause" data-lang-it="Tocca i lati per navigare · tocca al centro per la pausa">Tap sides to navigate · tap center to pause</span>
                 </p>
             </div>
-            <div class="reveal flex justify-center">
-                <div class="story-container" id="storyContainer" onmouseenter="pauseStory()" onmouseleave="resumeStory()">
-                    <div class="story-progress" id="storyProgress"></div>
+            
+            <!-- Grid per affiancare i due storytelling su Desktop -->
+            <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
+                
+                <!-- STORYTELLING 1 (6 Immagini) -->
+                <div class="story-container" id="storyContainer1">
+                    <div class="story-progress"></div>
                     <div class="story-pause"><i data-lucide="pause" class="w-4 h-4 text-white"></i></div>
                     <div class="story-slide active" data-index="0"><img src="https://z-cdn-media.chatglm.cn/files/3ca8524c-1b0d-4e1e-a58c-4916fb8bbf8b.jpg?auth_key=1883577833-5535d4f2ae554eb28bb2ba8f943c2f68-0-51064163c2d88c3c76b8f27273ca14eb" alt=""></div>
                     <div class="story-slide" data-index="1"><img src="https://z-cdn-media.chatglm.cn/files/412d53df-85df-4bf2-9ba1-c0a245077572.jpg?auth_key=1883577833-bd31ee5cfab04d60be9dc22bcf056b88-0-77af54fd1c696a115a2ba22bebab00e2" alt=""></div>
@@ -452,14 +455,25 @@
                     <div class="story-slide" data-index="3"><img src="https://z-cdn-media.chatglm.cn/files/cec9c04d-587b-4ea4-8d43-c0989c0d55b5.jpg?auth_key=1883577833-44f159e5fb464dae861b0ff292d3d5b0-0-08fc5b82ae932a9dbf176c7747f45e13" alt=""></div>
                     <div class="story-slide" data-index="4"><img src="https://z-cdn-media.chatglm.cn/files/93c09c4a-2d0c-4838-9110-811c75555478.jpg?auth_key=1883577833-d5d6c17f8cfe49f7b1fe63c68f023419-0-94c80492cce4b79c47f16be5966c549f" alt=""></div>
                     <div class="story-slide" data-index="5"><img src="https://z-cdn-media.chatglm.cn/files/57598671-6833-48a5-8b2f-b9e367fe219f.jpg?auth_key=1883577833-7c1bcb237a934ff1ab78f24e4513de31-0-19e93d630be39d4e77c85eed907e325f" alt=""></div>
-                    <div class="story-slide" data-index="6"><img src="immagine15.png" alt=""></div>
-                    <div class="story-slide" data-index="7"><img src="immagine17.png" alt=""></div>
-                    <div class="story-slide" data-index="8"><img src="immagine16.png" alt=""></div>
-                    <div class="story-nav left" onclick="prevStory(event)"><div class="story-nav-icon"><i data-lucide="chevron-left" class="w-4 h-4 text-white"></i></div></div>
-                    <div class="story-nav center" onclick="togglePause()" aria-label="Pausa"></div>
-                    <div class="story-nav right" onclick="nextStory(event)"><div class="story-nav-icon"><i data-lucide="chevron-right" class="w-4 h-4 text-white"></i></div></div>
-                    <div class="story-counter" id="storyCounter">01 / 10</div>
+                    <div class="story-nav left"><div class="story-nav-icon"><i data-lucide="chevron-left" class="w-4 h-4 text-white"></i></div></div>
+                    <div class="story-nav center" aria-label="Pausa"></div>
+                    <div class="story-nav right"><div class="story-nav-icon"><i data-lucide="chevron-right" class="w-4 h-4 text-white"></i></div></div>
+                    <div class="story-counter">01 / 06</div>
                 </div>
+
+                <!-- STORYTELLING 2 (3 Immagini) -->
+                <div class="story-container" id="storyContainer2">
+                    <div class="story-progress"></div>
+                    <div class="story-pause"><i data-lucide="pause" class="w-4 h-4 text-white"></i></div>
+                    <div class="story-slide active" data-index="0"><img src="immagine15.png" alt=""></div>
+                    <div class="story-slide" data-index="1"><img src="immagine17.png" alt=""></div>
+                    <div class="story-slide" data-index="2"><img src="immagine16.png" alt=""></div>
+                    <div class="story-nav left"><div class="story-nav-icon"><i data-lucide="chevron-left" class="w-4 h-4 text-white"></i></div></div>
+                    <div class="story-nav center" aria-label="Pausa"></div>
+                    <div class="story-nav right"><div class="story-nav-icon"><i data-lucide="chevron-right" class="w-4 h-4 text-white"></i></div></div>
+                    <div class="story-counter">01 / 03</div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -761,88 +775,115 @@
             if (e.key === 'ArrowRight') navLB(1);
         });
 
-        /* ===== STORYTELLING ===== */
-        var slides = document.querySelectorAll('.story-slide');
-        var totalSlides = slides.length;
-        var storyIndex = 0;
-        var storyTimer = null;
-        var storyPaused = false;
-
-        var progressContainer = document.getElementById('storyProgress');
-        for (var i = 0; i < totalSlides; i++) {
-            var bar = document.createElement('div');
-            bar.className = 'story-bar';
-            bar.innerHTML = '<div class="story-bar-fill"></div>';
-            progressContainer.appendChild(bar);
-        }
-        var bars = document.querySelectorAll('.story-bar');
-
-        function goToStory(index) {
-            slides[storyIndex].classList.remove('active');
-            bars[storyIndex].classList.remove('active');
-            bars[storyIndex].classList.add('done');
-            storyIndex = (index + totalSlides) % totalSlides;
-            slides[storyIndex].classList.add('active');
-            bars[storyIndex].classList.remove('done');
-            var f = bars[storyIndex].querySelector('.story-bar-fill');
-            f.style.transition = 'none'; f.style.width = '0%';
-            void bars[storyIndex].offsetWidth;
-            bars[storyIndex].classList.add('active');
-            f.style.transition = 'width 5s linear'; f.style.width = '100%';
-            document.getElementById('storyCounter').textContent = String(storyIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
-            clearTimeout(storyTimer);
-            if (!storyPaused) { storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, 5000); }
-        }
-
-        function nextStory(e) { if (e) e.stopPropagation(); goToStory(storyIndex + 1); }
-
-        function prevStory(e) {
-            if (e) e.stopPropagation();
-            bars[storyIndex].classList.remove('active', 'done');
-            var f1 = bars[storyIndex].querySelector('.story-bar-fill'); f1.style.transition = 'none'; f1.style.width = '0%';
-            slides[storyIndex].classList.remove('active');
-            storyIndex = (storyIndex - 1 + totalSlides) % totalSlides;
-            slides[storyIndex].classList.add('active');
-            bars[storyIndex].classList.remove('done');
-            var f2 = bars[storyIndex].querySelector('.story-bar-fill'); f2.style.transition = 'none'; f2.style.width = '0%';
-            void bars[storyIndex].offsetWidth;
-            bars[storyIndex].classList.add('active');
-            f2.style.transition = 'width 5s linear'; f2.style.width = '100%';
-            document.getElementById('storyCounter').textContent = String(storyIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
-            clearTimeout(storyTimer);
-            if (!storyPaused) { storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, 5000); }
-        }
-
-        function pauseStory() {
-            storyPaused = true; clearTimeout(storyTimer);
-            document.getElementById('storyContainer').classList.add('paused');
-            var f = bars[storyIndex].querySelector('.story-bar-fill'); f.style.transition = 'none'; f.style.width = getComputedStyle(f).width;
-        }
-
-        function resumeStory() {
-            if (!storyPaused) return; storyPaused = false;
-            document.getElementById('storyContainer').classList.remove('paused');
-            var f = bars[storyIndex].querySelector('.story-bar-fill'); var p = f.parentElement;
-            var pct = (parseFloat(getComputedStyle(f).width) / p.offsetWidth) * 100;
-            f.style.transition = 'none'; f.style.width = pct + '%'; void f.offsetWidth;
-            var rem = 5000 * (1 - pct / 100);
-            f.style.transition = 'width ' + rem + 'ms linear'; f.style.width = '100%';
-            storyTimer = setTimeout(function() { goToStory(storyIndex + 1); }, rem);
-        }
-
-        function togglePause() { if (storyPaused) resumeStory(); else pauseStory(); }
-
-        var storyStarted = false;
-        var storyObs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting && !storyStarted) {
-                    storyStarted = true; bars[0].classList.add('active');
-                    var f = bars[0].querySelector('.story-bar-fill'); f.style.transition = 'width 5s linear'; f.style.width = '100%';
-                    storyTimer = setTimeout(function() { goToStory(1); }, 5000);
+        /* ===== STORYTELLING CLASS (Supporta istanze multiple) ===== */
+        class StorySlider {
+            constructor(containerId) {
+                this.container = document.getElementById(containerId);
+                if (!this.container) return;
+                
+                this.slides = this.container.querySelectorAll('.story-slide');
+                this.totalSlides = this.slides.length;
+                this.index = 0;
+                this.timer = null;
+                this.paused = false;
+                this.started = false;
+                
+                this.progressContainer = this.container.querySelector('.story-progress');
+                this.counter = this.container.querySelector('.story-counter');
+                
+                // Genera barre di progresso
+                for (var i = 0; i < this.totalSlides; i++) {
+                    var bar = document.createElement('div');
+                    bar.className = 'story-bar';
+                    bar.innerHTML = '<div class="story-bar-fill"></div>';
+                    this.progressContainer.appendChild(bar);
                 }
-            });
-        }, { threshold: 0.3 });
-        storyObs.observe(document.getElementById('storyContainer'));
+                this.bars = this.container.querySelectorAll('.story-bar');
+                
+                // Event Listeners per nav
+                this.container.querySelector('.story-nav.left').addEventListener('click', (e) => { e.stopPropagation(); this.prev(); });
+                this.container.querySelector('.story-nav.right').addEventListener('click', (e) => { e.stopPropagation(); this.next(); });
+                this.container.querySelector('.story-nav.center').addEventListener('click', () => this.togglePause());
+                
+                this.container.addEventListener('mouseenter', () => this.pause());
+                this.container.addEventListener('mouseleave', () => this.resume());
+                
+                // Intersection Observer per partenza automatica
+                var self = this;
+                this.obs = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting && !self.started) {
+                            self.started = true; 
+                            self.bars[0].classList.add('active');
+                            var f = self.bars[0].querySelector('.story-bar-fill'); 
+                            f.style.transition = 'width 5s linear'; 
+                            f.style.width = '100%';
+                            self.timer = setTimeout(function() { self.goTo(1); }, 5000);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                this.obs.observe(this.container);
+            }
+            
+            goTo(index) {
+                this.slides[this.index].classList.remove('active');
+                this.bars[this.index].classList.remove('active');
+                this.bars[this.index].classList.add('done');
+                this.index = (index + this.totalSlides) % this.totalSlides;
+                this.slides[this.index].classList.add('active');
+                this.bars[this.index].classList.remove('done');
+                var f = this.bars[this.index].querySelector('.story-bar-fill');
+                f.style.transition = 'none'; f.style.width = '0%';
+                void this.bars[this.index].offsetWidth;
+                this.bars[this.index].classList.add('active');
+                f.style.transition = 'width 5s linear'; f.style.width = '100%';
+                this.counter.textContent = String(this.index + 1).padStart(2, '0') + ' / ' + String(this.totalSlides).padStart(2, '0');
+                clearTimeout(this.timer);
+                if (!this.paused) { this.timer = setTimeout(() => this.goTo(this.index + 1), 5000); }
+            }
+
+            next() { this.goTo(this.index + 1); }
+
+            prev() {
+                this.bars[this.index].classList.remove('active', 'done');
+                var f1 = this.bars[this.index].querySelector('.story-bar-fill'); f1.style.transition = 'none'; f1.style.width = '0%';
+                this.slides[this.index].classList.remove('active');
+                this.index = (this.index - 1 + this.totalSlides) % this.totalSlides;
+                this.slides[this.index].classList.add('active');
+                this.bars[this.index].classList.remove('done');
+                var f2 = this.bars[this.index].querySelector('.story-bar-fill'); f2.style.transition = 'none'; f2.style.width = '0%';
+                void this.bars[this.index].offsetWidth;
+                this.bars[this.index].classList.add('active');
+                f2.style.transition = 'width 5s linear'; f2.style.width = '100%';
+                this.counter.textContent = String(this.index + 1).padStart(2, '0') + ' / ' + String(this.totalSlides).padStart(2, '0');
+                clearTimeout(this.timer);
+                if (!this.paused) { this.timer = setTimeout(() => this.goTo(this.index + 1), 5000); }
+            }
+
+            pause() {
+                this.paused = true; clearTimeout(this.timer);
+                this.container.classList.add('paused');
+                var f = this.bars[this.index].querySelector('.story-bar-fill'); f.style.transition = 'none'; f.style.width = getComputedStyle(f).width;
+            }
+
+            resume() {
+                if (!this.paused) return; this.paused = false;
+                this.container.classList.remove('paused');
+                var f = this.bars[this.index].querySelector('.story-bar-fill'); var p = f.parentElement;
+                var pct = (parseFloat(getComputedStyle(f).width) / p.offsetWidth) * 100;
+                f.style.transition = 'none'; f.style.width = pct + '%'; void f.offsetWidth;
+                var rem = 5000 * (1 - pct / 100);
+                f.style.transition = 'width ' + rem + 'ms linear'; f.style.width = '100%';
+                this.timer = setTimeout(() => this.goTo(this.index + 1), rem);
+            }
+
+            togglePause() { if (this.paused) this.resume(); else this.pause(); }
+        }
+
+        // Inizializza i due Storytelling
+        const story1 = new StorySlider('storyContainer1');
+        const story2 = new StorySlider('storyContainer2');
+
 
         var revealObs = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry, i) {
